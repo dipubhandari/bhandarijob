@@ -1,5 +1,5 @@
 .hero_container {
-    background-color: rgb(53, 154, 201);
+    background-color: rgb(39, 85, 107);
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -7,10 +7,16 @@
     align-items: center;
 }
 
-.hero_slogan {}
+.hero_slogan {
+    color: #fff;
+    font-size: large;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
-.hero_slogan_word {
-    color: orange;
+.hero_slogan_special {
+    color: rgb(255, 115, 0);
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .search_field {

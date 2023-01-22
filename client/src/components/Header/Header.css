@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .logo {
@@ -74,7 +75,7 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    border-right: 1px solid gray;
+    text-decoration: none;
 }
 
 
@@ -84,4 +85,5 @@
 
 .right_logo {
     color: orange;
+    margin-top: 2px;
 }

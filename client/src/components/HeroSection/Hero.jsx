@@ -10,7 +10,7 @@ const Hero = () => {
 
                 <section className="search">
 
-                    <h1 className='hero_slogan'>Find Your Jobs</h1>
+                    <h1 className='hero_slogan'>Find Your Right <span className="hero_slogan_special">Jobs </span>Now</h1>
 
                     <section className="search_field">
 

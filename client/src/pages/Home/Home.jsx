@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer'
 import Hero from '../../components/HeroSection/Hero'
 import Job from '../../components/Jobs/Job'
-
-
+import './Home.css'
 const Home = () => {
     return (
         <div className='home_container'>
@@ -18,6 +18,15 @@ const Home = () => {
 
             <section className="job">
                 <Job />
+            </section>
+
+
+            <section className="footer">
+
+
+
+                <Footer />
+
             </section>
         </div>
     )

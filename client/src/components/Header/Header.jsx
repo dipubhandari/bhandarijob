@@ -14,9 +14,9 @@ const Header = () => {
     <div className='header_container'>
 
 
-      <section className="header_logo">
+      <Link to='/' className="header_logo">
         <h1 className='logo'>Bhandari <span className='logo_special'>Job.</span> </h1>
-      </section>
+      </Link>
 
       <section className="header__menu">
 
@@ -39,20 +39,20 @@ const Header = () => {
       </section>
       <section className="header_operator">
 
-        <div className="first">
+        <Link to='/post' className="first">
           <span className='right_logo'><MdOutlineWork /></span>
           <span className='right_topic'>Post Job Free</span>
-        </div>
-        <div className="first">
+        </Link>
+        <Link className="first" to='/login'>
           <span className='right_logo'><FaSignInAlt /></span>
           <span className='right_topic'>Login</span>
 
-        </div>
-        <div className="first">
+        </Link>
+        <Link className="first" to='new'>
           <span className='right_logo'><BsFillPersonFill /></span>
           <span className='right_topic'>Singup</span>
 
-        </div>
+        </Link>
 
       </section >
 

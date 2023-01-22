@@ -1,0 +1,47 @@
+.hero_container {
+    background-color: rgb(53, 154, 201);
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero_slogan {}
+
+.hero_slogan_word {
+    color: orange;
+}
+
+.search_field {
+    display: flex;
+    position: relative;
+
+}
+
+.input_field {
+    padding: 12px;
+    border: 1px solid grey;
+}
+
+.keyword_input_logo {
+    position: absolute;
+    top: 10px;
+    color: orange;
+    left: 5px;
+
+}
+
+.category_input_avatar {
+    position: absolute;
+    left: 190px;
+    top: 10px;
+    color: orange;
+}
+
+.locaton_input_icon {
+    top: 10px;
+    color: orange;
+    position: absolute;
+    left: 360px;
+}

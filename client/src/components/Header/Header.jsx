@@ -2,9 +2,13 @@ import React from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom'
 import { AiFillHome } from 'react-icons/ai'
+import { FaSignInAlt } from 'react-icons/fa'
 import { FaHandshake } from 'react-icons/fa'
 import { FaBloggerB } from 'react-icons/fa'
+import { MdOutlineWork } from 'react-icons/md'
 import { MdPermContactCalendar } from 'react-icons/md'
+import { BsFillPersonFill } from 'react-icons/bs'
+
 const Header = () => {
   return (
     <div className='header_container'>
@@ -35,9 +39,24 @@ const Header = () => {
       </section>
       <section className="header_operator">
 
-      </section>
+        <div className="first">
+          <span className='right_logo'><MdOutlineWork /></span>
+          <span className='right_topic'>Post Job Free</span>
+        </div>
+        <div className="first">
+          <span className='right_logo'><FaSignInAlt /></span>
+          <span className='right_topic'>Login</span>
 
-    </div>
+        </div>
+        <div className="first">
+          <span className='right_logo'><BsFillPersonFill /></span>
+          <span className='right_topic'>Singup</span>
+
+        </div>
+
+      </section >
+
+    </div >
   )
 }
 

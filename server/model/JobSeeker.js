@@ -6,9 +6,11 @@ const User_Schema = new mongoose.Schema({
     email: { type: String, require: true },
     pasword: { type: String, require: true },
     phone: { type: String, require: true },
+    
+    account: { type: String, default: 'jobseeker' },
     createdAt: { type: Date, default: Date.now() }
 })
 
-const User_Model = mongoose.model('user', User_Schema)
+const JobSeeker_Model = mongoose.model('jobseeker', User_Schema)
 
-export default User_Model
+export default JobSeeker_Model

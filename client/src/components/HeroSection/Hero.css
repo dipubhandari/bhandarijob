@@ -29,7 +29,11 @@
     padding: 12px;
     border: 1px solid grey;
 }
-
+.first_field{
+    background-color: orange;
+    border: none;
+    padding: 10px;
+}
 .keyword_input_logo {
     position: absolute;
     top: 10px;

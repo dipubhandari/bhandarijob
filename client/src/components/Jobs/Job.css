@@ -1,18 +1,18 @@
 .job_container {
-    width: 80%;
     background-color: rgb(180, 180, 180, 0.6);
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: cne;
     justify-content: center;
     margin: auto;
-    padding: 10px;
+    padding: 30px 100px;
+    margin: 10px;
 
 }
 
 .job_title span {
-    background-color: rgb(255, 166, 0);
+    background-color: rgb(140, 247, 0);
     border-radius: 10px;
     padding: 10px 200px;
     color: rgb(91, 91, 91, 0.6);
@@ -56,12 +56,35 @@
 
 .view_btn {
     text-decoration: none;
-    color: orange;
-    top: 10px;
-    position: relative;
+    color: blueviolet;
+
+    margin: 10px;
 }
 
 .job_category {
     display: flex;
+    font-size: small;
     flex-direction: column;
 }
+
+.companyName {
+    width: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.jobtitle {
+    width: 90px;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.experience {
+    color: dimgray;
+    opacity: 50%;
+    width: auto;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+/* } */

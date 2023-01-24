@@ -12,7 +12,7 @@ const connection = async (DATABASE_URL) => {
             console.log('Database connected')
         }
         else {
-            console.log('')
+            console.log('Not connected')
         }
     } catch (error) {
         console.log(error)

@@ -1,28 +1,29 @@
 import bcrypt from 'bcryptjs';
-import User_Model from "../../model/User.js"
+import JobSeeker_Model from "../../model/JobSeeker.js"
+import Employer_Model from "../../model/employer.js"
 import jwt from 'jsonwebtoken';
 
-class UserController {
+class JobSeekerController {
 
     static UserAccountCreation = async (req, res) => {
-        console.log('This works')
+
         // get data from user
 
         const { name, email, phone, password } = req.body
 
         // (if)
         // check data in the db if exitst or not
-        const user = await User_Model.findOne({ email, password })
+        const user = await JobSeeker_Model.findOne({ email, password })
         if (user) {
             res.send({ error_msg: 'Email used. Try New Email.' })
         }
         else {
             // const pasword = req.body.password
 
-            const user_detail = await User_Model.create({
+            const user_detail = await JobSeeker_Model.create({
                 name,
                 email,
-                password: password
+                password
             })
             // await bcrypt.hash(req.body.password, 10)
             // generating the token
@@ -46,10 +47,11 @@ class UserController {
         // get data from user
 
         const { email, password } = req.body
-
+        console.log(req.body)
         // check data in the db if exitst or not
-        const user = await User_Model.findOne({ email })
-        if (!user) {
+        // const employer = await (Employer_Model.findOne({ email, password }))
+        const user = await (JobSeeker_Model.findOne({ email, password }) && Employer_Model.findOne({ email, password }))
+        if (!(user)) {
             console.log('Details donot match')
             res.status(400).send({ error_msg: 'Enter Correct Details' })
         }
@@ -86,9 +88,10 @@ class UserController {
     }
 
 
+
     static Check__Login = async (req, res) => {
         const { email, password } = req.body
-        const user = await User_Model.findOne({ email, password })
+        const user = await JobSeeker_Model.findOne({ email, password })
         if (user) {
             res.send(true)
         }
@@ -99,4 +102,4 @@ class UserController {
     }
 }
 
-export default UserController
+export default JobSeekerController

@@ -15,7 +15,7 @@ const Signup = () => {
 
         e.preventDefault()
         // validating the form
-        if (!(input.name && input.email && input.password && input.repeat)) {
+        if (!(input.companyname && input.email && input.password && input.repeat)) {
             toast.warn('Enter all the fiels')
         }
         else if (input.phone.length < 10) {
@@ -62,14 +62,15 @@ const Signup = () => {
                 <section className="form">
                     <h4>Create Job Seeker Account</h4>
                     <hr />
-                    <form onSubmit={handleForm} action="" className='login_form'>
+                    <form
+                        encType='multipart/form-data' onSubmit={handleForm} action="" className='login_form'>
                         <span className="form_fullname">
                             <label htmlFor="">Enter full Name * </label>
                             <input
                                 type="text"
                                 onChange={(e) =>
                                     setinput({ ...input, [e.target.name]: e.target.value })}
-                                name='name'
+                                name='companyname'
                                 value={input.name || ''}
                                 placeholder='Enter the full name'
                             />

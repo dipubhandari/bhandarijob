@@ -10,29 +10,15 @@ import { MdOutlineWork } from 'react-icons/md'
 import { MdPermContactCalendar } from 'react-icons/md'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { useEffect, useState } from 'react'
-import CheckUser from '../../utils/CheckLogin'
-
+import { useSelector } from 'react-redux'
 
 const Header = () => {
 
-  // is login state
-  const [isLogin, setIsLogin] = useState(false)
-
-
-
-
-  // logout
+  const isLogin = useSelector(state => state.isLogin)
 
   const logout = () => {
     localStorage.removeItem('token')
   }
-
-  useEffect(() => {
-
-    const isLogin = CheckUser()
-    setIsLogin(isLogin)
-
-  }, [logout])
 
 
   return (
@@ -75,7 +61,7 @@ const Header = () => {
                 <span className='right_topic'>Login</span>
 
               </Link>
-              <Link className="first" to='/new'>
+              <Link className="first" to='/select_Account_Type'>
                 <span className='right_logo'><BsFillPersonFill /></span>
                 <span className='right_topic'>Singup</span>
 

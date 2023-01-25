@@ -10,7 +10,8 @@
 .hero_slogan {
     color: #fff;
     font-size: large;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 20px;
 }
 
 .hero_slogan_special {
@@ -25,33 +26,43 @@
 
 }
 
+.search_field input {
+    padding: 10px 70px;
+}
+
 .input_field {
     padding: 12px;
     border: 1px solid grey;
 }
-.first_field{
+
+.first_field {
     background-color: orange;
     border: none;
     padding: 10px;
 }
-.keyword_input_logo {
-    position: absolute;
-    top: 10px;
-    color: orange;
-    left: 5px;
 
+.keyword_input_logo {
+    position: relative;
+    color: orange;
+
+    font-size: large;
+    left: 40px;
+    top: 10px;
 }
 
 .category_input_avatar {
-    position: absolute;
-    left: 190px;
+    position: relative;
+
+    font-size: large;
+    left: 40px;
     top: 10px;
     color: orange;
 }
 
 .locaton_input_icon {
-    top: 10px;
     color: orange;
-    position: absolute;
-    left: 360px;
+    position: relative;
+    font-size: large;
+    left: 40px;
+    top: 10px;
 }

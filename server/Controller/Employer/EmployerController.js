@@ -45,6 +45,12 @@ class EmployerController {
 
     }
 
+    // employer api
+    static AllEmployer = async (req, res) => {
+        const user = await Employer_Model.find()
+        res.send(user)
+    }
+
 }
 
 export default EmployerController

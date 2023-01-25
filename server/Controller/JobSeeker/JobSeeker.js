@@ -13,7 +13,7 @@ class JobSeekerController {
 
         // (if)
         // check data in the db if exitst or not
-        const user = await JobSeeker_Model.findOne({ email, password })
+        const user = await (JobSeeker_Model.findOne({ email, password }) && Employer_Model.findOne({ email }))
         if (user) {
             res.send({ error_msg: 'Email used. Try New Email.' })
         }
@@ -91,14 +91,19 @@ class JobSeekerController {
 
     static Check__Login = async (req, res) => {
         const { email, password } = req.body
-        const user = await JobSeeker_Model.findOne({ email, password })
+        const user = await (JobSeeker_Model.findOne({ email, password }) && Employer_Model.findOne({ email, password }))
         if (user) {
             res.send(true)
         }
         else {
             res.send(false)
         }
-        console.log(user)
+    }
+
+
+    static AllJobSekeer = async (req, res) => {
+        const user = await JobSeeker_Model.find()
+        res.send(user)
     }
 }
 

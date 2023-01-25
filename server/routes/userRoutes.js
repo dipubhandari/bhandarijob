@@ -25,9 +25,10 @@ const upload = multer({ storage: storage })
 userRoutes.post('/newuser', JobSeekerController.UserAccountCreation)
 userRoutes.post('/login', JobSeekerController.User__Login)
 userRoutes.post('/checklogin', JobSeekerController.Check__Login)
+userRoutes.get('/alljobseeker', JobSeekerController.AllJobSekeer)
 
 // employer route
 userRoutes.post('/account-company-owner', upload.single('logo'), EmployerController.UserAccountCreation)
-
+userRoutes.get('/allemployer', EmployerController.AllEmployer)
 
 export default userRoutes

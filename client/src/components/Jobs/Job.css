@@ -2,26 +2,26 @@
     background-color: rgb(180, 180, 180, 0.6);
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    align-items: cne;
-    justify-content: center;
+    justify-content: flex-start;
     margin: auto;
     padding: 30px 100px;
     margin: 10px;
-
 }
 
 .job_title span {
-    background-color: rgb(140, 247, 0);
+    background-color: rgb(20, 26, 78,0.6);
     border-radius: 10px;
-    padding: 10px 200px;
-    color: rgb(91, 91, 91, 0.6);
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
 }
 
 .job_content {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px 50px;
+    width: 99%;
+    margin: auto;
+    align-items: flex-start;
 }
 
 .job_title {
@@ -36,12 +36,19 @@
 }
 
 .job_Card {
+    max-height: 200px;
     gap: 10px;
     justify-content: center;
     display: flex;
-    border: 1px solid grey;
+    border: 1px solid rgb(178, 178, 178);
     padding: 26px 15px;
     background-color: rgb(255, 255, 255);
+    min-height: 200px;
+}
+
+.like {
+    display: flex;
+
 }
 
 .company_logo {
@@ -56,35 +63,48 @@
 
 .view_btn {
     text-decoration: none;
-    color: blueviolet;
-
+    color: rgb(20, 20, 137);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 10px;
+    opacity: 50%;
 }
 
 .job_category {
     display: flex;
     font-size: small;
     flex-direction: column;
+    opacity: 50%;
 }
 
-.companyName {
+.name {
     width: 10px;
     display: flex;
     flex-wrap: wrap;
+    font-size: small;
+
 }
 
 .jobtitle {
     width: 90px;
     flex-wrap: wrap;
     display: flex;
+
 }
 
-.experience {
-    color: dimgray;
-    opacity: 50%;
-    width: auto;
-    flex-wrap: wrap;
+.viewbtn {
+    background-color: rgb(255, 170, 0);
+    width: 100px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
     display: flex;
+    margin: auto;
+}
+
+.viewbtnlink {
+    color: #ffff;
+    text-decoration: none;
 }
 
 /* } */

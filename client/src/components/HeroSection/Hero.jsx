@@ -10,7 +10,7 @@ const Hero = () => {
 
                 <section className="search">
 
-                    <h1 className='hero_slogan'>Find Your Right <span className="hero_slogan_special">Jobs </span>Now</h1><br />
+                    <h1 className='hero_slogan'>Find Your  <span className="hero_slogan_special">CARRER </span>Now</h1><br />
 
                     <section className="search_field">
 
@@ -21,7 +21,7 @@ const Hero = () => {
 
 
 
-                        <input type="submit" value='search' className="first_field" />
+                        <button type="submit" value='search' className="first_field" >Search</button>
                     </section>
 
                 </section>

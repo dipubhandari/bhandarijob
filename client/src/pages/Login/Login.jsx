@@ -2,13 +2,15 @@ import React from 'react'
 import Header from '../../components/Header/Header'
 import './Login.css'
 import { ToastContainer, toast } from 'react-toastify';
+import { isLogin } from '../../redux/authSlice';
+import { useDispatch } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { server } from '../../config'
 
 const Login = () => {
-
+    const dispatch = useDispatch()
     const location = useNavigate()
     // state for login input
     const [email, setEmail] = useState('');
@@ -20,8 +22,8 @@ const Login = () => {
             toast.warn('Enter the details')
 
 
-            console.log(email)
-            console.log(password)
+            // console.log(email)
+            // console.log(password)
 
 
         }
@@ -37,7 +39,11 @@ const Login = () => {
                 .then(data => {
                     if (data.success) {
                         toast.success(data.success)
-                        location('/homepage')
+                        setTimeout(() => {
+                            location('/homepage')
+                        }, 1000)
+                        dispatch(isLogin(true))
+                        toast.success('Login...')
                     }
                     // if (data.success) {
                     //     localStorage.setItem('token', data.token);

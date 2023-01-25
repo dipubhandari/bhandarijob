@@ -10,14 +10,18 @@ import { MdOutlineWork } from 'react-icons/md'
 import { MdPermContactCalendar } from 'react-icons/md'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { isLogin } from '../../redux/authSlice'
 
 const Header = () => {
 
   const isLogin = useSelector(state => state.isLogin)
 
+  const sendIslogin = useDispatch()
+
   const logout = () => {
     localStorage.removeItem('token')
+    sendIslogin(isLogin(false))
   }
 
 
@@ -69,7 +73,7 @@ const Header = () => {
             </>
             :
             <>
-              <Link className="first" onClick={
+              <Link to='/' className="first" onClick={
                 logout
 
               }>

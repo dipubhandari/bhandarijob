@@ -10,6 +10,8 @@ import { server } from './config'
 import { useDispatch } from 'react-redux'
 import { isLogin } from './redux/authSlice'
 import Select from './pages/SelectAccount/Select'
+import axios from 'axios';
+import Search from './pages/Search/Search';
 
 function App() {
 
@@ -26,15 +28,11 @@ function App() {
       if (strignify_user) {
         const user_detail = JSON.parse(strignify_user)
 
-        await fetch(`${server}/checklogin`,
-          {
-            method: 'POST',
-            body: JSON.stringify(user_detail),
-            headers: {
-              'Content-type': 'application/json'
-            }
-          }.then(result => result.json()).then(data => dispatch(isLogin(true)))
-        )
+        await axios.post(`${server}/checklogin`, user_detail
+        ).then((data) => {
+
+          dispatch(isLogin(data.data))
+        })
       }
       else {
         dispatch(isLogin(false))
@@ -55,11 +53,12 @@ function App() {
           <Route path='/' element={
             <Home isLogin={isLogin} />
           } />
-          {/* <Route path='/homepage' element={<Home />} /> */}
+          <Route path='/homepage' element={<Home />} />
           <Route path='/select_Account_Type' element={<Select />} />
           <Route path='/login' element={<Login />} />
           <Route path='/new' element={<Signup />} />
           <Route path='/newemploye' element={<SignupCompany />} />
+          <Route path='/search' element={<Search />} />
         </Routes>
       </section>
     </>

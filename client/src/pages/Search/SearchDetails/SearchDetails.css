@@ -1,0 +1,160 @@
+.search_details_container {
+    display: flex;
+    width: 100%;
+    background-color: aliceblue;
+    min-height: 100px;
+}
+
+.search_box {
+    display: flex;
+    width: 100%;
+    min-height: 100px;
+    margin: 0px 190px;
+}
+
+.search_items {
+    flex: 1;
+    margin-top: 30px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.search_items select {
+    padding: 10px 90px;
+}
+
+.search_data {
+    flex: 2;
+}
+
+
+
+
+.searchcat h2 {
+    font-size: large;
+    opacity: 50%;
+    margin: 10px 0px 0px 0px;
+    border-bottom: 1px solid rgb(132, 130, 130);
+    padding: 10px 1px;
+}
+
+.category_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    gap: 20px;
+}
+
+.search_data {
+    flex: 2;
+}
+
+.search_content {
+    border: 1px solid rgb(190, 185, 185);
+    background-color: rgb(255, 255, 255);
+    height: 200px;
+    margin: 20px auto auto 0px;
+    width: 100%;
+    display: flex;
+}
+
+.search_logo {
+    height: 200px;
+    width: 100%;
+    flex: 1;
+}
+
+.company_logo {
+    width: 100px;
+    display: flex;
+    margin: auto auto;
+    margin-top: 50px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.search_details {
+    flex: 4;
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.search_details_header {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.search_details_header h5 {
+    font-size: larger;
+    color: darkslategray;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+
+}
+
+
+.companyname {
+    font-size: large;
+    color: darkslategray;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+}
+
+.search_details_mid {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.language {
+    border-right: 1px solid rgb(128, 111, 111, 0.6);
+    height: 30px;
+    color: rgb(255, 204, 0);
+    padding: 0px 6px;
+}
+
+.what_lang {
+    color: rgb(80, 80, 70);
+}
+
+.location {
+    height: 30px;
+    color: rgb(255, 204, 0);
+    padding: 0px 6px;
+    border-right: 1px solid rgb(128, 111, 111, 0.6);
+}
+
+.validatetill {
+    color: rgb(255, 204, 0);
+}
+
+.search_details_footer {
+    flex: 1;
+    font-size: small;
+    overflow: hidden;
+}
+
+.applybtn {
+    flex: 1;
+    height: 200px;
+    width: 100%;
+}
+
+.applybtn input {
+    padding: 10px;
+    display: flex;
+    margin: 70px auto;
+    justify-content: center;
+    border: none;
+    align-items: center;
+    background-color: orange;
+    color: cornsilk;
+}

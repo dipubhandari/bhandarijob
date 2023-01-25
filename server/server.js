@@ -7,6 +7,8 @@ import connection from './database/connection.js'
 dotenv.config()
 import cors from 'cors'
 import mongoose from 'mongoose'
+import postRoutes from './routes/postRoutes.js'
+import categoryRoutes from './routes/categoryRoute.js'
 
 const app = express()
 connection(process.env.MONGO_URL)
@@ -24,8 +26,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
 
+// app.use('/', postRoutes)
+
 app.use('/', userRoutes)
 
+app.use('/', categoryRoutes)
 
+app.use('/', postRoutes)
 
 server.listen(process.env.port, () => { console.log(`The app is running in port`) })

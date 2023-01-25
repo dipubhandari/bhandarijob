@@ -50,7 +50,7 @@ const Job = () => {
                     <section className="search_content">
                         <section className="search_logo">
                             <img src="https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587515358_10512.png" alt=""
-                                className='company_logo'
+                                className='image_search'
                                 width='100px' />
                         </section>
                         <section className="search_details">

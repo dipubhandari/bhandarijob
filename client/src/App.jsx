@@ -31,10 +31,10 @@ function App() {
       if (token) {
         await axios.post(`${server}/checklogin`, { token }
         ).then((data) => {
+
           dispatch(isLogin(data.data.isLogin))
-          const whichuser = data.data.user.account
-          console.log(whichuser)
-          if (whichuser == 'employer') {
+
+          if (data.data.user) {
             dispatch(account('employer'))
           }
           else {

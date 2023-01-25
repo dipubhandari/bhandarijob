@@ -70,13 +70,15 @@ class JobSeekerController {
 
         console.log(token)
 
-        const user = await (JobSeeker_Model.findOne({ __id: token }) && Employer_Model.findOne({ __id: token }))
-        console.log(user)
-        if (user) {
-            res.send({ isLogin: true, user })
+        const user1 = await JobSeeker_Model.findOne({ _id: token })
+        const user2 = await Employer_Model.findOne({ _id: token })
+        if (user1 || user2) {
+            console.log(user1 || user2)
+
+            res.send({ isLogin: true, user: user1 || user2 })
         }
         else {
-            res.send({ isLogin: false, user })
+            res.send({ isLogin: false, user: user1 || user2 })
         }
     }
 

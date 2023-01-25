@@ -38,14 +38,14 @@ const Login = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
+                        console.log(data.user)
+                        localStorage.setItem('token', data.user._id)
                         toast.success(data.success)
                         setTimeout(() => {
                             location('/homepage')
                         }, 1000)
                         dispatch(isLogin(true))
                         toast.success('Login...')
-                        console.log(data.user)
-                        localStorage.setItem('token', data.user.__id)
                     }
                     // if (data.success) {
                     //     localStorage.setItem('token', data.token);

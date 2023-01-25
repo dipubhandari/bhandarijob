@@ -15,7 +15,7 @@ const Signup = () => {
 
         e.preventDefault()
         // validating the form
-        if (!(input.companyname && input.email && input.password && input.repeat)) {
+        if (!(input.name && input.email && input.password && input.repeat)) {
             toast.warn('Enter all the fiels')
         }
         else if (input.phone.length < 10) {
@@ -70,7 +70,7 @@ const Signup = () => {
                                 type="text"
                                 onChange={(e) =>
                                     setinput({ ...input, [e.target.name]: e.target.value })}
-                                name='companyname'
+                                name='name'
                                 value={input.name || ''}
                                 placeholder='Enter the full name'
                             />
@@ -111,7 +111,7 @@ const Signup = () => {
                                         setinput({ ...input, [e.target.name]: e.target.value })}
                                     name='password'
                                     value={input.password || ''}
-                                    placeholder='Choose Passowrd'
+                                    placeholder='Choose Password'
                                 />
                             </span>
 

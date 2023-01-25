@@ -44,11 +44,13 @@ const Login = () => {
                         }, 1000)
                         dispatch(isLogin(true))
                         toast.success('Login...')
+                        console.log(data.user)
+                        localStorage.setItem('token', data.user.__id)
                     }
                     // if (data.success) {
                     //     localStorage.setItem('token', data.token);
                     // }
-                    localStorage.setItem('token', JSON.stringify(data.user));
+
                     if (data.error_msg) {
                         toast.warn(data.error_msg)
                     }

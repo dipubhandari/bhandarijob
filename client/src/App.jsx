@@ -9,6 +9,8 @@ import SignupCompany from './pages/CompanyAccount/SignupCompany';
 import { server } from './config'
 import { useDispatch } from 'react-redux'
 import { isLogin } from './redux/authSlice'
+
+import { account } from './redux/accountSlice'
 import Select from './pages/SelectAccount/Select'
 import axios from 'axios';
 import Search from './pages/Search/Search';
@@ -25,14 +27,19 @@ function App() {
   useEffect(() => {
 
     async function checkLogin() {
-      const strignify_user = localStorage.getItem('token')
-      if (strignify_user) {
-        const user_detail = JSON.parse(strignify_user)
-
-        await axios.post(`${server}/checklogin`, user_detail
+      const token = localStorage.getItem('token')
+      if (token) {
+        await axios.post(`${server}/checklogin`, { token }
         ).then((data) => {
-
-          dispatch(isLogin(data.data))
+          dispatch(isLogin(data.data.isLogin))
+          const whichuser = data.data.user.account
+          console.log(whichuser)
+          if (whichuser == 'employer') {
+            dispatch(account('employer'))
+          }
+          else {
+            dispatch(account('jobseeker'))
+          }
         })
       }
       else {

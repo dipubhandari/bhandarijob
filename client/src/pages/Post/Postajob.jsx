@@ -50,10 +50,33 @@ const Postajob = () => {
     }
     async function handleForm(e) {
         e.preventDefault()
-        console.log(input)
-        await axios.post(`${server}/post`, input).then(response => {
-            console.log(response.data)
-        })
+
+        // validating the fields
+
+        if (!(input.position && input.valid && input.vacancyfor && input.salary && input.category && input.education && input.description)) {
+            toast.warn('Enter all the fields')
+        }
+        else if (input.description.length < 100) {
+            toast.warn('Description should at least 100 characters')
+        }
+        else if (input.experience > 10) {
+            toast.warn('Enter valid experience 1 to 10 years..')
+
+        }
+
+        else if (!input.vacancyfor < 10) {
+            toast.warn('Enter valid vacancy 1 to 10 ')
+
+        }
+        else {
+
+            await axios.post(`${server}/post`, input).then(response => {
+                console.log(response.data)
+                if (response.data.success) {
+                    toast.success('You Posted a Job')
+                }
+            })
+        }
     }
 
     // fetching the categories from server
@@ -124,7 +147,7 @@ const Postajob = () => {
                                 <span>Offer Salary</span>
 
                                 <input
-                                    type="text"
+                                    type="number"
                                     value={input.salary || ''}
                                     onChange={handleInput}
                                     name='salary'
@@ -141,8 +164,8 @@ const Postajob = () => {
                                     placeholder='Expected Experience (in years)'
 
                                     onChange={handleInput}
-                                    name='salary'
-                                    value={input.salary || ''}
+                                    name='experience'
+                                    value={input.experience || ''}
                                 />
                             </span>
 

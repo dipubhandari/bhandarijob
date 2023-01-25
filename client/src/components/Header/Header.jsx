@@ -16,6 +16,7 @@ import { isLogin } from '../../redux/authSlice'
 const Header = () => {
 
   const isLogin = useSelector(state => state.isLogin)
+  const account = useSelector(state => state.account)
 
   const sendIslogin = useDispatch()
 
@@ -56,10 +57,7 @@ const Header = () => {
         {
           (!isLogin) ?
             <>
-              <Link to='/post' className="first">
-                <span className='right_logo'><MdOutlineWork /></span>
-                <span className='right_topic'>Post Job Free</span>
-              </Link>
+
               <Link className="first" to='/login'>
                 <span className='right_logo'><FaSignInAlt /></span>
                 <span className='right_topic'>Login</span>
@@ -73,6 +71,20 @@ const Header = () => {
             </>
             :
             <>
+
+              {
+                (account == 'employer') 
+
+                  ?
+                  <Link to='/post' className="first">
+                    <span className='right_logo'><MdOutlineWork /></span>
+                    <span className='right_topic'>Post Job...</span>
+                  </Link>
+                  :
+
+                  null
+              }
+            
               <Link to='/' className="first" onClick={
                 logout
 

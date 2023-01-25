@@ -35,7 +35,7 @@ function App() {
           dispatch(isLogin(data.data.isLogin))
 
           if (data.data.user) {
-            dispatch(account('employer'))
+            dispatch(account(data.data.user.account))
           }
           else {
             dispatch(account('jobseeker'))

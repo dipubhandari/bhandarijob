@@ -1,1 +1,1 @@
-export const server = 'http://localhost:500o'
+export const server = 'http://localhost:5000'

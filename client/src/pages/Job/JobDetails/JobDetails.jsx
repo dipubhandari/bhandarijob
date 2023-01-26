@@ -11,19 +11,19 @@ import { useState } from 'react'
 
 const JobDetails = () => {
 
-// const url = useLocati
+    // const url = useLocati
 
     const [jobPost, setJobPost] = useState([])
 
     useEffect(() => {
-    
-            // fetching all the post from sever
-            async function postApi() {
-                const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
 
-                    setJobPost(response.data)
-                })
-            }
+        // fetching all the post from sever
+        async function postApi() {
+            const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
+
+                setJobPost(response.data)
+            })
+        }
         postApi()
     }, [])
 

@@ -30,7 +30,7 @@ class JobPostController {
                 vacancy: vacancyfor,
                 category,
                 salary,
-                description,
+                jobdescription: description,
                 experience,
                 skills: req.body.skill,
                 requirements: req.body.req
@@ -45,22 +45,30 @@ class JobPostController {
 
     }
     static GetNaukariDetails = async (req, res) => {
+
         const url = req.params.id
-        console.log(url)
-        const jobdetail = await Job_Model.find({ _id: url })
-        console.log(jobdetail)
+
+        const jobdetail = await Job_Model.findOne({ _id: url })
+
         if (!jobdetail) {
             res.status(400).send('No result found')
         }
         else {
-            // getting the company details who posted this job
-            const companydetail = await Employer_Model.find({ email: owneremail })
-            if (companydetail) {
-                const jobdetails = { ...companydetail, ...jobdetail }
-                console.log(jobdetails)
-                res.send(jobdetails)
+            //  getting owner information/detail
+            const owner = await Employer_Model.findOne({ email: jobdetail.owneremail })
+
+            if (owner) {
+                console.log(jobdetail)
+                console.log(owner)
+
+                res.send({ companydetail: owner, jobdetail: jobdetail })
 
             }
+            else {
+                res.send('No result found')
+            }
+
+
         }
     }
     static JobPostApi = async (req, res) => {

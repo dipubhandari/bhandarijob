@@ -3,7 +3,7 @@ import './Hero.css'
 import { ImFileText } from 'react-icons/im'
 import { BiCategoryAlt, BiCurrentLocation } from 'react-icons/bi'
 
-const Hero = () => {
+const JobApply = () => {
     return (
         <>
             <section className="hero_container">
@@ -32,4 +32,4 @@ const Hero = () => {
     )
 }
 
-export default Hero
+export default JobApply

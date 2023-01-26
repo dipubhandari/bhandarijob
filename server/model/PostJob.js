@@ -1,7 +1,9 @@
 import mongoose from "mongoose"
 
 const Job_Schema = new mongoose.Schema({
-
+    owneremail: { type: String },
+    companyname: { type: String },
+    logo: { type: String },
     position: { type: String, require: true },
     applydate: { type: Date, require: true },
     vacancy: { type: Number, require: true },

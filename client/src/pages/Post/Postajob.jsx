@@ -8,6 +8,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { server } from '../../../src/config';
 
 const Postajob = () => {
+    const [token, setToken] = useState('')
     // state for cateogories
     const [categories, setCategories] = useState([])
     // count for skill in the form
@@ -52,19 +53,17 @@ const Postajob = () => {
         e.preventDefault()
 
         // validating the fields
-
+        console.log(input)
         if (!(input.position && input.valid && input.vacancyfor && input.salary && input.category && input.education && input.description)) {
-            toast.warn('Enter all the fields')
+            toast.warn('Enter all the fields...')
         }
         else if (input.description.length < 100) {
             toast.warn('Description should at least 100 characters')
         }
         else if (input.experience > 10) {
             toast.warn('Enter valid experience 1 to 10 years..')
-
         }
-
-        else if (!input.vacancyfor < 10) {
+        else if (input.vacancyfor < 1 || input.vacancyfor > 10) {
             toast.warn('Enter valid vacancy 1 to 10 ')
 
         }
@@ -73,12 +72,12 @@ const Postajob = () => {
             await axios.post(`${server}/post`, input).then(response => {
                 console.log(response.data)
                 if (response.data.success) {
-                    toast.success('You Posted a Job')
+                    setInput({})
+                    toast.success('You Posted a Job');
                 }
             })
         }
     }
-
     // fetching the categories from server
     useEffect(() => {
 
@@ -95,6 +94,11 @@ const Postajob = () => {
 
         categories()
 
+        // getting login id from localstorage
+        const token = localStorage.getItem('token')
+        setToken(token)
+        // setting input so that to send it to backend with post data
+        setInput({ ...input, token: token })
     }, [])
 
     return (

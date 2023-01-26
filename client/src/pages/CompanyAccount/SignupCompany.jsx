@@ -15,16 +15,12 @@ const SignupCompany = () => {
         console.log(input)
         e.preventDefault()
 
-        if (!(input.companyname && input.email && input.password && input.repeat && input.description && input.phone)) {
+        if (!(input.companyname && input.address && input.email && input.password && input.repeat && input.description && input.phone)) {
             toast.warn('Enter all the fiels')
         }
         else if (input.phone.length < 10) {
             toast.warn('Enter correct Mobile')
         }
-        else if (input.password != input.repeat) {
-            toast.warn('Password donot match')
-        }
-
         else if (input.description.length < 100) {
             toast.warn('Description should at least 100 character long.')
         }
@@ -138,14 +134,14 @@ const SignupCompany = () => {
                             </span>
 
                             <span className='phone'>
-                                <span>Password*</span>
+                                <span>Address*</span>
                                 <input
                                     type="text"
-                                    value={input.repeat || ''}
+                                    value={input.address || ''}
                                     onChange={(e) =>
                                         setinput({ ...input, [e.target.name]: e.target.value })}
-                                    name='repeat'
-                                    placeholder='Repeat Password'
+                                    name='address'
+                                    placeholder='Address (only District)'
                                 />
 
                             </span>

@@ -10,10 +10,10 @@ class EmployerController {
     static UserAccountCreation = async (req, res) => {
 
         //  getting the input from the frontend
-        const { companyname, email, phone, password, description } = req.body
+        const { companyname, address, email, phone, password, description } = req.body
 
         // validation
-        if (!(companyname && email && phone && password && description)) {
+        if (!(companyname && email && phone && password && description )) {
             res.send({ error_msg: 'Please enter all the credential...' })
         }
         else {
@@ -33,6 +33,7 @@ class EmployerController {
                     email,
                     phone,
                     password,
+                    address,
                     description,
                     logo: req.file.filename
                 })

@@ -3,7 +3,7 @@ import JobPostController from '../Controller/JobPost/JobPost.js'
 const postRoutes = express.Router()
 
 postRoutes.post('/post', JobPostController.JobPost)
-postRoutes.get('/api/jobpost', JobPostController.JobPostApi)
-
+postRoutes.post('/api/jobpost', JobPostController.JobPostApi)
+postRoutes.get('/job-post-detail/:id', JobPostController.GetNaukariDetails)
 
 export default postRoutes

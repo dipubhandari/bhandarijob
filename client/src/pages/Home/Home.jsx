@@ -19,12 +19,7 @@ const Home = (props) => {
             <section className="job">
                 <Job />
             </section>
-
-
             <section className="footer">
-
-
-
                 <Footer />
 
             </section>

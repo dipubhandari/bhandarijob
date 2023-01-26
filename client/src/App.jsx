@@ -13,8 +13,9 @@ import { isLogin } from './redux/authSlice'
 import { account } from './redux/accountSlice'
 import Select from './pages/SelectAccount/Select'
 import axios from 'axios';
-import Search from './pages/Search/Search';
+import Job from './pages/Job/Job';
 import Postajob from './pages/Post/Postajob';
+import JobPostDetail from './pages/JobPostDetail/JobPostDetail'
 
 function App() {
 
@@ -69,6 +70,10 @@ function App() {
           <Route path='/select_Account_Type' element={<Select />} />
           {/* accoutn selection when signup here*/}
 
+          {/* all jobs route */}
+          <Route path='/jobs' element={<Job />} />
+          {/* all jbos route */}
+
           {/* login */}
           <Route path='/login' element={<Login />} />
           {/* login */}
@@ -82,14 +87,23 @@ function App() {
           {/* signup for new employer  herer*/}
 
 
+
           {/* post a job */}
 
 
           <Route path='/post' element={<Postajob />} />
 
           {/* post a job */}
+
+
+          {/* post a job */}
+
+
+          <Route path='/job-post-detail/:id' element={<JobPostDetail />} />
+
+          {/* post a job */}
           {/* seasrch route */}
-          <Route path='/search' element={<Search />} />
+          {/* <Route path='/search' element={< />} /> */}
           {/* seasrch route */}
 
         </Routes>

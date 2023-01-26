@@ -3,8 +3,8 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import Hero from '../../components/HeroSection/Hero'
 import Job from '../../components/Jobs/Job'
-import './Search.css'
-import SearchDetails from './SearchDetails/SearchDetails'
+import './Job.css'
+import JobDetails from './JobDetails/JobDetails'
 
 const Search = (props) => {
 
@@ -22,7 +22,7 @@ const Search = (props) => {
 
             <section className="job">
 
-                <SearchDetails />
+                <JobDetails />
 
 
             </section>

@@ -9,6 +9,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import postRoutes from './routes/postRoutes.js'
 import categoryRoutes from './routes/categoryRoute.js'
+import path from 'path'
 
 const app = express()
 connection(process.env.MONGO_URL)
@@ -17,6 +18,10 @@ const server = http.createServer(app)
 // app.use(formData.parse())
 
 app.use(cors())
+
+app.use(express.static(process.cwd() + '/uploads/logo'))
+
+app.use('/uploads/logo', express.static(path.join(process.cwd(), './uploads/logo')))
 
 app.use(express.urlencoded({ extended: false }))
 

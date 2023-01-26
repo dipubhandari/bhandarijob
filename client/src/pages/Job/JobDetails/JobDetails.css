@@ -14,10 +14,12 @@
 
 .search_items {
     flex: 1;
+    flex-direction: column;
     margin-top: 30px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 50px;
 }
 
 .search_items select {
@@ -42,9 +44,11 @@
 .category_content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    width: 100%;
+    align-items: stretch;
+
     margin: 10px;
-    gap: 20px;
+    gap: 220px;
 }
 
 .search_data {
@@ -142,13 +146,19 @@
     overflow: hidden;
 }
 
+.search_details_footer p {
+    width: 500px;
+    height: 55px;
+    overflow: hidden;
+}
+
 .applybtn {
     flex: 1;
     height: 200px;
     width: 100%;
 }
 
-.applybtn input {
+.applybtnlink {
     padding: 10px;
     display: flex;
     margin: 70px auto;
@@ -157,4 +167,7 @@
     align-items: center;
     background-color: orange;
     color: cornsilk;
+
+    text-decoration: none;
+    width: 100px;
 }

@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './Job.css'
-import post from './post'
 import { server } from '../../config'
 import axios from 'axios'
 

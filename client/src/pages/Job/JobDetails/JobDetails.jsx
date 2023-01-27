@@ -130,7 +130,7 @@ const JobDetails = () => {
                                             </span>
                                         </section>
                                         <section className="search_details_footer">
-                                            <p>{data.description} ...</p>
+                                            <p>{data.jobdescription} ...</p>
                                         </section>
                                     </section>
                                     <section className="applybtn">

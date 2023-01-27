@@ -1,3 +1,7 @@
+.cate_type_hero{
+padding: 0px 50px;
+}
+
 .hero_container {
     background-color: rgb(39, 85, 107);
     height: 200px;
@@ -23,9 +27,9 @@
 .search_field {
     display: flex;
     position: relative;
+   
 
 }
-
 .search_field input {
     padding: 10px 70px;
 }
@@ -35,8 +39,10 @@
     border: 1px solid grey;
 }
 
-.first_field {
+.searchlink {
     background-color: orange;
+    text-decoration: none;
+    color: #ffff;
     border: none;
     padding: 10px;
 }

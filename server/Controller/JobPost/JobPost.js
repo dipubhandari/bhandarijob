@@ -3,7 +3,28 @@ import Employer_Model from '../../model/employer.js'
 import Job_Model from '../../model/PostJob.js'
 
 class JobPostController {
+    // search
 
+    static Search = async (req, res) => {
+
+        console.log('hello world')
+
+        const { keyword, category, location } = req.body
+
+        const jobs = await JobPost.find({
+            "$or": [
+                { companyname: { $regex: keyword } } ||
+
+                { category: { $regex: category } } ||
+                { position: { $regex: keyword } }
+            ]
+
+        })
+        console.log(jobs)
+        res.send(jobs)
+    }
+
+    // search
     static JobPost = async (req, res) => {
 
         // getting the data from frontend
@@ -44,6 +65,8 @@ class JobPostController {
         }
 
     }
+
+
     static GetNaukariDetails = async (req, res) => {
 
         const url = req.params.id
@@ -80,6 +103,7 @@ class JobPostController {
 
         }
     }
+
 }
 
 

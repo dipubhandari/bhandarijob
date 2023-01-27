@@ -7,6 +7,7 @@ import { CiTimer } from 'react-icons/ci'
 import { useEffect } from 'react'
 import { server } from '../../../config'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import { useState } from 'react'
 
 const JobDetails = () => {
@@ -14,19 +15,55 @@ const JobDetails = () => {
     // const url = useLocati
 
     const [jobPost, setJobPost] = useState([])
-
+    const searchInput = useSelector(state => state.search)
     useEffect(() => {
 
-        // fetching all the post from sever
-        async function postApi() {
-            const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
 
-                setJobPost(response.data)
+        // fetching all the post from sever accorgint to search key if store
+
+        console.log(searchInput)
+        if ((searchInput.location == '' && searchInput.keyword == '' && searchInput.category == '') || !(searchInput.keyword || searchInput.location || searchInput.category)) {
+            async function postApi() {
+                const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
+                    console.log(response)
+                    setJobPost(response.data)
+                })
+            }
+            postApi()
+        }
+        else {
+            async function search() {
+                const posts = await axios.post(`${server}/api/jobpost`, searchInput).then((response) => {
+
+                    setJobPost(response.data)
+
+                })
+            }
+            search()
+        }
+    }, [searchInput])
+    // getting location of all the user so that to display in search
+    const [location, setLocation] = useState([])
+    useEffect(() => {
+        async function getLocation() {
+            const posts = await axios.get(`${server}/allemployer`).then((response) => {
+                const locations = response.data.map((item, id) => {
+                    return item.location
+                })
+                // removing the duplicated item from arr
+                let new_locations = []
+                for (let i = 0; i < location.length; i++) {
+                    if (!new_locations.includes(locations[i])) {
+                        new_locations = [...new_locations,location[i]]
+                    }
+
+                }
+                console.log(new_locations)
+                setLocation(locations)
             })
         }
-        postApi()
+        getLocation()
     }, [])
-
 
     return (
         <div className='search_details_container'>
@@ -35,13 +72,15 @@ const JobDetails = () => {
             <section className="search_box">
                 {/* left sesarch box */}
                 <section className="search_items">
-                    <section className="companyloation">
+                    <section className="companyloation" name='location'>
 
                         <select name="" id="">
-                            <option>Location</option>
-                            <option>Location</option>
-                            <option>Location</option>
-                            <option>Location</option>
+
+                            {
+                                location.map((item, id) => {
+                                    return <option value={item}>{item}</option>
+                                })
+                            }
                         </select>
 
                     </section>

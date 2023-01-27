@@ -18,7 +18,7 @@ const JobApply = () => {
     const dispatch = useDispatch()
     // search input from store
 
-    const searchInput = useSelector(state => state.search)
+    // const searchInput = useSelector(state => state.search)
  
 
     const [searchKey, setSearchKey] = useState({ keyword: '', category: '', location: '' })

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = false
 
 const accountSlice = createSlice({
-    name: "account",
+    name: "Account",
     initialState,
     reducers: {
         account: (state, action) => {

@@ -1,0 +1,39 @@
+.applicationtable {
+    width: 100%;
+
+}
+
+.table_heading {
+    background-color: lightgray;
+    opacity: 40%;
+
+}
+.dashboard-icon{
+    margin: 0px 10px;
+}
+.download{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+} .grey-table{
+    background-color: rgb(210, 210, 210);
+}
+
+
+.table_heading tr {
+    height: 50px;
+}
+
+.table_content {
+    color: rgb(61, 61, 61);
+    width: 100%;
+}
+
+.table_content tr {
+    height: 50px;
+}
+
+.table_content td {
+    margin: auto;
+
+}

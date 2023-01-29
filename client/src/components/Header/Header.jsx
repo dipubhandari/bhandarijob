@@ -16,7 +16,7 @@ import { isLogin } from '../../redux/authSlice'
 const Header = () => {
 
   const isLogin = useSelector(state => state.isLogin)
-  const account = useSelector(state => state.account)
+  const account = useSelector(state => state.Account)
 
   const sendIslogin = useDispatch()
 
@@ -73,7 +73,7 @@ const Header = () => {
             <>
 
               {
-                (account == 'employer') 
+                (account == 'employer')
 
                   ?
                   <Link to='/post' className="first">
@@ -84,7 +84,7 @@ const Header = () => {
 
                   null
               }
-            
+
               <Link to='/' className="first" onClick={
                 logout
 

@@ -136,7 +136,7 @@ const JobPostDetail = () => {
                         <p>Interested candidates fulfilling the mentioned criteria are encouraged to Apply using the Easy Apply Button below. Registered candidates may also apply using Apply Now Button.</p>
                     </section>
 
-                    <button className='Aplly_btn'>Apply</button>
+                    <Link to={`/apply/${jobDetail._id}`} className='Aplly_btn'>Apply</Link>
                 </section>
 
                 <section className="other_jobs">

@@ -1,0 +1,30 @@
+.dashboard {
+    display: flex;
+    background-color:rgb(247, 247, 247);
+    height: 98vh;
+    width: 100%;
+}
+
+.left_dashboard {
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.left_dashboard input {
+    padding: 0px 50px;
+    height: 50px;
+    background-color: rgb(255, 153, 0);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.footer {
+    margin-top: 7px;
+}
+.right_dashboard{
+     width: 100%;
+}
+.right_dashboard h1{
+    color: orchid;
+}

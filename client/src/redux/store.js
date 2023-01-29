@@ -7,7 +7,7 @@ const store = configureStore({
     reducer: {
 
         isLogin: authSlice,
-        account: accountSlice,
+        Account: accountSlice,
         search:searchKeysSlice
     }
 })

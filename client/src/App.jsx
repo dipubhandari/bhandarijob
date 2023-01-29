@@ -7,19 +7,25 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import SignupCompany from './pages/CompanyAccount/SignupCompany';
 import { server } from './config'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { isLogin } from './redux/authSlice'
-
 import { account } from './redux/accountSlice'
 import Select from './pages/SelectAccount/Select'
 import axios from 'axios';
 import Job from './pages/Job/Job';
 import Postajob from './pages/Post/Postajob';
 import JobPostDetail from './pages/JobPostDetail/JobPostDetail'
+import EmployerHome from './pages/EmployerHome/EmployerHome'
+import ApplyJob from './pages/ApplyJob/ApplyJob';
+
+
 
 function App() {
+  // getting the user info from store
+  const Account = useSelector(state => state.Account)
 
   // const [isLogin, setIslogged] = useState(true)
+
 
 
   const dispatch = useDispatch()
@@ -48,6 +54,9 @@ function App() {
       }
     }
     checkLogin()
+
+
+    console.log((Account))
   }, [])
 
   // checking if the user is logged in or not
@@ -63,7 +72,7 @@ function App() {
           <Route path='/' element={
             <Home isLogin={isLogin} />
           } />
-          <Route path='/homepage' element={<Home />} />
+          <Route path='/homepage' element={(Account == 'jobseeker') ? <Home /> : <EmployerHome />} />
           {/* homepage here */}
 
           {/* accoutn selection when signup */}
@@ -100,6 +109,7 @@ function App() {
 
 
           <Route path='/job-post-detail/:id' element={<JobPostDetail />} />
+          <Route path='/apply/:id' element={<ApplyJob/>} />
 
           {/* post a job */}
           {/* seasrch route */}

@@ -2,12 +2,16 @@ import React from 'react'
 import { useState } from 'react'
 import Application from '../../components/Application/Application'
 import Header from '../../components/Header/Header'
-
+import JobApplication from '../../components/JobNotice/JobNotice'
 import './EmployerHome.css'
 
 const EmployerHome = (props) => {
 
-    const [component, setComponent] = useState('')
+    const [component, setComponent] = useState('job')
+
+    const handleJobComponent = (e) => {
+        setComponent(e)
+    }
 
     return (
         <div className='home_container'>
@@ -19,16 +23,17 @@ const EmployerHome = (props) => {
 
 
                 <section className="left_dashboard">
-                    <input onClick={()=>setComponent('dashboard')} type="button" value='Dashboard' />
-                    <input type="button" value='Applications' onClick={() => setComponent('application')} />
+                    <input onClick={() => setComponent('job')} type="button" value='Your Job' />
 
                 </section>
                 <section className="right_dashboard">
                     {
-                        !(component == 'application') ?
-                            <Application />
+                        (component == 'job') ?
+                            // jobpost
+                            <JobApplication handleJobComponent={handleJobComponent} />
                             :
-                            <h1>Welcome,..... to the dashboard</h1>
+                            // jpb
+                            <Application />
                     }
 
                 </section>

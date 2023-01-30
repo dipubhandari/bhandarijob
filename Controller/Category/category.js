@@ -30,7 +30,6 @@ class Category {
             res.send('Created')
 
         } catch (error) {
-            console.log(error)
         }
     }
 

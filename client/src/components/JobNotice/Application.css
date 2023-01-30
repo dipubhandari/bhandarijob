@@ -1,0 +1,10 @@
+.jobnotice {
+    height: 100vh;
+}
+.job_containers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 30px 100px;
+}

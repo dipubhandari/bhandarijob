@@ -20,10 +20,8 @@ class EmployerController {
             //    checking the email present in db of both jobseeker and employ
             const user1 = await Jobseeker_Model.findOne({ email })
             const user2 = await Employer_Model.findOne({ email })
-            console.log(user1)
 
             if (user1 || user2) {
-                console.log('Account exist')
                 res.send({ error_msg: 'Email already exist' })
             }
             else {

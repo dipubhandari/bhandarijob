@@ -2,13 +2,17 @@ import { configure, configureStore } from '@reduxjs/toolkit'
 import authSlice from './authSlice'
 import accountSlice from './accountSlice'
 import searchKeysSlice from './searchKeysSlice'
+import applySlice from './applySlice'
+import jobIdSclice from './jobIdSlice'
 
 const store = configureStore({
     reducer: {
 
         isLogin: authSlice,
         Account: accountSlice,
-        search:searchKeysSlice
+        search: searchKeysSlice,
+        apply: applySlice,
+        jobId: jobIdSclice
     }
 })
 

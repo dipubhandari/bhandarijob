@@ -172,9 +172,9 @@ const JobDetails = () => {
                                             <p>{data.jobdescription} ...</p>
                                         </section>
                                     </section>
-                                    <section className="applybtn">
+                                    <section className="applysection">
 
-                                        <Link className='applybtnlink' to={`../job-post-detail/${data._id}`}    > Apply </Link>
+                                        <Link className='applylink' to={`../job-post-detail/${data._id}`}    > Apply </Link>
                                     </section>
                                 </section>
                             </>

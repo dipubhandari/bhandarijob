@@ -1,13 +1,117 @@
 import JobPost from '../../model/PostJob.js'
 import Employer_Model from '../../model/employer.js'
 import Job_Model from '../../model/PostJob.js'
+import JobSeeker_Model from '../../model/JobSeeker.js'
+import Apply_Model from '../../model/Apply_Model.js'
 
 class JobPostController {
+    static GetPost = async (req, res) => {
+
+        const id = req.params.id
+
+
+        const user = await Employer_Model.findOne({ _id: id })
+        // console.log(all)
+
+        const useremail = user.email
+
+
+        const post = await Job_Model.find({ owneremail: useremail })
+        console.log(post)
+
+        if (post) {
+            res.send(post)
+        }
+        else {
+            res.send('something gone wrong')
+        }
+
+    }
+    //apply
+
+    static Apply = async (req, res) => {
+        try {
+
+            const jobseeker = req.body.user
+            const jobpostId = req.body.jobpost
+            const resume = req.file.filename
+            console.log(req.body)
+            if (!(jobseeker || jobpostId && resume)) {
+                res.send({ error_msg: 'Login or detail is not in correct format..' })
+            }
+            //   getting the user
+            const user = await JobSeeker_Model.findOne({ __id: jobseeker })
+            // check if already applied
+            const checkApplied = user.jobapplied
+            let exist = false
+            console.log(exist)
+            user.jobapplied.forEach((item, id) => {
+                if (item == jobpostId) {
+                    exist = true
+                }
+            })
+            if (exist) {
+                res.send({ error_msg: 'Already Applied' })
+            }
+            else {
+                const userapplication = [...checkApplied, jobpostId]
+
+                const updateuser = await JobSeeker_Model.updateOne({
+                    __id: jobseeker
+                }, { jobapplied: userapplication })
+                if (userapplication) {
+
+                    const owner = await Job_Model.findOne({ _id: req.body.jobpost })
+                    const apply = await Apply_Model.create({
+                        name: user.name,
+                        email: user.email,
+                        resume: resume,
+                        owner: owner.owneremail,
+                        appliedjob: jobpostId
+                    })
+                    if (apply) {
+
+                        res.send({ success: "Applied successful" })
+                    }
+                    else {
+
+
+                        res.send({ error_msg: 'Try Again..' })
+                    }
+                }
+                else {
+                    console.log('user not updated')
+                }
+            }
+
+
+
+
+        } catch (error) {
+
+        }
+
+    }
+
+
+
+
+
+    // all application api create
+    static Application = async (req, res) => {
+        const applications = await Apply_Model.find()
+        if (applications) {
+            res.send(applications)
+        }
+        else {
+            res.send('Something gone wrong')
+        }
+    }
     // search
 
     static Search = async (req, res) => {
 
-        console.log('hello world')
+        //
 
         const { keyword, category, location } = req.body
 
@@ -20,7 +124,6 @@ class JobPostController {
             ]
 
         })
-        console.log(jobs)
         res.send(jobs)
     }
 
@@ -40,7 +143,6 @@ class JobPostController {
             // getting the user who posted the postbased on token id
 
             const owner = await Employer_Model.findOne({ _id: token })
-            console.log(owner)
             const post = await JobPost.create({
                 owneremail: owner.email,
                 companyname: owner.companyname,
@@ -59,7 +161,6 @@ class JobPostController {
 
             if (post) {
                 res.send({ success: 'You Posted a job successfully....' })
-                console.log(post)
             }
 
         }
@@ -81,8 +182,6 @@ class JobPostController {
             const owner = await Employer_Model.findOne({ email: jobdetail.owneremail })
 
             if (owner) {
-                console.log(jobdetail)
-                console.log(owner)
 
                 res.send({ companydetail: owner, jobdetail: jobdetail })
 

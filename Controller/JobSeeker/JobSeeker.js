@@ -35,7 +35,6 @@ class JobSeekerController {
             //     user_detail.password = null
             // if user not exist and token generated then 
             if (user_detail) {
-                console.log('first')
                 res.send({ user: user_detail, success: 'Account created Successfully' })
             }
 
@@ -48,7 +47,6 @@ class JobSeekerController {
         // get data from user
 
         const { email, password } = req.body
-        console.log(req.body)
         // check data in the db if exitst or notawait
         // const employer = await (Employer_Model.findOne({ email, password }))
         const user2 = await JobSeeker_Model.findOne({ email, password })
@@ -56,6 +54,7 @@ class JobSeekerController {
 
 
         if (!(user2 || user1)) {
+            console.log(user1)
             res.send({ error_msg: 'Enter correct details...' })
         }
         else {
@@ -67,14 +66,11 @@ class JobSeekerController {
     static Check__Login = async (req, res) => {
 
         const token = req.body.token
-
-        console.log(token)
-
+       
         const user1 = await JobSeeker_Model.findOne({ _id: token })
         const user2 = await Employer_Model.findOne({ _id: token })
         if (user1 || user2) {
-            console.log(user1 || user2)
-
+            console.log('are login')
             res.send({ isLogin: true, user: user1 || user2 })
         }
         else {

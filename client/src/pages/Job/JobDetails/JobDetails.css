@@ -152,13 +152,13 @@
     overflow: hidden;
 }
 
-.applybtn {
+.applysection {
     flex: 1;
     height: 200px;
     width: 100%;
 }
 
-.applybtnlink {
+.applylink {
     padding: 10px;
     display: flex;
     margin: 70px auto;

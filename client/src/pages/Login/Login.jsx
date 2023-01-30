@@ -6,6 +6,7 @@ import { isLogin } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
+import { account } from '../../redux/accountSlice';
 import { useNavigate } from 'react-router-dom';
 import { server } from '../../config'
 
@@ -19,14 +20,7 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!(email && password)) {
-            toast.warn('Enter the details')
-
-
-            // console.log(email)
-            // console.log(password)
-
-
-        }
+            toast.warn('Enter the details')    }
         else {
             // send a POST request to the server with email and password
             // using the fetch API
@@ -42,8 +36,9 @@ const Login = () => {
                         localStorage.setItem('token', data.user._id)
                         toast.success(data.success)
                         setTimeout(() => {
-                            location('/homepage')
+                            location('/')
                         }, 1000)
+                        dispatch(account(data.user.account))
                         dispatch(isLogin(true))
                         toast.success('Login...')
                     }

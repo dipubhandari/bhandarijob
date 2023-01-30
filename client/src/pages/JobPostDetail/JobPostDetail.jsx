@@ -12,9 +12,13 @@ import { AiOutlineFieldTime } from 'react-icons/ai'
 import { useLocation } from 'react-router-dom'
 import { server } from '../../config'
 import Footer from '../../components/Footer/Footer'
-
+import {apply} from '../../redux/applySlice'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
 const JobPostDetail = () => {
+
+    // 
+    const dispatch = useDispatch()
     // post detail state
     const [jobDetail, setDetail] = useState({})
 
@@ -136,7 +140,7 @@ const JobPostDetail = () => {
                         <p>Interested candidates fulfilling the mentioned criteria are encouraged to Apply using the Easy Apply Button below. Registered candidates may also apply using Apply Now Button.</p>
                     </section>
 
-                    <Link to={`/apply/${jobDetail._id}`} className='Aplly_btn'>Apply</Link>
+                    <Link to={`/apply/${jobDetail._id}`} onClick={()=> dispatch(apply(jobDetail._id))} className='Aplly_btn'>Apply</Link>
                 </section>
 
                 <section className="other_jobs">

@@ -7,6 +7,7 @@ const User_Schema = new mongoose.Schema({
     password: { type: String, require: true },
     phone: { type: String, require: true },
     account: { type: String, default: 'jobseeker' },
+    jobapplied: { type: Array },
     createdAt: { type: Date, default: Date.now() }
 })
 

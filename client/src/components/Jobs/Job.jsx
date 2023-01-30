@@ -51,12 +51,7 @@ const Job = () => {
                                 <section className='like'></section>
                             </section>
                         })
-                    }
-
-
-
-
-                </section>
+                    }     </section>
 
             </div>
 

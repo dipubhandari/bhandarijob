@@ -6,7 +6,7 @@ const Apply_Schema = new mongoose.Schema({
     owner: { type: String, require: true },
     email: { type: String, require: true },
     phone: { type: String, default: 1 },
-    resume: { type: String, require: true },
+    resume: { type: Buffer, require: true },
     appliedjob: { type: String, require: true },
     createdAt: { type: Date, default: Date.now() }
 })

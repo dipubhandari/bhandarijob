@@ -54,7 +54,8 @@ class JobSeekerController {
 
 
         if (!(user2 || user1)) {
-            console.log(user1)
+      
+            
             res.send({ error_msg: 'Enter correct details...' })
         }
         else {

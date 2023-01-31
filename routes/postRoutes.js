@@ -17,6 +17,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 // company upload
+
+// downlaod rsume
+postRoutes.get('/download/:id', JobPostController.Download)
 // application api
 postRoutes.get('/application/:employer/:postid', JobPostController.GetApplication)
 // post a job by acompany
@@ -29,7 +32,14 @@ postRoutes.post('/apply', upload.single('resume'), JobPostController.Apply)
 postRoutes.get('/api/applications', JobPostController.Application)
 // search route
 postRoutes.post('/api/jobpost', JobPostController.Search)
+
+
+
+// remove job applicatoin
+postRoutes.post('/removeapplication', JobPostController.DeleteApplication)
+
 // job detail page
+
 postRoutes.get('/job-post-detail/:id', JobPostController.GetNaukariDetails)
 // jo post
 postRoutes.get('/api/companyjobs/:id', JobPostController.GetPost)

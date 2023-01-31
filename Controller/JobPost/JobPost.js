@@ -4,15 +4,45 @@ import Job_Model from '../../model/PostJob.js'
 import JobSeeker_Model from '../../model/JobSeeker.js'
 import Apply_Model from '../../model/Apply_Model.js'
 
+
 class JobPostController {
 
+
+
+    // delete application
+    static DeleteApplication = async (req, res) => {
+        const id = req.body.applicationid
+        const remove = await Apply_Model.findByIdAndDelete(id)
+        if (remove) {
+            res.send({ success: 'Remove Sucessfully....' })
+        }
+    }
+
+    // download
+
+    static Download = async (req, res) => {
+
+      
+        const id = req.params.id
+        // find the resume
+        const resume = await Apply_Model.findOne({ _id: id })
+
+        const download = resume.resume
+        res.download(process.cwd(),`/resume${download}`)
+        
+    }
+    // download
+    // get application data to show in employer sashboard
     static GetApplication = async (req, res) => {
+
         const post = req.params.postid
         const employer = req.params.employer
-
         const emp = await Employer_Model.findOne({ _id: employer })
-        const applicaion = await Apply_Model.find({ owner: emp.email, appliedjob: post })
-        console.log(applicaion)
+        const application = await Apply_Model.find({ owner: emp.email, appliedjob: post })
+
+        if (application) {
+            res.send(application)
+        }
 
     }
 
@@ -71,7 +101,6 @@ class JobPostController {
                     _id: jobseeker
                 }, { jobapplied: userapplication })
 
-                console.log(updateuser)
                 if (updateuser) {
                     const owner = await Job_Model.findOne({ _id: req.body.jobpost })
                     const apply = await Apply_Model.create({

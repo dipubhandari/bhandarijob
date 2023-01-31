@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import './Application.css'
 import { BsFillPersonCheckFill } from 'react-icons/bs'
 import { GrView } from 'react-icons/gr'
@@ -8,23 +9,59 @@ import { useSelector } from 'react-redux'
 import { HiDownload } from 'react-icons/hi'
 import { RxResume } from 'react-icons/rx'
 import { useEffect } from 'react'
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 import { server } from '../../config'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import FileDownload from "js-file-download"
+
 
 
 const Application = () => {
 
+
+  // download the resume
+  const download = async (id) => {
+
+    // requiest ofr download
+    await axios(
+      {
+        url:`${server}/download/${id}`,
+        method:"GET",
+
+   responseType:"blob"
+      }).then((response) => {
+    FileDownload(response.data,'resume.pdf')
+      console.log(response)
+    })
+
+
+  }
+
   const postId = useSelector(state => state.jobId)
   const token = localStorage.getItem('token')
-
+  const [application, setApplication] = useState([])
   // getting the appication based on id of post and tokenin gh elocalstorage
+
+
+
+  async function de(e) {
+    const id = e
+    console.log(id)
+    const del = await axios.post(`${server}/removeapplication`, { applicationid: id }).then((response) => {
+      toast.alert(response.data.success)
+    })
+  }
+
+
   useEffect(() => {
     console.log(postId)
     async function getApplication() {
       await axios.get(`${server}/application/${token}/${postId}`).then(response => {
-        console.log(response.data).catch((err) => {
-          console.log(err)
-        })
+
+
+        console.log(response.data)
+        setApplication(response.data)
       })
     }
     getApplication()
@@ -33,6 +70,8 @@ const Application = () => {
   return (
     <div>
       <table className='applicationtable'>
+        <ToastContainer />
+
         <thead className='table_heading'>
           <tr><th>SN.</th>
             <th><BsFillPersonCheckFill className='dashboard-icon' />Name</th>
@@ -41,23 +80,19 @@ const Application = () => {
             <th><RxResume className='dashboard-icon' />Resume.</th>  <th>Action</th></tr>
         </thead>
         <tbody className='table_content'>
-          <tr>
-            <td>1.</td>
-            <td>Dipu Bhandari</td>
-            <td>dipu@gmail.com</td>
-            <td>Dipu Bhandari</td>
-            <td className='download'><span>Download<HiDownload className='dashboard-icon' /></span>
-              <span> View<GrView className='dashboard-icon' /></span></td>
-          </tr>
+          {
+            application.map((item, id) => {
+              return <tr className='grey-table' keys={id}>
+                <td>{id + 1}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.phone}</td>
+                <td className='download'><span>Download<HiDownload className='dashboard-icon' onClick={() => download(item._id)} /></span>
+                  <span> View<GrView className='dashboard-icon' /></span></td> <td onClick={() => de(item._id)}><AiFillDelete className='dashboard-icon' /></td>
+              </tr>
+            })
+          }
 
-          <tr className='grey-table'>
-            <td>1.</td>
-            <td>Dipu Bhandari</td>
-            <td>dipu@gmail.com</td>
-            <td>Dipu Bhandari</td>
-            <td className='download'><span>Download<HiDownload className='dashboard-icon' /></span>
-              <span> View<GrView className='dashboard-icon' /></span></td> <td><AiFillDelete className='dashboard-icon' /></td>
-          </tr>
 
         </tbody>
       </table>

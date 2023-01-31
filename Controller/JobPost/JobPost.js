@@ -5,19 +5,29 @@ import JobSeeker_Model from '../../model/JobSeeker.js'
 import Apply_Model from '../../model/Apply_Model.js'
 
 class JobPostController {
+
+    static GetApplication = async (req, res) => {
+        const post = req.params.postid
+        const employer = req.params.employer
+
+        const emp = await Employer_Model.findOne({ _id: employer })
+        const applicaion = await Apply_Model.find({ owner: emp.email, appliedjob: post })
+        console.log(applicaion)
+
+    }
+
+
     static GetPost = async (req, res) => {
 
         const id = req.params.id
 
 
         const user = await Employer_Model.findOne({ _id: id })
-        // console.log(all)
 
         const useremail = user.email
 
 
         const post = await Job_Model.find({ owneremail: useremail })
-        console.log(post)
 
         if (post) {
             res.send(post)
@@ -32,19 +42,21 @@ class JobPostController {
     static Apply = async (req, res) => {
         try {
 
-            const jobseeker = req.body.user
+            const jobseeker = req.body.jobseeker
             const jobpostId = req.body.jobpost
             const resume = req.file.filename
-            console.log(req.body)
-            if (!(jobseeker || jobpostId && resume)) {
+
+
+
+            if (!(jobseeker && jobpostId && resume)) {
                 res.send({ error_msg: 'Login or detail is not in correct format..' })
             }
             //   getting the user
-            const user = await JobSeeker_Model.findOne({ __id: jobseeker })
+            const user = await JobSeeker_Model.findOne({ _id: jobseeker })
             // check if already applied
+
             const checkApplied = user.jobapplied
             let exist = false
-            console.log(exist)
             user.jobapplied.forEach((item, id) => {
                 if (item == jobpostId) {
                     exist = true
@@ -55,12 +67,12 @@ class JobPostController {
             }
             else {
                 const userapplication = [...checkApplied, jobpostId]
-
                 const updateuser = await JobSeeker_Model.updateOne({
-                    __id: jobseeker
+                    _id: jobseeker
                 }, { jobapplied: userapplication })
-                if (userapplication) {
 
+                console.log(updateuser)
+                if (updateuser) {
                     const owner = await Job_Model.findOne({ _id: req.body.jobpost })
                     const apply = await Apply_Model.create({
                         name: user.name,
@@ -80,7 +92,6 @@ class JobPostController {
                     }
                 }
                 else {
-                    console.log('user not updated')
                 }
             }
 

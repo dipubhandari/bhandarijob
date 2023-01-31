@@ -2,13 +2,34 @@ import React from 'react'
 import './Application.css'
 import { BsFillPersonCheckFill } from 'react-icons/bs'
 import { GrView } from 'react-icons/gr'
-import {  AiFillDelete } from 'react-icons/ai'
+import { AiFillDelete } from 'react-icons/ai'
 import { AiOutlineMail, AiFillPhone } from 'react-icons/ai'
-
+import { useSelector } from 'react-redux'
 import { HiDownload } from 'react-icons/hi'
 import { RxResume } from 'react-icons/rx'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { server } from '../../config'
+
 
 const Application = () => {
+
+  const postId = useSelector(state => state.jobId)
+  const token = localStorage.getItem('token')
+
+  // getting the appication based on id of post and tokenin gh elocalstorage
+  useEffect(() => {
+    console.log(postId)
+    async function getApplication() {
+      await axios.get(`${server}/application/${token}/${postId}`).then(response => {
+        console.log(response.data).catch((err) => {
+          console.log(err)
+        })
+      })
+    }
+    getApplication()
+  }, [])
+
   return (
     <div>
       <table className='applicationtable'>
@@ -25,7 +46,7 @@ const Application = () => {
             <td>Dipu Bhandari</td>
             <td>dipu@gmail.com</td>
             <td>Dipu Bhandari</td>
-            <td className='download'><span>Download<HiDownload className='dashboard-icon' /></span> 
+            <td className='download'><span>Download<HiDownload className='dashboard-icon' /></span>
               <span> View<GrView className='dashboard-icon' /></span></td>
           </tr>
 
@@ -35,7 +56,7 @@ const Application = () => {
             <td>dipu@gmail.com</td>
             <td>Dipu Bhandari</td>
             <td className='download'><span>Download<HiDownload className='dashboard-icon' /></span>
-              <span> View<GrView className='dashboard-icon' /></span></td> <td><AiFillDelete className='dashboard-icon'/></td>
+              <span> View<GrView className='dashboard-icon' /></span></td> <td><AiFillDelete className='dashboard-icon' /></td>
           </tr>
 
         </tbody>

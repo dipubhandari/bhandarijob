@@ -5,25 +5,25 @@ import { FaHandshake } from 'react-icons/fa'
 // import { MdOutlineWork,MdDriveFolderUpload } from 'react-icons/md'
 import { MdOutlineWork, MdDriveFolderUpload } from 'react-icons/md'
 import './style.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { server } from '../../config'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
+import {apply} from '../../redux/applySlice'
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { jobId } from '../../redux/jobIdSlice'
 
 const ApplyJob = () => {
+    const location = useLocation()
     const [resume, setResume] = useState({});
-    const apply = useSelector(state => state.apply)
+    const applier = useSelector(state => state.apply)
 
-    const user = localStorage.getItem('token')
-    console.log(resume)
-    console.log(resume.type)
-
+    const jobapplier = localStorage.getItem('token')
+    
     const Apply = async (e) => {
         e.preventDefault()
-        // checking the file is correct or not
-
         if (!resume.name) {
             toast.warn('Upload the file ')
 
@@ -32,21 +32,27 @@ const ApplyJob = () => {
         } else {
             const formData = new FormData()
             formData.append('resume', resume)
-            formData.append('jobseeker', user)
-            formData.append('jobpost', apply)
+            formData.append('jobseeker', jobapplier)
+            formData.append('jobpost', applier)
             await axios.post(`${server}/apply`, formData).then((response) => {
-
                 if (response.data.error_msg) {
                     toast.error(response.data.error_msg)
                 }
-
                 if (response.data.success) {
                     toast.success(response.data.success)
                 }
             })
         }
-
     }
+    // onload fetch if of the post from url and insert to store sot htat once refresh the page it not out from store
+
+    const dispathch = useDispatch()
+    const pathname = location.pathname
+    const patharr = pathname.split('/')
+    const job = patharr[patharr.length - 1]
+    useEffect(() => {
+        dispathch(apply(job))
+    }, [])
 
     return (
         <>

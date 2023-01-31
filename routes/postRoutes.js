@@ -17,7 +17,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 // company upload
-
+// application api
+postRoutes.get('/application/:employer/:postid', JobPostController.GetApplication)
 // post a job by acompany
 postRoutes.post('/post', JobPostController.JobPost)
 // postRoutes.post('/api/jobpost', JobPostController.JobPostApi)

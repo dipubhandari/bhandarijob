@@ -87,7 +87,7 @@ const Application = () => {
             <th><BsFillPersonCheckFill className='dashboard-icon' />Name</th>
             <th><AiOutlineMail className='dashboard-icon' />Email</th>
             <th><AiFillPhone className='dashboard-icon' />Phone</th>
-            <th><RxResume className='dashboard-icon' />Resume.</th>  <th>Action</th></tr>
+            <th>Resume.</th>  <th>Action</th></tr>
         </thead>
         <tbody className='table_content'>
           {
@@ -98,7 +98,7 @@ const Application = () => {
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
                 <td className='download'><span>Download<HiDownload className='dashboard-icon' onClick={() => download(item._id)} /></span>
-                  <span> View<GrView className='dashboard-icon' /></span></td> <td onClick={() => de(item._id)}><AiFillDelete className='dashboard-icon' /></td>
+                </td> <td onClick={() => de(item._id)}><AiFillDelete className='dashboard-icon' /></td>
               </tr>
             })
           }

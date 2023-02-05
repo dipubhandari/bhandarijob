@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import Hero from '../../components/HeroSection/Hero'
@@ -8,6 +8,13 @@ import JobDetails from './JobDetails/JobDetails'
 
 const Search = (props) => {
 
+    const [isSearchClicked, searchClicked] = useState('')
+
+    function clickedOnSearch() {
+
+        searchClicked(Math.random())
+
+    }
 
     return (
         <div className='home_container'>
@@ -17,12 +24,12 @@ const Search = (props) => {
             </section>
 
             <section className="hero">
-                <Hero />
+                <Hero clickedOnSearch={clickedOnSearch} />
             </section>
 
             <section className="job">
 
-                <JobDetails />
+                <JobDetails isSearchClicked={isSearchClicked} />
 
 
             </section>

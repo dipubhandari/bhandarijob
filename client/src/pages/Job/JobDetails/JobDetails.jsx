@@ -10,7 +10,7 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 
-const JobDetails = () => {
+const JobDetails = (props) => {
 
     // const url = useLocati
 
@@ -18,30 +18,30 @@ const JobDetails = () => {
     const searchInput = useSelector(state => state.search)
     useEffect(() => {
 
-
         // fetching all the post from sever accorgint to search key if store
 
-        console.log(searchInput)
         if ((searchInput.location == '' && searchInput.keyword == '' && searchInput.category == '') || !(searchInput.keyword || searchInput.location || searchInput.category)) {
             async function postApi() {
                 const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
-                    console.log(response)
                     setJobPost(response.data)
+                    console.log(response.data)
+
                 })
             }
             postApi()
         }
         else {
+
             async function search() {
                 const posts = await axios.post(`${server}/api/jobpost`, searchInput).then((response) => {
 
                     setJobPost(response.data)
-
+                    console.log(response.data)
                 })
             }
             search()
         }
-    }, [searchInput])
+    }, [props.isSearchClicked])
     // getting location of all the user so that to display in search
     const [location, setLocation] = useState([])
     useEffect(() => {
@@ -51,15 +51,8 @@ const JobDetails = () => {
                     return item.location
                 })
                 // removing the duplicated item from arr
-                let new_locations = []
-                for (let i = 0; i < location.length; i++) {
-                    if (!new_locations.includes(locations[i])) {
-                        new_locations = [...new_locations,location[i]]
-                    }
-
-                }
-                console.log(new_locations)
-                setLocation(locations)
+                let new_locations = new Set(locations)
+                setLocation([...new_locations])
             })
         }
         getLocation()
@@ -75,7 +68,6 @@ const JobDetails = () => {
                     <section className="companyloation" name='location'>
 
                         <select name="" id="">
-
                             {
                                 location.map((item, id) => {
                                     return <option value={item}>{item}</option>
@@ -159,13 +151,16 @@ const JobDetails = () => {
                                         <section className="search_details_mid">
 
                                             <span className="language">
-                                                <MdWork /><span className='what_lang'> PHP</span>
+                                                <MdWork /><span className='what_lang'> {data.skills[0] || 'N/A'}</span>
                                             </span>
                                             <span className="location">
-                                                <ImLocation /> <span className=' what_lang'>Ktm</span>
+                                                <ImLocation /> <span className=' what_lang'>{data.location || 'Nepal'}</span>
                                             </span>
                                             <span className="validatetill">
-                                                <CiTimer /> <span className="what_lang">  100years left</span>
+                                                <CiTimer /> <span className="what_lang"> {
+                                           data.applydate.split('T')[0]
+                                                 
+                                                }</span>
                                             </span>
                                         </section>
                                         <section className="search_details_footer">

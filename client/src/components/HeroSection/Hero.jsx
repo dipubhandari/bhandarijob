@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom'
 
 
 
-const JobApply = () => {
+const JobApply = (props) => {
 
     const dispatch = useDispatch()
     // search input from store
@@ -29,8 +29,9 @@ const JobApply = () => {
     }
 
     const handleSubmit = () => {
-        console.log(searchKey)
-        dispatch(search(searchKey))
+   
+        props.clickedOnSearch()
+        dispatch(search(searchKey));
     }
     // fetching the categories from server to display in search list
     const [categories, setCategories] = useState([])

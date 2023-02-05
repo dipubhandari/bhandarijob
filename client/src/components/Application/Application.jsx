@@ -29,12 +29,12 @@ const Application = () => {
         url: `${server}/download/${id}`,
         method: "GET",
         responseType: 'blob',
-       ers: {
-         Accept: 'application/pdf',
+        headers: {
+          Accept: 'application/pdf',
         },
       }).then((response) => {
-const file = window.URL.createObjectURL(new Blob([response.data])); console.log(response.data)
-window.open(response.data);
+        const file = window.URL.createObjectURL(new Blob([response.data])); console.log(response.data)
+        window.open(response.data);
       })
 
 

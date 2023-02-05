@@ -1,5 +1,4 @@
-// this is the site for searching job and posting job if you are a company
-
+inspired from jobaxle
 
 //How to use
 

@@ -44,6 +44,7 @@ const JobDetails = (props) => {
     }, [props.isSearchClicked])
     // getting location of all the user so that to display in search
     const [location, setLocation] = useState([])
+    const [skills, Setskills] = useState({})
     useEffect(() => {
         async function getLocation() {
             const posts = await axios.get(`${server}/allemployer`).then((response) => {
@@ -56,6 +57,39 @@ const JobDetails = (props) => {
             })
         }
         getLocation()
+
+        async function getSkills() {
+            const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
+                let skills = []
+                const skill = response.data.map((item, index) => {
+                    skills = [...skills, ...item.skills]
+                    return item.skills
+                })
+                console.log(skills)
+                let newskills = new Set(skills)
+                newskills = [...newskills]
+                // comparing skills and new skills to find number
+                let skillsObj = {}
+
+                for (let i = 0; i < skills.length; i++) {
+
+                    if (skillsObj.hasOwnProperty(skills[i])) {
+
+                        // const value = skillsObj.skills[i]
+                        skillsObj = { ...skillsObj, [skills[i]]: skillsObj[skills[i]] + 1 }
+
+                    }
+                    else {
+                        skillsObj = { ...skillsObj, [skills[i]]: 1 }
+                    }
+                }
+
+
+                console.log(skillsObj)
+                Setskills(skillsObj)
+            })
+        }
+        getSkills()
     }, [])
 
     return (
@@ -78,24 +112,14 @@ const JobDetails = (props) => {
                     </section>
 
                     <section className="searchcat">
-                        <h2>Category:</h2>
-                        {/* content */}
-                        <section className="category_content">
-                            <span>  <input type="checkbox" /> <label htmlFor="Java">Java</label> </span><span>4</span>
-                        </section>
-                        {/* content .. */}
-
-                        {/* content */}
-                        <section className="category_content">
-                            <span>  <input type="checkbox" /> <label htmlFor="Java">C</label> </span><span>9</span>
-                        </section>
-                        {/* content .. */}
-
-                        {/* content */}
-                        <section className="category_content">
-                            <span>  <input type="checkbox" /> <label htmlFor="Java">PHP</label> </span><span>4</span>
-                        </section>
-                        {/* content .. */}
+                        <h2>Programing Languages:</h2>
+                        {
+                            Object.keys(skills).map((item, index) => {
+                                return <section className="category_content">
+                                    <span>  <input type="checkbox" value={`${skills[item]}`} /> <label htmlFor="Java">{item}</label> </span><span>{skills[item]}</span>
+                                </section>
+                            })
+                        }
                     </section>
                 </section>
                 {/* right details section */}
@@ -158,8 +182,8 @@ const JobDetails = (props) => {
                                             </span>
                                             <span className="validatetill">
                                                 <CiTimer /> <span className="what_lang"> {
-                                           data.applydate.split('T')[0]
-                                                 
+                                                    data.applydate.split('T')[0]
+
                                                 }</span>
                                             </span>
                                         </section>

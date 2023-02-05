@@ -50,7 +50,9 @@
     margin: 10px;
     gap: 220px;
 }
-
+.category_content span label{
+    text-transform: uppercase;
+}
 .search_data {
     flex: 2;
 }

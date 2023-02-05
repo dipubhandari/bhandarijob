@@ -15,7 +15,8 @@
     display: flex;
     flex-direction: column;
     height: auto;
-    padding: 20px;;
+    padding: 20px;
+    ;
     align-items: center;
     flex: 1.5;
 }
@@ -35,11 +36,13 @@
 }
 
 .Aplly_btn {
+    text-decoration: none;
     background-color: rgb(2, 24, 60);
     padding: 10px 20px;
-    color:#fff;
+    color: #fff;
     border: none;
-    margin: 10px 10px 10px 50px;
+    margin: 40px 10px 10px 0px;
+    width: 100px
 }
 
 .company_detail_nav h2 {

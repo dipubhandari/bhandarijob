@@ -62,6 +62,7 @@ function App() {
 
         <Routes>
           {/* homepage */}
+          <Route path='/:resume'/>
           <Route path='/' element={
           (Account == 'employer') ?  <EmployerHome/> : <Home isLogin={isAuth} /> 
           } />

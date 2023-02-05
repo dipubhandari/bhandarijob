@@ -1,6 +1,7 @@
 import express from 'express'
 import JobPostController from '../Controller/JobPost/JobPost.js'
 const postRoutes = express.Router()
+import cors from 'cors';
 import multer from 'multer'
 
 
@@ -19,7 +20,9 @@ const upload = multer({ storage: storage })
 // company upload
 
 // downlaod rsume
-postRoutes.get('/download/:id', JobPostController.Download)
+postRoutes.get('/download/:id',cors({
+    exposedHeaders: ['Content-Disposition'],
+  }), JobPostController.Download)
 // application api
 postRoutes.get('/application/:employer/:postid', JobPostController.GetApplication)
 // post a job by acompany

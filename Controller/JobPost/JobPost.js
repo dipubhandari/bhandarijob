@@ -3,7 +3,7 @@ import Employer_Model from '../../model/employer.js'
 import Job_Model from '../../model/PostJob.js'
 import JobSeeker_Model from '../../model/JobSeeker.js'
 import Apply_Model from '../../model/Apply_Model.js'
-
+import fs from 'fs'
 
 class JobPostController {
 
@@ -21,15 +21,21 @@ class JobPostController {
     // download
 
     static Download = async (req, res) => {
+         const id = req.params.id
 
-      
-        const id = req.params.id
+
+       console.log(req.params.id)  
         // find the resume
         const resume = await Apply_Model.findOne({ _id: id })
 
-        const download = resume.resume
-        res.download(process.cwd(),`/resume${download}`)
-        
+      const fileName = `resume`
+      const fileURL = `${process.cwd()}/resume/${resume.resume}`
+      const stream = fs.createReadStream(fileURL);
+      res.set({
+        'Content-Disposition': `attachment; filename='${fileName}'`,
+        'Content-Type': 'application/pdf',
+      });
+      stream.pipe(res);
     }
     // download
     // get application data to show in employer sashboard

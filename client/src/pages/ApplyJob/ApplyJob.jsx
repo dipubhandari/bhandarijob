@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 import { server } from '../../config'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
-import {apply} from '../../redux/applySlice'
+import { apply } from '../../redux/applySlice'
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { jobId } from '../../redux/jobIdSlice'
@@ -21,7 +21,7 @@ const ApplyJob = () => {
     const applier = useSelector(state => state.apply)
 
     const jobapplier = localStorage.getItem('token')
-    
+
     const Apply = async (e) => {
         e.preventDefault()
         if (!resume.name) {
@@ -80,11 +80,6 @@ const ApplyJob = () => {
                                     className='fieldresume'
                                 />
                             </span>
-
-
-
-
-
                             <input
                                 type='submit'
                                 value='Apply' className='applybtn'

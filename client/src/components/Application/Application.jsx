@@ -14,7 +14,7 @@ import { server } from '../../config'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FileDownload from "js-file-download"
-
+import { saveAs } from 'file-saver'
 
 
 const Application = () => {
@@ -26,14 +26,16 @@ const Application = () => {
     // requiest ofr download
     await axios(
       {
-        url:`${server}/download/${id}`,
-        method:"GET",
-
-   responseType:"blob"
+        url: `${server}/download/${id}`,
+        method: "GET",
+        responseType: 'blob',
+       ers: {
+         Accept: 'application/pdf',
+        },
       }).then((response) => {
-    FileDownload(response.data,'resume.pdf')
-      console.log(response)
-    })
+const file = window.URL.createObjectURL(new Blob([response.data])); console.log(response.data)
+window.open(response.data);
+      })
 
 
   }

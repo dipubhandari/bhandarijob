@@ -34,8 +34,6 @@ const JobDetails = (props) => {
                     searching = { ...searching, skills: [...skills, value] }
                     dispatch(search(searching))
                     setSearchInputTrack(Math.random())
-
-
                 }
             }
             else {
@@ -46,7 +44,6 @@ const JobDetails = (props) => {
                 searching = { ...searching, skills: skills }
                 dispatch(search(searching))
                 setSearchInputTrack(Math.random())
-
             }
         }
         else {
@@ -62,17 +59,17 @@ const JobDetails = (props) => {
     }
     useEffect(() => {
         // fetching all the post from sever accorgint to search key if store
-
-        if (!(searchInput.location && searchInput.keyword && searchInput.category) || !(searchInput.keyword || searchInput.location || searchInput.category)) {
+        if (!(searchInput.keyword || searchInput.location || searchInput.category || searchInput.skills)) {
             async function postApi() {
                 const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
                     setJobPost(response.data)
-
+                    console.log(response.data)
                 })
             }
             postApi()
         }
         else {
+
             console.log(searchInputTrack)
 
             async function search() {
@@ -220,7 +217,7 @@ const JobDetails = (props) => {
                                                 <MdWork /><span className='what_lang'> {data.skills[0] || 'N/A'}</span>
                                             </span>
                                             <span className="location">
-                                                <ImLocation /> <span className=' what_lang'>{data.location || 'Nepal'}</span>
+                                                <ImLocation /> <span className=' what_lang'>{data.address || 'Nepal'}</span>
                                             </span>
                                             <span className="validatetill">
                                                 <CiTimer /> <span className="what_lang"> {

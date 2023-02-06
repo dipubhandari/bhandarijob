@@ -157,20 +157,18 @@ class JobPostController {
 
     static Search = async (req, res) => {
 
-
-
-        const { keyword, category, location } = req.body
-        console.log(req.body)
-        // const jobs = await JobPost.find({
-        //     "$or": [
-        //         { companyname: { $regex: keyword } } ||
-
-        //         { category: { $regex: category } } ||
-        //         { position: { $regex: keyword } }
-        //     ]
-
-        // })
-        // res.send(jobs)
+        const skills = req.body.skills
+        const { keyword, category, location } = req.body;
+        console.log(keyword, category, location)
+        const jobs = await JobPost.find({
+            "$or": [
+                { position: { $regex: keyword } },
+                { location: { $regex: location } },
+                { category: { $regex: category } },
+                { address: { $regex: keyword } }
+            ]
+        })
+        res.send(jobs)
     }
 
     // search

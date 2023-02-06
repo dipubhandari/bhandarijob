@@ -30,7 +30,7 @@ const JobApply = (props) => {
     }
 
     const handleSubmit = (e) => {
-        // props.clickedOnSearch()
+        props.clickedOnSearch()
         dispatch(search({ ...searchInput, ...searchKey }));
     }
     // fetching the categories from server to display in search list

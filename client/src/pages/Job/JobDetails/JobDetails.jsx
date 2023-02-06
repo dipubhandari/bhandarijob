@@ -16,11 +16,54 @@ const JobDetails = (props) => {
     const dispatch = useDispatch()
     const [jobPost, setJobPost] = useState([])
     const searchInput = useSelector(state => state.search)
-    useEffect(() => {
+    const [searchInputTrack, setSearchInputTrack] = useState(0)
+    let searching = searchInput
+    const handleSearchInput = (e) => {
+        if (e.target.name == 'skills') {
+            const { checked, value } = e.target
+            if (checked) {
+                const skills = searching.skills
+                if (skills === undefined) {
+                    searching = { ...searching, skills: [value] }
+                    dispatch(search(searching))
+                    setSearchInputTrack(Math.random())
 
+                }
+                else {
+
+                    searching = { ...searching, skills: [...skills, value] }
+                    dispatch(search(searching))
+                    setSearchInputTrack(Math.random())
+
+
+                }
+            }
+            else {
+
+                const skills = searching.skills?.filter((item, id) => {
+                    return item != value
+                })
+                searching = { ...searching, skills: skills }
+                dispatch(search(searching))
+                setSearchInputTrack(Math.random())
+
+            }
+        }
+        else {
+
+            const name = e.target.name;
+            const value = e.target.value
+            dispatch(search(searching))
+            searching = { ...searching, [name]: value }; dispatch(search(searching))
+            setSearchInputTrack(Math.random())
+
+        }
+
+    }
+    useEffect(() => {
         // fetching all the post from sever accorgint to search key if store
 
-        if ((searchInput.location == '' && searchInput.keyword == '' && searchInput.category == '') || !(searchInput.keyword || searchInput.location || searchInput.category)) {
+        if (!(searchInput.location && searchInput.keyword && searchInput.category) || !(searchInput.keyword || searchInput.location || searchInput.category)) {
             async function postApi() {
                 const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
                     setJobPost(response.data)
@@ -30,6 +73,7 @@ const JobDetails = (props) => {
             postApi()
         }
         else {
+            console.log(searchInputTrack)
 
             async function search() {
                 const posts = await axios.post(`${server}/api/jobpost`, searchInput).then((response) => {
@@ -39,7 +83,7 @@ const JobDetails = (props) => {
             }
             search()
         }
-    }, [props.isSearchClicked])
+    }, [props.isSearchClicked, searchInputTrack])
     // getting location of all the user so that to display in search
     const [location, setLocation] = useState([])
     const [skills, Setskills] = useState({})
@@ -88,44 +132,7 @@ const JobDetails = (props) => {
         }
         getSkills()
     }, [])
-    let searching = searchInput
-    const handleSearchInput = (e) => {
-        if (e.target.name == 'skills') {
-            const { checked, value } = e.target
-            if (checked) {
-                const skills = searching.skills
-                if (skills === undefined) {
-                    searching = { ...searching, skills: [value] }
-                    dispatch(search(searching))
 
-                }
-                else {
-
-                    searching = { ...searching, skills: [...skills, value] }
-                    dispatch(search(searching))
-
-                }
-            }
-            else {
-
-                const skills = searching.skills?.filter((item, id) => {
-                    return item != value
-                })
-                searching = { ...searching, skills: skills }
-                dispatch(search(searching))
-
-            }
-        }
-        else {
-
-            const name = e.target.name;
-            const value = e.target.value
-            dispatch(search(searching))
-            searching = { ...searching, [name]: value };dispatch(search(searching))
-
-        }
-
-    }
 
     return (
         <div className='search_details_container'>

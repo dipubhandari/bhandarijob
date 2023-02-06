@@ -21,21 +21,21 @@ class JobPostController {
     // download
 
     static Download = async (req, res) => {
-         const id = req.params.id
+        const id = req.params.id
 
 
-       console.log(req.params.id)  
+        console.log(req.params.id)
         // find the resume
         const resume = await Apply_Model.findOne({ _id: id })
 
-      const fileName = `resume`
-      const fileURL = `${process.cwd()}/resume/${resume.resume}`
-      const stream = fs.createReadStream(fileURL);
-      res.set({
-        'Content-Disposition': `attachment; filename='${fileName}'`,
-        'Content-Type': 'application/pdf',
-      });
-      stream.pipe(res);
+        const fileName = `resume`
+        const fileURL = `${process.cwd()}/resume/${resume.resume}`
+        const stream = fs.createReadStream(fileURL);
+        res.set({
+            'Content-Disposition': `attachment; filename='${fileName}'`,
+            'Content-Type': 'application/pdf',
+        });
+        stream.pipe(res);
     }
     // download
     // get application data to show in employer sashboard
@@ -159,18 +159,18 @@ class JobPostController {
 
         //
 
-        const { keyword, category, location } = req.body
+        // const { keyword, category, location } = req.body
 
-        const jobs = await JobPost.find({
-            "$or": [
-                { companyname: { $regex: keyword } } ||
+        // const jobs = await JobPost.find({
+        //     "$or": [
+        //         { companyname: { $regex: keyword } } ||
 
-                { category: { $regex: category } } ||
-                { position: { $regex: keyword } }
-            ]
+        //         { category: { $regex: category } } ||
+        //         { position: { $regex: keyword } }
+        //     ]
 
-        })
-        res.send(jobs)
+        // })
+        // res.send(jobs)
     }
 
     // search

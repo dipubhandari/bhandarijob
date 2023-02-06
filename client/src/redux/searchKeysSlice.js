@@ -9,7 +9,7 @@ const searchSlice = createSlice({
         search: (state, action) => {
             state = action.payload
             return state
-        
+
         }
     },
 });

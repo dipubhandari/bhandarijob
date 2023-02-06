@@ -7,13 +7,13 @@ import { CiTimer } from 'react-icons/ci'
 import { useEffect } from 'react'
 import { server } from '../../../config'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
+import { search } from '../../../redux/searchKeysSlice'
 
 const JobDetails = (props) => {
 
-    // const url = useLocati
-
+    const dispatch = useDispatch()
     const [jobPost, setJobPost] = useState([])
     const searchInput = useSelector(state => state.search)
     useEffect(() => {
@@ -96,9 +96,14 @@ const JobDetails = (props) => {
                 const skills = searching.skills
                 if (skills === undefined) {
                     searching = { ...searching, skills: [value] }
+                    dispatch(search(searching))
+
                 }
                 else {
+
                     searching = { ...searching, skills: [...skills, value] }
+                    dispatch(search(searching))
+
                 }
             }
             else {
@@ -107,13 +112,17 @@ const JobDetails = (props) => {
                     return item != value
                 })
                 searching = { ...searching, skills: skills }
+                dispatch(search(searching))
+
             }
         }
         else {
 
             const name = e.target.name;
             const value = e.target.value
-            searching = { ...searching, [name]: value }
+            dispatch(search(searching))
+            searching = { ...searching, [name]: value };dispatch(search(searching))
+
         }
 
     }
@@ -125,7 +134,7 @@ const JobDetails = (props) => {
             <section className="search_box">
                 {/* left sesarch box */}
                 <section className="search_items">
-                    <section className="companyloation" name='location'>
+                    {/* <section className="companyloation" name='sortby'>
 
                         <select name="location" id="" onChange={handleSearchInput}>
                             {
@@ -135,7 +144,7 @@ const JobDetails = (props) => {
                             }
                         </select>
 
-                    </section>
+                    </section> */}
 
                     <section className="searchcat">
                         <h2>Programing Languages:</h2>

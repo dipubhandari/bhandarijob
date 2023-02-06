@@ -24,7 +24,6 @@ const JobDetails = (props) => {
             async function postApi() {
                 const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
                     setJobPost(response.data)
-                    console.log(response.data)
 
                 })
             }
@@ -36,7 +35,6 @@ const JobDetails = (props) => {
                 const posts = await axios.post(`${server}/api/jobpost`, searchInput).then((response) => {
 
                     setJobPost(response.data)
-                    console.log(response.data)
                 })
             }
             search()
@@ -65,7 +63,6 @@ const JobDetails = (props) => {
                     skills = [...skills, ...item.skills]
                     return item.skills
                 })
-                console.log(skills)
                 let newskills = new Set(skills)
                 newskills = [...newskills]
                 // comparing skills and new skills to find number
@@ -85,12 +82,41 @@ const JobDetails = (props) => {
                 }
 
 
-                console.log(skillsObj)
+
                 Setskills(skillsObj)
             })
         }
         getSkills()
     }, [])
+    let searching = searchInput
+    const handleSearchInput = (e) => {
+        if (e.target.name == 'skills') {
+            const { checked, value } = e.target
+            if (checked) {
+                const skills = searching.skills
+                if (skills === undefined) {
+                    searching = { ...searching, skills: [value] }
+                }
+                else {
+                    searching = { ...searching, skills: [...skills, value] }
+                }
+            }
+            else {
+
+                const skills = searching.skills?.filter((item, id) => {
+                    return item != value
+                })
+                searching = { ...searching, skills: skills }
+            }
+        }
+        else {
+
+            const name = e.target.name;
+            const value = e.target.value
+            searching = { ...searching, [name]: value }
+        }
+
+    }
 
     return (
         <div className='search_details_container'>
@@ -101,7 +127,7 @@ const JobDetails = (props) => {
                 <section className="search_items">
                     <section className="companyloation" name='location'>
 
-                        <select name="" id="">
+                        <select name="location" id="" onChange={handleSearchInput}>
                             {
                                 location.map((item, id) => {
                                     return <option value={item}>{item}</option>
@@ -116,7 +142,7 @@ const JobDetails = (props) => {
                         {
                             Object.keys(skills).map((item, index) => {
                                 return <section className="category_content">
-                                    <span>  <input type="checkbox" value={`${skills[item]}`} /> <label htmlFor="Java">{item}</label> </span><span>{skills[item]}</span>
+                                    <span>  <input type="checkbox" value={`${item}`} name='skills' onChange={handleSearchInput} /> <label htmlFor="Java">{item}</label> </span><span>{skills[item]}</span>
                                 </section>
                             })
                         }

@@ -19,7 +19,7 @@ const JobApply = (props) => {
     // search input from store
 
     // const searchInput = useSelector(state => state.search)
- 
+
 
     const [searchKey, setSearchKey] = useState({ keyword: '', category: '', location: '' })
     var handleSearchInput = (e) => {
@@ -29,11 +29,12 @@ const JobApply = (props) => {
     }
 
     const handleSubmit = () => {
-   
+
         props.clickedOnSearch()
         dispatch(search(searchKey));
     }
     // fetching the categories from server to display in search list
+    const [location, setlocation] = useState([])
     const [categories, setCategories] = useState([])
     useEffect(() => {
         const categories = async function () {
@@ -42,6 +43,18 @@ const JobApply = (props) => {
             })
         }
         categories()
+
+        async function getLocation() {
+            const posts = await axios.get(`${server}/allemployer`).then((response) => {
+                const locations = response.data.map((item, id) => {
+                    return item.location
+                })
+                // removing the duplicated item from arr
+                let new_locations = new Set(locations)
+                setlocation([...new_locations])
+            })
+        }
+        getLocation()
     }, [])
 
     return (
@@ -55,7 +68,7 @@ const JobApply = (props) => {
                     <section className="search_field">
 
                         <span className="keyword_input_logo"><ImFileText /></span>  <input type="text" name='keyword' onChange={handleSearchInput} className="input_field"
-                          
+
                             placeholder='  Enter the keyword' />
 
                         <span className="category_input_avatar"><BiCategoryAlt /></span>  <select
@@ -75,9 +88,23 @@ const JobApply = (props) => {
                             }
 
                         </select>
-                        <span className="locaton_input_icon"><BiCurrentLocation /></span>  <input type="text" className="input_field"
-                            onChange={handleSearchInput} name='location' placeholder='   Select Locaition' />
+                        <span className="locaton_input_icon"><BiCurrentLocation /></span>   <select
+                            className='cate_type_hero'
 
+                            name='location'
+                            onChange={handleSearchInput}
+
+                        >
+                            <option value="none" selected disabled hidden>Select Job Location</option>
+                            {
+                                location.map((data, id) => {
+                                    return <>
+                                        <option value={data}>{data}</option>
+                                    </>
+                                })
+                            }
+
+                        </select>
 
 
                         <Link to='/jobs' value='search' className="searchlink" onClick={handleSubmit} >Search</Link>

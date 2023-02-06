@@ -11,8 +11,6 @@ import axios from 'axios';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-
-
 const JobApply = (props) => {
 
     const dispatch = useDispatch()

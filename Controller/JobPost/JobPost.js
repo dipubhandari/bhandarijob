@@ -142,7 +142,6 @@ class JobPostController {
 
 
 
-
     // all application api create
     static Application = async (req, res) => {
         const applications = await Apply_Model.find()
@@ -157,18 +156,33 @@ class JobPostController {
 
     static Search = async (req, res) => {
 
-        const skills = req.body.skills
-        const { keyword, category, location } = req.body;
-        console.log(keyword, category, location)
-        const jobs = await JobPost.find({
-            "$or": [
-                { position: { $regex: keyword } },
-                { location: { $regex: location } },
-                { category: { $regex: category } },
-                { address: { $regex: keyword } }
-            ]
-        })
-        res.send(jobs)
+        const skills = req.body.skills || []
+        const keyword = req.body.kekword || ''
+        const location = req.body.location || ''
+        const category = req.body.category || ''
+
+        if ((keyword == '' && category == '' && location == '')) {
+            const jobs = await JobPost.find({
+                "$or": [
+                    { skills: { $gte: skills } }
+                    // this will return search in skills
+                ]
+            })
+            res.send(jobs)
+        }
+        else if ((keyword != '' || category != '' || location != '')) {
+            // console.log('this runs')
+            const jobs = await JobPost.find({
+                "$or": [
+                    { category: { $regex: req.body.category } },
+                    
+
+                ]
+            })
+            res.send(jobs)
+        }
+
+
     }
 
     // search

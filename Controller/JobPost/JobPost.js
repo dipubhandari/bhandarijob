@@ -157,32 +157,36 @@ class JobPostController {
     static Search = async (req, res) => {
 
         const skills = req.body.skills || []
-        const keyword = req.body.kekword || ''
+        const keyword = req.body.keyword || ''
         const location = req.body.location || ''
         const category = req.body.category || ''
 
-        if ((keyword == '' && category == '' && location == '')) {
+        if (!(keyword == '' && category == '' && location == '')) {
+            console.log('this ')
             const jobs = await JobPost.find({
-                "$or": [
-                    { skills: { $gte: skills } }
-                    // this will return search in skills
+
+                "$and": [
+                    { "position": { $regex: keyword, $options: "i" } },
+                    { "category": { $regex: category } },
+                    { "address": { $regex: location } },
                 ]
-            })
+                // this will return search in skills
+
+            }).sort({ createdAt: 'desc' })
             res.send(jobs)
         }
-        else if ((keyword != '' || category != '' || location != '')) {
-            // console.log('this runs')
+        else if (skills.length > 0) {
             const jobs = await JobPost.find({
-                "$or": [
-                    { category: { $regex: req.body.category } },
-                    
 
-                ]
-            })
+                skills: { $in: skills }
+
+            }).sort({ createdAt: 'desc' })
             res.send(jobs)
         }
-
-
+        else if ((keyword == '' && category == '' && location == '' && skills.length == 0)) {
+            const jobs = await JobPost.find().sort({ createdAt: 'desc' })
+            res.send(jobs)
+        }
     }
 
     // search

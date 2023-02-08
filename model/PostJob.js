@@ -14,6 +14,7 @@ const Job_Schema = new mongoose.Schema({
     jobdescription: { type: String, require: true },
     skills: { type: Array },
     requirements: { type: Array },
+    isActive: { type: Boolean, default: true },
     createdAt: { type: Date, default: Date.now() }
 
 })

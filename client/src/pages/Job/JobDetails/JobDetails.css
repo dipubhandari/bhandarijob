@@ -1,3 +1,12 @@
+.notfound {
+    font-size: large;
+    display: flex;
+    align-self: center;
+    width: 100%;
+    margin: 60px;
+
+}
+
 .search_details_container {
     display: flex;
     width: 100%;
@@ -50,9 +59,11 @@
     margin: 10px;
     gap: 220px;
 }
-.category_content span label{
+
+.category_content span label {
     text-transform: uppercase;
 }
+
 .search_data {
     flex: 2;
 }

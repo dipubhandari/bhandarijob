@@ -196,7 +196,8 @@ const JobDetails = (props) => {
                         </section>
                     </section>
                      */}
-                    {
+                    {(jobPost.length > 0) ?
+
                         jobPost.map((data, id) => {
                             return <>
                                 {/* first content */}
@@ -223,7 +224,7 @@ const JobDetails = (props) => {
                                                 <CiTimer /> <span className="what_lang"> {
                                                     data.applydate.split('T')[0]
 
-                                                }</span>
+                                                } ( Apply Before )</span>
                                             </span>
                                         </section>
                                         <section className="search_details_footer">
@@ -237,6 +238,8 @@ const JobDetails = (props) => {
                                 </section>
                             </>
                         })
+                        :
+                        <h1 className='notfound'>Data Not Found</h1>
                     }
                 </section>
             </section>

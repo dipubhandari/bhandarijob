@@ -4,7 +4,8 @@ import Application from '../../components/Application/Application'
 import Header from '../../components/Header/Header'
 import JobApplication from '../../components/JobNotice/JobNotice'
 import './EmployerHome.css'
-
+import { RxDashboard } from 'react-icons/rx'
+import { MdOutlineWork } from 'react-icons/md'
 const EmployerHome = (props) => {
 
     const [component, setComponent] = useState('job')
@@ -23,7 +24,10 @@ const EmployerHome = (props) => {
 
 
                 <section className="left_dashboard">
-                    <input onClick={() => setComponent('job')} type="button" value='Your Job' />
+                    <button><RxDashboard />Dashboard</button>
+                    <input onClick={() => setComponent('job')} type="button" value='Your Job Posts' />
+                    <input onClick={() => setComponent('aboutuser')} type="button" value='Your Information' />
+                    <input onClick={() => setComponent('aboutuser')} type="button" value='Setting' />
 
                 </section>
                 <section className="right_dashboard">

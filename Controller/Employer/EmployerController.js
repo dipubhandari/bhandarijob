@@ -13,7 +13,7 @@ class EmployerController {
         const { companyname, address, email, phone, password, description } = req.body
 
         // validation
-        if (!(companyname && email && phone && password && description)) {
+        if (!(companyname && email && phone && password && description && address)) {
             res.send({ error_msg: 'Please enter all the credential...' })
         }
         else {

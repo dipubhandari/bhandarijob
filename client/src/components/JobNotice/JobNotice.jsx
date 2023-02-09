@@ -58,7 +58,7 @@ const JobApplicatoin = (props) => {
                   </buton>
                   {/* <li className='jobtitle'>Post Date{item.createdAt }</li> */}
                 </section>
-                <section className="job_category">
+                <section className="job_categoryemployer">
                  
                   Category:  <b><span>{item.category}</span></b>
                   Postion: <b><span>{item.position}</span></b>

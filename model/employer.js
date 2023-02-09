@@ -6,7 +6,7 @@ const Employer_Schema = new mongoose.Schema({
     description: { type: String, require: true },
     logo: { type: String },
     password: { type: String, require: true },
-    adress: { type: String, require: true },
+    address: { type: String, require: true },
     phone: { type: String, require: true },
     account: { type: String, default: 'employer' },
     createdAt: { type: Date, default: Date.now() }

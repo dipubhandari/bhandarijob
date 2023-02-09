@@ -218,7 +218,7 @@ const JobDetails = (props) => {
                                                 <MdWork /><span className='what_lang'> {data.skills[0] || 'N/A'}</span>
                                             </span>
                                             <span className="location">
-                                                <ImLocation /> <span className=' what_lang'>{data.address || 'Nepal'}</span>
+                                                <ImLocation /> <span className=' what_lang'>{data.address || 'N/A'}</span>
                                             </span>
                                             <span className="validatetill">
                                                 <CiTimer /> <span className="what_lang"> {

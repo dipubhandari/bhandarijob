@@ -11,16 +11,22 @@
 }
 
 
-.emp_view_btn{
-    color:rgb(140, 141, 142)
+.emp_view_btn {
+    cursor: pointer;
+    color: rgb(140, 141, 142)
 }
-.job_category {
+
+.job_categoryemployer {
     color: aliceblue;
-
+    display: flex;
+    font-size: small;
+    /* font-family; */
+    flex-direction: column;
+    opacity: 50%;
 }
 
-.job_category li span {
-    color: white
+.job_categoryemployer li span {
+    color: white;
 }
 
 .job_Card_Employer {

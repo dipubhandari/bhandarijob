@@ -214,6 +214,7 @@ class JobPostController {
                 education,
                 vacancy: vacancyfor,
                 category,
+                address: owner.address,
                 salary,
                 jobdescription: description,
                 experience,
@@ -242,10 +243,19 @@ class JobPostController {
         else {
             //  getting owner information/detail
             const owner = await Employer_Model.findOne({ email: jobdetail.owneremail })
+            owner.password = null
+            var dateObj = jobdetail.applydate;
+            var month = dateObj.getUTCMonth() + 1;
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
 
+            const newdate = year + "/" + month + "/" + day;
+            jobdetail.applydate = newdate
+            console.log(newdate)
+            console.log(jobdetail)
             if (owner) {
 
-                res.send({ companydetail: owner, jobdetail: jobdetail })
+                res.send({ companydetail: owner, jobdetail })
 
             }
             else {

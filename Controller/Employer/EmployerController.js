@@ -46,14 +46,37 @@ class EmployerController {
 
     //    company details for  user detail update pag
 
+    // updating the user detail
+    static UpdateCompanyDetail = async (req, res) => {
+        try {
+            // getting the details from
+            const { companyname, email, phone, password, address } = req.body;
+            const avatar = req.file.filename
+
+            const _id = req.body.token;
+            console.log(_id)
+            console.log(req.body)
+            console.log(avatar)
+            const update = await Employer_Model.findByIdUpdate(_id, {
+                companyname, address, phone, password, email
+            })
+            if (update) {
+                console.log("Updated Successfuly...")
+            }
+            else {
+
+            }
+        } catch (error) {
+
+        }
+    }
     static CompanyDetail = async (req, res) => {
         try {
             //    getting id from frontend
-            const id = req.params.token
+            const id = req.params.id
+            const user = await Employer_Model.findOne({ _id: id })
 
-            const user = await Employer_Model.findOne(id)
-            console.log(user)
-            if (user != (undefined || null)) {
+            if (user) {
                 res.send(user)
             }
             else {

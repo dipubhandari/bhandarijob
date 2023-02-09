@@ -3,10 +3,54 @@ import React, { useEffect, useState } from 'react'
 import './CompanyProfile.css'
 import axios from 'axios'
 import { server } from '../../config'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 const CompanyProfile = () => {
     const [companyDetails, setCompanyDetails] = useState({})
 
     const token = localStorage.getItem('token')
+    console.log(token)
+    // onChange the input of the field
+    function handleChange(e) {
+        const value = e.target.value
+        const name = e.target.name
+        console.log(companyDetails)
+        setCompanyDetails({ ...companyDetails, [name]: value })
+    }
+    // onsubmit the form
+
+    // alert confrim
+    function handleUpdate(e) {
+        console.log(companyDetails)
+        e.preventDefault()
+        confirmAlert({
+            title: 'Update Profile',
+            message: 'Are you sure to Update this details',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        const formData = new FormData()
+                        formData.append('companyname', companyDetails.companyname)
+                        formData.append('token', localStorage.getItem('token'))
+                        formData.append('avatar', companyDetails.avatar)
+                        formData.append('email', companyDetails.email)
+                        formData.append('phone', companyDetails.phone)
+                        formData.append('address', companyDetails.address)
+                        //    when user clieck yes button
+                        await axios.post(`${server}/update-company-details`, companyDetails).then((response) => {
+                            console.log(response.data)
+                        })
+                    }
+                },
+                {
+                    label: 'No'
+                }
+            ]
+        });
+
+    }
     // fetching the particular company detail
     useEffect(() => {
 
@@ -15,9 +59,7 @@ const CompanyProfile = () => {
                 setCompanyDetails(res.data)
             }
         })
-        return () => {
 
-        };
     }, [])
     return (
         <div className=''>
@@ -37,7 +79,10 @@ const CompanyProfile = () => {
                             </label>
                             <input
                                 type="file"
-                                name='changeavatar'
+
+                                onChange={(e) => setCompanyDetails({
+                                    ...companyDetails, 'avatar': e.target.files[0]
+                                })}
                                 id='changeavatar'
                                 className='companylogo'
 
@@ -53,7 +98,7 @@ const CompanyProfile = () => {
                             <span htmlFor="">Enter Company Name * </span>
                             <input value={companyDetails.companyname}
                                 type="text"
-                                name='companyname'
+                                name='companyname' onChange={handleChange}
                                 placeholder='Enter the company name'
                             />
                         </span>
@@ -64,7 +109,7 @@ const CompanyProfile = () => {
                             <input
                                 type="text"
                                 value={companyDetails.email}
-                                name='email'
+                                name='email' onChange={handleChange}
                                 placeholder='Enter email'
                             />
                         </span>
@@ -77,7 +122,7 @@ const CompanyProfile = () => {
 
                             <input
                                 type="text"
-                                name='phone'
+                                name='phone' onChange={handleChange}
                                 value={companyDetails.phone}
                                 placeholder='Enter Phone'
                             />
@@ -87,7 +132,7 @@ const CompanyProfile = () => {
                             <span>Password*</span>
                             <input
                                 value={companyDetails.password} disabled='true'
-                                type="text"
+                                type="text" onChange={handleChange}
                                 name='password'
                                 placeholder='Choose Passowrd'
                             />
@@ -101,7 +146,7 @@ const CompanyProfile = () => {
                             style={{ margin: '0px', width: '48%' }}
                             type="text"
                             name='address'
-                            placeholder='Address (only District)'
+                            onChange={handleChange} placeholder='Address (only District)'
                             value={companyDetails.address}
                         />
 
@@ -111,6 +156,7 @@ const CompanyProfile = () => {
                         type='submit'
                         value='Update Profile'
                         className='update'
+                        onClick={handleUpdate}
                     />
                 </form>
             </section>

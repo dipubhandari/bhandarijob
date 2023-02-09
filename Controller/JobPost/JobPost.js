@@ -267,7 +267,7 @@ class JobPostController {
     }
     static JobPostApi = async (req, res) => {
         try {
-            const jobpostapi = await JobPost.find().sort({ createdAt: 'desc' })
+            const jobpostapi = await JobPost.find().sort({ createdAt: 'desc' }).limit(16)
 
             res.send(jobpostapi)
         } catch (error) {

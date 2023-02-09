@@ -44,6 +44,28 @@ class EmployerController {
 
     }
 
+    //    company details for  user detail update pag
+
+    static CompanyDetail = async (req, res) => {
+        try {
+            //    getting id from frontend
+            const id = req.params.token
+
+            const user = await Employer_Model.findOne(id)
+            console.log(user)
+            if (user != (undefined || null)) {
+                res.send(user)
+            }
+            else {
+                res.send('Error')
+            }
+
+        } catch (error) {
+
+        }
+    }
+
+
     // employer api
     static AllEmployer = async (req, res) => {
         const user = await Employer_Model.find()

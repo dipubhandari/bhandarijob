@@ -20,9 +20,9 @@ const upload = multer({ storage: storage })
 // company upload
 
 // downlaod rsume
-postRoutes.get('/download/:id',cors({
+postRoutes.get('/download/:id', cors({
     exposedHeaders: ['Content-Disposition'],
-  }), JobPostController.Download)
+}), JobPostController.Download)
 // application api
 postRoutes.get('/application/:employer/:postid', JobPostController.GetApplication)
 // post a job by acompany
@@ -43,7 +43,7 @@ postRoutes.post('/removeapplication', JobPostController.DeleteApplication)
 
 // job detail page
 
-postRoutes.get('/job-post-detail/:id', JobPostController.GetNaukariDetails)
+postRoutes.get('/job-post-detail/:token', JobPostController.GetNaukariDetails)
 // jo post
 postRoutes.get('/api/companyjobs/:id', JobPostController.GetPost)
 

@@ -161,24 +161,7 @@ class JobPostController {
         const location = req.body.location || ''
         const category = req.body.category || ''
 
-        if (!(keyword == '' && category == '' && location == '')) {
-            console.log('this ')
-            const jobs = await JobPost.find({
 
-                "$and": [
-                    { "position": { $regex: keyword, $options: "i" } },
-                    { "category": { $regex: category } },
-                    { "address": { $regex: location } },
-                ]
-                // this will return search in skills
-
-            }).sort({ createdAt: 'desc' })
-            res.send(jobs)
-        }
-        else if (skills.length > 0) {
-            const jobs = await JobPost.find({
-
-                skills: { $in: skills }
 
             }).sort({ createdAt: 'desc' })
             res.send(jobs)

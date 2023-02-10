@@ -11,8 +11,6 @@ import axios from 'axios';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-
-
 const JobApply = (props) => {
 
     const dispatch = useDispatch()
@@ -29,9 +27,6 @@ const JobApply = (props) => {
         setSearchKey({ ...searchKey, [name]: value })
     }
 
-    const handleSubmit = (e) => {
-        props.clickedOnSearch()
-        dispatch(search({ ...searchInput, ...searchKey }));
     }
     // fetching the categories from server to display in search list
     const [location, setlocation] = useState([])

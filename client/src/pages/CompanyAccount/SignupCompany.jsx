@@ -15,11 +15,17 @@ const SignupCompany = () => {
         console.log(input)
         e.preventDefault()
 
-        if (!(input.companyname && input.address && input.email && input.password && input.repeat && input.description && input.phone)) {
+        if (!(input.companyname && input.address && input.email && input.password && input.description && input.phone)) {
             toast.warn('Enter all the fiels')
         }
         else if (input.phone.length < 10) {
             toast.warn('Enter correct Mobile')
+        }
+        else if (input.password.length < 8 || input.password.length > 16) {
+            toast.warn('Password must between 8 to 16 character long')
+        }
+        else if (!input.logo) {
+            toast.warn('Upload a company Logo')
         }
         else if (input.description.length < 100) {
             toast.warn('Description should at least 100 character long.')
@@ -34,6 +40,7 @@ const SignupCompany = () => {
             formData.append('companyname', input.companyname)
             formData.append('logo', input.logo)
             formData.append('email', input.email)
+            formData.append('address', input.address)
             formData.append('password', input.password
             )
 

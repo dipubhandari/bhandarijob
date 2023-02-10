@@ -27,7 +27,7 @@ const Header = () => {
 
 
   return (
-    <div className='header_container'>
+    <div className='header_container' style={{ backgroundColor: (account == 'employer') ? 'rgb(25, 30, 32)' : 'rgb(15, 15, 104)' }} >
 
 
       <Link to='/' className="header_logo">
@@ -53,7 +53,7 @@ const Header = () => {
         </Link>
 
       </section>
-      <section className="header_operator">
+      <section className="header_operator" style={{backgroundColor: (account == 'employer') ?"grey" : 'rgb(73, 103, 191)'}}>
         {
           (!isLogin) ?
             <>

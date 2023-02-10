@@ -70,10 +70,7 @@
 }
 
 .job_category {
-    display: flex;
-    font-size: small;
-    flex-direction: column;
-    opacity: 50%;
+  color:rgb(46, 45, 45);
 }
 
 .name {

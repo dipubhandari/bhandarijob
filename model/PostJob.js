@@ -4,6 +4,7 @@ const Job_Schema = new mongoose.Schema({
     owneremail: { type: String },
     companyname: { type: String },
     logo: { type: String },
+    address: { type: String },
     position: { type: String, require: true },
     applydate: { type: Date, require: true },
     vacancy: { type: Number, require: true },
@@ -14,6 +15,7 @@ const Job_Schema = new mongoose.Schema({
     jobdescription: { type: String, require: true },
     skills: { type: Array },
     requirements: { type: Array },
+    isActive: { type: Boolean, default: true },
     createdAt: { type: Date, default: Date.now() }
 
 })

@@ -142,7 +142,6 @@ class JobPostController {
 
 
 
-
     // all application api create
     static Application = async (req, res) => {
         const applications = await Apply_Model.find()
@@ -157,17 +156,20 @@ class JobPostController {
 
     static Search = async (req, res) => {
 
-        //
+        const skills = req.body.skills || []
+        const keyword = req.body.keyword || ''
+        const location = req.body.location || ''
+        const category = req.body.category || ''
 
-        const { keyword, category, location } = req.body
-        console.log(req.body)
-        const jobs = await JobPost.find({
-            "$or": [
-                { position: { $regex: keyword } }
-            ]
 
-        })
-        res.send(jobs)
+
+            }).sort({ createdAt: 'desc' })
+            res.send(jobs)
+        }
+        else if ((keyword == '' && category == '' && location == '' && skills.length == 0)) {
+            const jobs = await JobPost.find().sort({ createdAt: 'desc' })
+            res.send(jobs)
+        }
     }
 
     // search
@@ -195,6 +197,7 @@ class JobPostController {
                 education,
                 vacancy: vacancyfor,
                 category,
+                address: owner.address,
                 salary,
                 jobdescription: description,
                 experience,
@@ -213,8 +216,8 @@ class JobPostController {
 
     static GetNaukariDetails = async (req, res) => {
 
-        const url = req.params.id
-
+        const url = req.params.token
+        console.log(url)
         const jobdetail = await Job_Model.findOne({ _id: url })
 
         if (!jobdetail) {
@@ -223,10 +226,19 @@ class JobPostController {
         else {
             //  getting owner information/detail
             const owner = await Employer_Model.findOne({ email: jobdetail.owneremail })
+            owner.password = null
+            var dateObj = jobdetail.applydate;
+            var month = dateObj.getUTCMonth() + 1;
+            var day = dateObj.getUTCDate();
+            var year = dateObj.getUTCFullYear();
 
+            const newdate = year + "/" + month + "/" + day;
+            jobdetail.applydate = newdate
+            console.log(newdate)
+            console.log(jobdetail)
             if (owner) {
 
-                res.send({ companydetail: owner, jobdetail: jobdetail })
+                res.send({ companydetail: owner, jobdetail })
 
             }
             else {
@@ -238,7 +250,7 @@ class JobPostController {
     }
     static JobPostApi = async (req, res) => {
         try {
-            const jobpostapi = await JobPost.find().sort({ createdAt: 'desc' })
+            const jobpostapi = await JobPost.find().sort({ createdAt: 'desc' }).limit(16)
 
             res.send(jobpostapi)
         } catch (error) {

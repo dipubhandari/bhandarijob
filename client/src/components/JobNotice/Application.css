@@ -1,10 +1,42 @@
-.jobnotice {
+.jobnotices {
     height: 100vh;
 }
+
 .job_containers {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     margin: auto;
     padding: 30px 100px;
+}
+
+
+.emp_view_btn {
+    cursor: pointer;
+    color: rgb(140, 141, 142)
+}
+
+.job_categoryemployer {
+    color: aliceblue;
+    display: flex;
+    font-size: small;
+    /* font-family; */
+    flex-direction: column;
+    opacity: 50%;
+}
+
+.job_categoryemployer li span {
+    color: white;
+}
+
+.job_Card_Employer {
+    border-radius: 10px;
+    max-height: 200px;
+    gap: 10px;
+    justify-content: center;
+    display: flex;
+    border: 1px solid rgb(178, 178, 178);
+    padding: 26px 15px;
+    background-color: rgb(66, 71, 72);
+    min-height: 200px;
 }

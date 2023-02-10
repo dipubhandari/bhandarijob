@@ -40,34 +40,37 @@ const JobApplicatoin = (props) => {
 
 
   return (
-    <section className="jobnotice">
+    <section className="jobnotices">
 
       <div className='job_containers'>
 
         <section className="job_content">
 
           {
+            (jobpost.length > 0) ?
             jobpost.map((item, id) => {
-              return < section className="job_Card" key={id}>
+              return < section className="job_Card_Employer" key={id}>
                 <section className="company_logo">
                   <img src={`${server}/uploads/logo/${item.logo}`} alt="" />
-                  <buton className='view_btn'
+                  <buton className='emp_view_btn'
 
                     onClick={() => handleClick(item._id)}
                   >View Application
                   </buton>
                   {/* <li className='jobtitle'>Post Date{item.createdAt }</li> */}
                 </section>
-                <section className="job_category">
-                  <h6 className='name'></h6>
-                  <li className='jobtitle'></li>
-                  Category:  <li><span>{item.category}</span></li>
-                  Postion: <li><span>{item.position}</span></li>
+                <section className="job_categoryemployer">
+                 
+                  Category:  <b><span>{item.category}</span></b>
+                  Postion: <b><span>{item.position}</span></b>
+                  Post Date: <b><span>{item.createdAt.split('T')[0]}</span></b>
 
                 </section>
                 <section className='like'></section>
               </section>
             })
+              :
+              <h6 className='noposthead'>You Donot post a Job Till Now...</h6>
           }
 
           {/* 

@@ -6,16 +6,28 @@
 .table_heading {
     background-color: lightgray;
     opacity: 40%;
+    color: white;
 
 }
-.dashboard-icon{
+
+.noposthead {
+    color: white;
+    font-size: xx-large;
+    width: 50%;
+    margin: 100px auto;
+}
+
+.dashboard-icon {
     margin: 0px 10px;
 }
-.download{
+
+.download {
     display: flex;
     justify-content: space-around;
     padding: 10px 0px;
-} .grey-table{
+}
+
+.grey-table {
     background-color: rgb(210, 210, 210);
 }
 

@@ -14,22 +14,19 @@ import { Link } from 'react-router-dom'
 const JobApply = (props) => {
 
     const dispatch = useDispatch()
+
     // search input from store
 
-    // const searchInput = useSelector(state => state.search)
+    const searchInput = useSelector(state => state.search)
 
 
-    const [searchKey, setSearchKey] = useState({ keyword: '', category: '', location: '' })
+    const [searchKey, setSearchKey] = useState({})
     var handleSearchInput = (e) => {
         const name = e.target.name
         const value = e.target.value
         setSearchKey({ ...searchKey, [name]: value })
     }
 
-    const handleSubmit = () => {
-
-    props.clickedOnSearch()
-        dispatch(search(searchKey));
     }
     // fetching the categories from server to display in search list
     const [location, setlocation] = useState([])
@@ -45,7 +42,7 @@ const JobApply = (props) => {
         async function getLocation() {
             const posts = await axios.get(`${server}/allemployer`).then((response) => {
                 const locations = response.data.map((item, id) => {
-                    return item.location
+                    return item.address
                 })
                 // removing the duplicated item from arr
                 let new_locations = new Set(locations)

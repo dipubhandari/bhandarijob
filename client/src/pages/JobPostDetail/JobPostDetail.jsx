@@ -12,7 +12,7 @@ import { AiOutlineFieldTime } from 'react-icons/ai'
 import { useLocation } from 'react-router-dom'
 import { server } from '../../config'
 import Footer from '../../components/Footer/Footer'
-import {apply} from '../../redux/applySlice'
+import { apply } from '../../redux/applySlice'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 const JobPostDetail = () => {
@@ -28,12 +28,12 @@ const JobPostDetail = () => {
         const paths = path.split('/')
         const token = paths[paths.length - 1]
         console.log(token)
-
         async function getDetails() {
             await axios.get(`${server}/job-post-detail/${token}`).then((response) => {
                 // console.log(first)
                 const data = { ...response.data.companydetail, ...response.data.jobdetail }
                 setDetail(data)
+                console.log(data)
             }).catch(() => {
 
             })
@@ -66,8 +66,8 @@ const JobPostDetail = () => {
 
                 <section className="job_details">
                     <section className="job_position_apply">
-                        <h2>{jobDetail.position}</h2>
-                        <h4>Apply Before <span>{jobDetail.applydate}(1 day left)</span></h4>
+                        <h2>{jobDetail.position}({jobDetail.category})</h2>
+                        <h4>Apply Before <span>{jobDetail.applydate || 'N/A'}(* day left)</span></h4>
                     </section> <h4 className='job_summary_title'>Job Sumaary</h4>
                     <section className="about_job">
                         <section className="about_jobs">
@@ -84,7 +84,7 @@ const JobPostDetail = () => {
 
                         <section className="about_jobs">   <span className="vancancy_div">
                             <span className="vacancy_icon"><BiCurrentLocation /></span>
-                            <span className='vacancy_number'><div>Location</div> <span className='v_'>Narayani</span></span>
+                            <span className='vacancy_number'><div>Location</div> <span className='v_'>{jobDetail.address || 'N/A'}</span></span>
                         </span></section>
                         <section className="about_jobs">   <span className="vancancy_div">
                             <span className="vacancy_icon"><AiOutlineFieldTime /></span>
@@ -139,7 +139,7 @@ const JobPostDetail = () => {
                         <h4>Apply:</h4>
                         <p>Interested candidates fulfilling the mentioned criteria are encouraged to Apply using the Easy Apply Button below. Registered candidates may also apply using Apply Now Button.</p>
 
-                    <Link to={`/apply/${jobDetail._id}`} onClick={()=> dispatch(apply(jobDetail._id))} className='Aplly_btn'>Apply</Link>
+                        <Link to={`/apply/${jobDetail._id}`} onClick={() => dispatch(apply(jobDetail._id))} className='Aplly_btn'>Apply</Link>
                     </section>
 
                 </section>

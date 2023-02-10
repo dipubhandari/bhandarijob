@@ -79,33 +79,42 @@ const Application = () => {
 
   return (
     <div>
-      <table className='applicationtable'>
-        <ToastContainer />
-
-        <thead className='table_heading'>
-          <tr><th>SN.</th>
-            <th><BsFillPersonCheckFill className='dashboard-icon' />Name</th>
-            <th><AiOutlineMail className='dashboard-icon' />Email</th>
-            <th><AiFillPhone className='dashboard-icon' />Phone</th>
-            <th>Resume.</th>  <th>Action</th></tr>
-        </thead>
-        <tbody className='table_content'>
-          {
-            application.map((item, id) => {
-              return <tr className='grey-table' keys={id}>
-                <td>{id + 1}</td>
-                <td>{item.name}</td>
-                <td>{item.email}</td>
-                <td>{item.phone}</td>
-                <td className='download'><span>Download<HiDownload className='dashboard-icon' onClick={() => download(item._id)} /></span>
-                </td> <td onClick={() => de(item._id)}><AiFillDelete className='dashboard-icon' /></td>
-              </tr>
-            })
-          }
 
 
-        </tbody>
-      </table>
+      {
+        (application.length == 0)
+          ?
+          <h6 className='noposthead'>No Application for this job post...</h6>
+          :
+          <table className='applicationtable'>
+            <ToastContainer />
+
+            <thead className='table_heading'>
+              <tr><th>SN.</th>
+                <th><BsFillPersonCheckFill className='dashboard-icon' />Name</th>
+                <th><AiOutlineMail className='dashboard-icon' />Email</th>
+                <th><AiFillPhone className='dashboard-icon' />Phone</th>
+                <th>Resume.</th>  <th>Action</th></tr>
+            </thead>
+            <tbody className='table_content'>
+              {
+                application.map((item, id) => {
+                  return <tr className='grey-table' keys={id}>
+                    <td>{id + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    <td>{item.phone}</td>
+                    <td className='download'><span>Download<HiDownload className='dashboard-icon' onClick={() => download(item._id)} /></span>
+                    </td> <td onClick={() => de(item._id)}><AiFillDelete className='dashboard-icon' /></td>
+                  </tr>
+                })
+              }
+
+
+            </tbody>
+          </table>
+      }
+
     </div>
   )
 }

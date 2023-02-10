@@ -27,7 +27,7 @@ const Job = () => {
     return (
         <>
 
-            <h4 className='job_title'><span>Latest Jobs ({10})</span></h4>
+            <h4 className='job_title'><span> New Jobs ({latestJob.length})</span></h4>
 
             <div className='job_container'>
 

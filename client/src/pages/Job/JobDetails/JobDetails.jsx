@@ -7,29 +7,70 @@ import { CiTimer } from 'react-icons/ci'
 import { useEffect } from 'react'
 import { server } from '../../../config'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
+import { search } from '../../../redux/searchKeysSlice'
 
 const JobDetails = (props) => {
 
-    // const url = useLocati
-
+    const dispatch = useDispatch()
     const [jobPost, setJobPost] = useState([])
     const searchInput = useSelector(state => state.search)
+    const [searchInputTrack, setSearchInputTrack] = useState(0)
+    let searching = searchInput
+    const handleSearchInput = (e) => {
+        if (e.target.name == 'skills') {
+            const { checked, value } = e.target
+            if (checked) {
+                const skills = searching.skills
+                if (skills === undefined) {
+                    searching = { ...searching, skills: [value] }
+                    dispatch(search(searching))
+                    setSearchInputTrack(Math.random())
+
+                }
+                else {
+
+                    searching = { ...searching, skills: [...skills, value] }
+                    dispatch(search(searching))
+                    setSearchInputTrack(Math.random())
+                }
+            }
+            else {
+
+                const skills = searching.skills?.filter((item, id) => {
+                    return item != value
+                })
+                searching = { ...searching, skills: skills }
+                dispatch(search(searching))
+                setSearchInputTrack(Math.random())
+            }
+        }
+        else {
+
+            const name = e.target.name;
+            const value = e.target.value
+            dispatch(search(searching))
+            searching = { ...searching, [name]: value }; dispatch(search(searching))
+            setSearchInputTrack(Math.random())
+
+        }
+
+    }
     useEffect(() => {
-
         // fetching all the post from sever accorgint to search key if store
-
-        if ((searchInput.location == '' && searchInput.keyword == '' && searchInput.category == '') || !(searchInput.keyword || searchInput.location || searchInput.category)) {
+        if (!(searchInput.keyword || searchInput.location || searchInput.category || searchInput.skills)) {
             async function postApi() {
                 const posts = await axios.get(`${server}/api/jobpost`).then((response) => {
                     setJobPost(response.data)
-
+                    console.log(response.data)
                 })
             }
             postApi()
         }
         else {
+
+            console.log(searchInputTrack)
 
             async function search() {
                 const posts = await axios.post(`${server}/api/jobpost`, searchInput).then((response) => {
@@ -39,7 +80,7 @@ const JobDetails = (props) => {
             }
             search()
         }
-    }, [props.isSearchClicked])
+    }, [props.isSearchClicked, searchInputTrack])
     // getting location of all the user so that to display in search
     const [location, setLocation] = useState([])
     const [skills, Setskills] = useState({})
@@ -88,35 +129,7 @@ const JobDetails = (props) => {
         }
         getSkills()
     }, [])
-    let searching = searchInput
-    const handleSearchInput = (e) => {
-        if (e.target.name == 'skills') {
-            const { checked, value } = e.target
-            if (checked) {
-                const skills = searching.skills
-                if (skills === undefined) {
-                    searching = { ...searching, skills: [value] }
-                }
-                else {
-                    searching = { ...searching, skills: [...skills, value] }
-                }
-            }
-            else {
 
-                const skills = searching.skills?.filter((item, id) => {
-                    return item != value
-                })
-                searching = { ...searching, skills: skills }
-            }
-        }
-        else {
-
-            const name = e.target.name;
-            const value = e.target.value
-            searching = { ...searching, [name]: value }
-        }
-
-    }
 
     return (
         <div className='search_details_container'>
@@ -125,7 +138,7 @@ const JobDetails = (props) => {
             <section className="search_box">
                 {/* left sesarch box */}
                 <section className="search_items">
-                    <section className="companyloation" name='location'>
+                    {/* <section className="companyloation" name='sortby'>
 
                         <select name="location" id="" onChange={handleSearchInput}>
                             {
@@ -135,7 +148,7 @@ const JobDetails = (props) => {
                             }
                         </select>
 
-                    </section>
+                    </section> */}
 
                     <section className="searchcat">
                         <h2>Programing Languages:</h2>
@@ -183,7 +196,8 @@ const JobDetails = (props) => {
                         </section>
                     </section>
                      */}
-                    {
+                    {(jobPost.length > 0) ?
+
                         jobPost.map((data, id) => {
                             return <>
                                 {/* first content */}
@@ -204,13 +218,13 @@ const JobDetails = (props) => {
                                                 <MdWork /><span className='what_lang'> {data.skills[0] || 'N/A'}</span>
                                             </span>
                                             <span className="location">
-                                                <ImLocation /> <span className=' what_lang'>{data.location || 'Nepal'}</span>
+                                                <ImLocation /> <span className=' what_lang'>{data.address || 'N/A'}</span>
                                             </span>
                                             <span className="validatetill">
                                                 <CiTimer /> <span className="what_lang"> {
                                                     data.applydate.split('T')[0]
 
-                                                }</span>
+                                                } ( Apply Before )</span>
                                             </span>
                                         </section>
                                         <section className="search_details_footer">
@@ -224,6 +238,8 @@ const JobDetails = (props) => {
                                 </section>
                             </>
                         })
+                        :
+                        <h1 className='notfound'>Data Not Found</h1>
                     }
                 </section>
             </section>

@@ -10,13 +10,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const PasswordChange = () => {
-    const [inputs, setInputs] = useState({})
+    const [inputs, setInputs] = useState({ newpassword: '', oldpassword: '', againpassword: '' })
     const token = localStorage.getItem('token')
     // onChange the input of the field
     function handleChange(e) {
         const value = e.target.value
         const name = e.target.name
-        console.log(inputs)
+
         setInputs({ ...inputs, [name]: value })
     }
     // onsubmit the form
@@ -24,28 +24,48 @@ const PasswordChange = () => {
     // alert confrim
     function passwordChange(e) {
         e.preventDefault()
-        confirmAlert({
-            title: 'Change Password',
-            message: 'Are you sure to Change Password',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: async () => {
+        inputs.token = token
+        if (inputs.newpassword != inputs.againpassword) {
+            toast.warn('Password donot match')
+        }
+        else if (inputs.newpassword.length < 8 || inputs.newpassword.length > 16) {
+            toast.warn('Password is too long or too short')
+        }
+        else {
+            confirmAlert({
+                title: 'Change Password',
+                message: 'Are you sure to Change Password',
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: async () => {
+                            //    when user clieck yes button
+                            await axios.post(`${server}/change-password`, inputs).then((response) => {
 
-                        //    when user clieck yes button
-                        await axios.post(`${server}/change-password`, inputs).then((response) => {
-                            { (response.data.success_msg) && toast.success(response.data.success_msg) }
-                            { (response.data.error_msg) && toast.warning(response.data.error_msg) }
+                                {
+                                    (response.data.success_msg) && toast.success(response.data.success_msg);
 
-                        })
+                                }
+                                {
+                                    (response.data.error_msg) && toast.warning(response.data.error_msg)
+                                }
 
+
+
+                                if (response.data.success_msg) {
+                                    setInputs({ oldpassword: '', newpassword: '', againpassword: '' })
+                                }
+                            })
+
+                        }
+                    },
+                    {
+                        label: 'No'
                     }
-                },
-                {
-                    label: 'No'
-                }
-            ]
-        });
+                ]
+            });
+
+        }
 
     }
 
@@ -73,8 +93,8 @@ const PasswordChange = () => {
                             <span>Enter New Password*</span>
                             <input
                                 type="text"
-                                value={inputs.oldpassword}
-                                name='password' onChange={handleChange}
+                                value={inputs.newpassword}
+                                name='newpassword' onChange={handleChange}
                                 placeholder='Enter New Password'
                             />
                         </span>
@@ -82,8 +102,8 @@ const PasswordChange = () => {
                             <span>Re-Type Password*</span>
                             <input
                                 type="text"
-                                value={inputs.password}
-                                name='password' onChange={handleChange}
+                                value={inputs.againpassword}
+                                name='againpassword' onChange={handleChange}
                                 placeholder='Confirm Password'
                             />
                         </span>

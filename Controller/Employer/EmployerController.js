@@ -136,6 +136,25 @@ class EmployerController {
         const user = await Employer_Model.find()
         res.send(user)
     }
+    static ChangePassword = async (req, res) => {
+        // console.log(req.bod)
+        const { oldpassword, newpassword } = req.body
+        // checking the password in the database
+        const password = await Employer_Model.findOne({ _id: req.body.token })
+
+        if (password.password == newpassword) {
+            res.send({ error_msg: "New Password is same as old password." })
+        }
+        else if (password.password != oldpassword) {
+            res.send({ error_msg: "Old Password is wrong." })
+        }
+        else {
+            const update = await Employer_Model.updateOne({ _id: req.body.token }, { password: newpassword })
+            if (update) {
+                res.send({ success_msg: "Password is changed" })
+            }
+        }
+    }
 
 }
 

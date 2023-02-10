@@ -33,5 +33,6 @@ userRoutes.get('/allemployer', EmployerController.AllEmployer)
 userRoutes.get('/company-details/:id', EmployerController.CompanyDetail
 )
 userRoutes.post('/update-company-details', upload.single('avatar'), EmployerController.UpdateCompanyDetail)
+userRoutes.post('/change-password', EmployerController.ChangePassword)
 
 export default userRoutes

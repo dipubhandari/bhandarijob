@@ -233,8 +233,8 @@ class JobPostController {
 
     static GetNaukariDetails = async (req, res) => {
 
-        const url = req.params.id
-
+        const url = req.params.token
+        console.log(url)
         const jobdetail = await Job_Model.findOne({ _id: url })
 
         if (!jobdetail) {

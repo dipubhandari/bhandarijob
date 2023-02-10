@@ -28,7 +28,6 @@ const JobPostDetail = () => {
         const paths = path.split('/')
         const token = paths[paths.length - 1]
         console.log(token)
-
         async function getDetails() {
             await axios.get(`${server}/job-post-detail/${token}`).then((response) => {
                 // console.log(first)

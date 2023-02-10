@@ -30,7 +30,8 @@ userRoutes.get('/alljobseeker', JobSeekerController.AllJobSekeer)
 // employer route
 userRoutes.post('/account-company-owner', upload.single('logo'), EmployerController.UserAccountCreation)
 userRoutes.get('/allemployer', EmployerController.AllEmployer)
-userRoutes.get('/company-details/:id', EmployerController.CompanyDetail)
-userRoutes.post('/update-company-details', EmployerController.UpdateCompanyDetail)
+userRoutes.get('/company-details/:id', EmployerController.CompanyDetail
+)
+userRoutes.post('/update-company-details', upload.single('avatar'), EmployerController.UpdateCompanyDetail)
 
 export default userRoutes

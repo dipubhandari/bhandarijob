@@ -53,7 +53,7 @@ const Header = () => {
         </Link>
 
       </section>
-      <section className="header_operator">
+      <section className="header_operator" style={{backgroundColor: (account == 'employer') ?"grey" : 'rgb(73, 103, 191)'}}>
         {
           (!isLogin) ?
             <>

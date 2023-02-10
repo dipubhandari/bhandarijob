@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const CompanyProfile = () => {
     const [companyDetails, setCompanyDetails] = useState({})
     const [updateButtonActive, setUpdateButtonActive] = useState(false)
+    const [updatedPic, setUpdatedPic] = useState(0)
     const token = localStorage.getItem('token')
     console.log(token)
     // onChange the input of the field
@@ -47,9 +48,9 @@ const CompanyProfile = () => {
                         await axios.post(`${server}/update-company-details`, formData).then((response) => {
                             { (response.data.success_msg) && toast.success(response.data.success_msg) }
                             { (response.data.error_msg) && toast.warning(response.data.error_msg) }
-                        }).then((response) => {
-                            console.log(response.data)
+                            setUpdatedPic(Math.random())
                         })
+
                     }
                 },
                 {
@@ -68,7 +69,7 @@ const CompanyProfile = () => {
             }
         })
 
-    }, [])
+    }, [updatedPic])
 
     function passwordwarning() {
         toast.warning('You are not allowed to change password from here')

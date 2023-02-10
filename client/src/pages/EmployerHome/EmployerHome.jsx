@@ -7,6 +7,8 @@ import './EmployerHome.css'
 import { RxDashboard } from 'react-icons/rx'
 import { MdOutlineWork } from 'react-icons/md'
 import CompanyProfile from '../../components/CompanyProfile/CompanyProfile'
+import PasswordChange from '../../components/PassowordChange/PasswordChange'
+
 const EmployerHome = (props) => {
 
     const [component, setComponent] = useState('job')
@@ -40,6 +42,7 @@ const EmployerHome = (props) => {
                     {(component == 'aboutuser') && <CompanyProfile />}
 
                     {(component == 'application') && <Application />}
+                    {(component == 'changepassword') && <PasswordChange />}
 
                 </section>
 

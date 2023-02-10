@@ -47,6 +47,7 @@ const JobApplicatoin = (props) => {
         <section className="job_content">
 
           {
+            (jobpost.length > 0) ?
             jobpost.map((item, id) => {
               return < section className="job_Card_Employer" key={id}>
                 <section className="company_logo">
@@ -68,6 +69,8 @@ const JobApplicatoin = (props) => {
                 <section className='like'></section>
               </section>
             })
+              :
+              <h6 className='noposthead'>You Donot post a Job Till Now...</h6>
           }
 
           {/* 

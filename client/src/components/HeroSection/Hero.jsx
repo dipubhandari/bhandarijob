@@ -45,7 +45,7 @@ const JobApply = (props) => {
         async function getLocation() {
             const posts = await axios.get(`${server}/allemployer`).then((response) => {
                 const locations = response.data.map((item, id) => {
-                    return item.location
+                    return item.address
                 })
                 // removing the duplicated item from arr
                 let new_locations = new Set(locations)

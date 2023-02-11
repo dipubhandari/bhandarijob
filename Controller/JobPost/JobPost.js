@@ -163,13 +163,6 @@ class JobPostController {
 
 
 
-            }).sort({ createdAt: 'desc' })
-            res.send(jobs)
-        }
-        else if ((keyword == '' && category == '' && location == '' && skills.length == 0)) {
-            const jobs = await JobPost.find().sort({ createdAt: 'desc' })
-            res.send(jobs)
-        }
     }
 
     // search

@@ -12,9 +12,30 @@ class JobPostController {
 
     static DeleteJob = async (req, res) => {
         try {
-            console.log(req.params.jobid)
-            console.log('this works')
 
+            const id = req.params.jobid
+
+            if (!id) {
+                res.send({ error_msg: 'Something went wrong' })
+            }
+            else {
+                //    delete job post
+                        const deletejob = await Job_Model.findByIdAndDelete({ _id: id })
+                // delete job apply
+                const find = await Apply_Model.find({_id:id})
+                if(find){
+                    const deleteUserApply = await Apply_Model.deleteMany({ appliedjob: id })
+                    await (deletejob && deleteUserApply) ?
+     res.send({ success_msg: 'Successfully deleted' }) :null
+                    
+
+                }else{
+                    if (deletejob) { res.send({ success_msg: 'Successfully deleted' })
+                    }
+                }
+
+               
+            }
         }
         catch (error) {
             console.log(error)

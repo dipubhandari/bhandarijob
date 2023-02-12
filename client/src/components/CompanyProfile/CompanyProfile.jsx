@@ -97,7 +97,7 @@ const CompanyProfile = () => {
                                     ...companyDetails, 'avatar': e.target.files[0]
                                 })}
                                 id='changeavatar'
-                                className='companylogo'
+                                className='companylogox'
 
                             />
 

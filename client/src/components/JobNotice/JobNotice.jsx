@@ -10,12 +10,14 @@ import { useDispatch } from 'react-redux'
 import { AiFillDelete } from 'react-icons/ai'
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const JobApplicatoin = (props) => {
 
   const dispatch = useDispatch()
+  const [isDeleted,setIsdeleted] = useState(0)
   //getting the job post posted by logged in user
 
   const [jobpost, setJobPost] = useState([])
@@ -32,7 +34,7 @@ const JobApplicatoin = (props) => {
 
     }
     fetchJobPost()
-  }, [])
+  }, [isDeleted])
 
   function handleClick(id) {
     dispatch(jobId(id))
@@ -52,8 +54,14 @@ const JobApplicatoin = (props) => {
           label: 'Yes',
           onClick: async () => {
             //    when user clieck yes button
-            await axios.post(`${server}/delete-post/${jobid}`).then((response) => {
-
+            await axios.delete(`${server}/delete-post/${jobid}`).then((response) => {
+              if (response.data.success_msg) {
+                toast.success(response.data.success_msg)
+                setIsdeleted(Math.random())
+              }
+              if (response.data.error_msg) {
+                toast.success(response.data.error_msg)
+              }
             }).catch((errps) => {
               console.log(errps)
             })
@@ -73,7 +81,7 @@ const JobApplicatoin = (props) => {
 
   return (
     <section className="jobnotices">
-
+      <ToastContainer />
       <div className='job_containers'>
 
         <section className="job_content">

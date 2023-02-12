@@ -37,7 +37,7 @@ postRoutes.get('/api/applications', JobPostController.Application)
 postRoutes.post('/api/jobpost', JobPostController.Search)
 
 // delete route for post job by company
-postRoutes.post('/delete-post/:jobid', JobPostController.DeleteJob)
+postRoutes.delete('/delete-post/:jobid', JobPostController.DeleteJob)
 
 // remove job applicatoin
 postRoutes.post('/removeapplication', JobPostController.DeleteApplication)

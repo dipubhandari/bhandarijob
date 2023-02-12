@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const JobApply = (props) => {
+const HeroSection = (props) => {
 
     const dispatch = useDispatch()
     // search input from store
@@ -28,7 +28,7 @@ const JobApply = (props) => {
 
     const handleSubmit = () => {
 
-    props.clickedOnSearch()
+        props.clickedOnSearch()
         dispatch(search(searchKey));
     }
     // fetching the categories from server to display in search list
@@ -57,6 +57,7 @@ const JobApply = (props) => {
 
     return (
         <>
+
             <section className="hero_container">
 
                 <section className="search">
@@ -116,4 +117,4 @@ const JobApply = (props) => {
     )
 }
 
-export default JobApply
+export default HeroSection

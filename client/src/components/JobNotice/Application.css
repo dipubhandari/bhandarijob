@@ -1,4 +1,12 @@
+.deleteicon {
+    position: absolute;
+    right: 5px;
+     top: 5px; 
+    color: lightslategray;
+}
+
 .jobnotices {
+
     height: 100vh;
 }
 
@@ -39,4 +47,5 @@
     padding: 26px 15px;
     background-color: rgb(66, 71, 72);
     min-height: 200px;
+     position: relative; 
 }

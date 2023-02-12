@@ -16,7 +16,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import FileDownload from "js-file-download"
 import { saveAs } from 'file-saver'
 
-
 const Application = () => {
 
 

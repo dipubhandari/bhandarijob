@@ -7,6 +7,20 @@ import fs from 'fs'
 
 class JobPostController {
 
+    // delete job
+
+
+    static DeleteJob = async (req, res) => {
+        try {
+            console.log(req.params.jobid)
+            console.log('this works')
+
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    // delete job
 
 
     // delete application
@@ -190,7 +204,7 @@ class JobPostController {
     }
 
     // search
-	
+
     // search
     static JobPost = async (req, res) => {
 

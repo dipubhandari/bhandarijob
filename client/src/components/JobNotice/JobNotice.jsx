@@ -7,6 +7,9 @@ import { jobId } from '../../redux/jobIdSlice'
 import axios from 'axios'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { AiFillDelete } from 'react-icons/ai'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
 
@@ -38,6 +41,35 @@ const JobApplicatoin = (props) => {
 
   }
 
+  // delete postlogic
+  function deletePost(jobId) {
+    const jobid = jobId
+    confirmAlert({
+      title: 'Delete Post',
+      message: 'Are you sure delete this job post',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            //    when user clieck yes button
+            await axios.post(`${server}/delete-post/${jobid}`).then((response) => {
+
+            }).catch((errps) => {
+              console.log(errps)
+            })
+
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+
+  }
+
+
+
 
   return (
     <section className="jobnotices">
@@ -48,27 +80,28 @@ const JobApplicatoin = (props) => {
 
           {
             (jobpost.length > 0) ?
-            jobpost.map((item, id) => {
-              return < section className="job_Card_Employer" key={id}>
-                <section className="company_logo">
-                  <img src={`${server}/uploads/logo/${item.logo}`} alt="" />
-                  <buton className='emp_view_btn'
+              jobpost.map((item, id) => {
+                return < section className="job_Card_Employer" key={id}>
+                  <span className='deleteicon' onClick={() => deletePost(item._id)}><AiFillDelete /></span>
+                  <section className="company_logo">
+                    <img src={`${server}/uploads/logo/${item.logo}`} alt="" />
+                    <buton className='emp_view_btn'
 
-                    onClick={() => handleClick(item._id)}
-                  >View Application
-                  </buton>
-                  {/* <li className='jobtitle'>Post Date{item.createdAt }</li> */}
-                </section>
-                <section className="job_categoryemployer">
-                 
-                  Category:  <b><span>{item.category}</span></b>
-                  Postion: <b><span>{item.position}</span></b>
-                  Post Date: <b><span>{item.createdAt.split('T')[0]}</span></b>
+                      onClick={() => handleClick(item._id)}
+                    >View Application
+                    </buton>
+                    {/* <li className='jobtitle'>Post Date{item.createdAt }</li> */}
+                  </section>
+                  <section className="job_categoryemployer">
 
+                    Category:  <b><span>{item.category}</span></b>
+                    Postion: <b><span>{item.position}</span></b>
+                    Post Date: <b><span>{item.createdAt.split('T')[0]}</span></b>
+
+                  </section>
+                  <section className='like'></section>
                 </section>
-                <section className='like'></section>
-              </section>
-            })
+              })
               :
               <h6 className='noposthead'>You Donot post a Job Till Now...</h6>
           }

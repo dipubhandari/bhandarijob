@@ -15,6 +15,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FileDownload from "js-file-download"
 import { saveAs } from 'file-saver'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Application = () => {
 
@@ -43,24 +45,43 @@ const Application = () => {
         // const file = window.URL.createObjectURL(new Blob([response.data])); 
         // window.open(response.data);
       })
-
-
   }
+
+  const [rerender, setRender] = useState(0)
+
 
   const postId = useSelector(state => state.jobId)
   const token = localStorage.getItem('token')
   const [application, setApplication] = useState([])
   // getting the appication based on id of post and tokenin gh elocalstorage
 
+  // alert confrim
+  function Delete(id) {
+    confirmAlert({
+      title: 'Update Profile',
+      message: 'Are you sure to Update this details',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            async function de() {
+              const del = await axios.post(`${server}/removeapplication`, { applicationid: id }).then((response) => {
+                toast.success(response.data.success_msg)
+                setRender(Math.random())
+              })
+            }
 
+            de()
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
 
-  async function de(e) {
-    const id = e
-    console.log(id)
-    const del = await axios.post(`${server}/removeapplication`, { applicationid: id }).then((response) => {
-      toast.alert(response.data.success)
-    })
   }
+  // fetching the particular company detail
 
 
   useEffect(() => {
@@ -68,13 +89,13 @@ const Application = () => {
     async function getApplication() {
       await axios.get(`${server}/application/${token}/${postId}`).then(response => {
 
-
         console.log(response.data)
         setApplication(response.data)
       })
     }
     getApplication()
-  }, [])
+
+  }, [rerender])
 
   return (
     <div>
@@ -88,7 +109,7 @@ const Application = () => {
           <table className='applicationtable'>
             <ToastContainer />
 
-            <thead className='table_heading'>
+            <thead className='table_headings'>
               <tr><th>SN.</th>
                 <th><BsFillPersonCheckFill className='dashboard-icon' />Name</th>
                 <th><AiOutlineMail className='dashboard-icon' />Email</th>
@@ -98,13 +119,13 @@ const Application = () => {
             <tbody className='table_content'>
               {
                 application.map((item, id) => {
-                  return <tr className='grey-table' keys={id}>
+                  return <tr className={((id % 2) == 0) ? 'grey-table' : 'light-table'} keys={id}>
                     <td>{id + 1}</td>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td className='download'><span>Download<HiDownload className='dashboard-icon' onClick={() => download(item._id)} /></span>
-                    </td> <td onClick={() => de(item._id)}><AiFillDelete className='dashboard-icon' /></td>
+                    </td> <td onClick={() => Delete(item._id)}><AiFillDelete className='dashboard-icon' /></td>
                   </tr>
                 })
               }
@@ -114,7 +135,7 @@ const Application = () => {
           </table>
       }
 
-    </div>
+    </div >
   )
 }
 

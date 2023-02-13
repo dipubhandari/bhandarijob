@@ -8,7 +8,8 @@ const Apply_Schema = new mongoose.Schema({
     phone: { type: String, default: 1 },
     resume: { type: Buffer, require: true },
     appliedjob: { type: String, require: true },
-    createdAt: { type: Date, default: Date.now() }
+    createdAt: { type: Date, default: Date.now() },
+    status: { type: String, default: 'pending' }
 })
 
 const Apply_Model = mongoose.model('apply', Apply_Schema)

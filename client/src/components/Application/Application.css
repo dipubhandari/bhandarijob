@@ -3,11 +3,10 @@
 
 }
 
-.table_heading {
-    background-color: lightgray;
-    opacity: 40%;
-    color: white;
-
+.table_headings {
+    background-color: rgb(64, 58, 58);
+    height: 40px;
+    color: orange;
 }
 
 .noposthead {
@@ -28,9 +27,23 @@
 }
 
 .grey-table {
-    background-color: rgb(210, 210, 210);
+
+    font-size: larger;
+    background-color: rgb(66, 66, 66);
+    color: aliceblue;
+    text-align: center;
+
 }
 
+
+
+.light-table {
+    text-align: center;
+    background-color: rgb(138, 138, 124);
+    color: aliceblue;
+    font-size: larger;
+
+}
 
 .table_heading tr {
     height: 50px;

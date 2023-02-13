@@ -74,7 +74,7 @@ const PasswordChange = () => {
             <ToastContainer />
             <section className="form_companyprofile_c_p">
 
-                <form encType='multipart/form-data' action="" className=''>
+                <form encType='multipart/form-data' action="" className='changepassword'>
 
 
 

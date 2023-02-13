@@ -20,21 +20,22 @@ class JobPostController {
             }
             else {
                 //    delete job post
-                        const deletejob = await Job_Model.findByIdAndDelete({ _id: id })
+                const deletejob = await Job_Model.findByIdAndDelete({ _id: id })
                 // delete job apply
-                const find = await Apply_Model.find({_id:id})
-                if(find){
+                const find = await Apply_Model.find({ _id: id })
+                if (find) {
                     const deleteUserApply = await Apply_Model.deleteMany({ appliedjob: id })
                     await (deletejob && deleteUserApply) ?
-     res.send({ success_msg: 'Successfully deleted' }) :null
-                    
+                        res.send({ success_msg: 'Successfully deleted' }) : null
 
-                }else{
-                    if (deletejob) { res.send({ success_msg: 'Successfully deleted' })
+
+                } else {
+                    if (deletejob) {
+                        res.send({ success_msg: 'Successfully deleted' })
                     }
                 }
 
-               
+
             }
         }
         catch (error) {
@@ -49,7 +50,7 @@ class JobPostController {
         const id = req.body.applicationid
         const remove = await Apply_Model.findByIdAndDelete(id)
         if (remove) {
-            res.send({ success: 'Remove Sucessfully....' })
+            res.send({ success_msg: 'Remove Sucessfully....' })
         }
     }
 

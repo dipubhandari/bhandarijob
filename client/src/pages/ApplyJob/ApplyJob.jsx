@@ -40,6 +40,7 @@ const ApplyJob = () => {
                 }
                 if (response.data.success) {
                     toast.success(response.data.success)
+                    setResume({})
                 }
             })
         }

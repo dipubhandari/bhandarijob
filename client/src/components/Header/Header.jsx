@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.css'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { AiFillHome } from 'react-icons/ai'
 import { FaSignInAlt } from 'react-icons/fa'
 import { FaHandshake } from 'react-icons/fa'
@@ -11,23 +11,55 @@ import { MdPermContactCalendar } from 'react-icons/md'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { account } from '../../redux/accountSlice'
 import { isLogin } from '../../redux/authSlice'
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { confirmAlert } from 'react-confirm-alert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Header = () => {
 
-  const isLogin = useSelector(state => state.isLogin)
-  const account = useSelector(state => state.Account)
+  const isUserLogin = useSelector(state => state.isLogin)
+  const accountType = useSelector(state => state.Account)
 
-  const sendIslogin = useDispatch()
+  const [rerender, setRerender] = useState(0)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const logout = () => {
-    localStorage.removeItem('token')
-    sendIslogin(isLogin(false))
+
+  // alert confrim
+  function logout(id) {
+    confirmAlert({
+      title: 'Update Profile',
+      message: 'Are you sure to Update this details',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            logout = () => {
+              setRerender(Math.random())
+              navigate('/')
+              toast.success('Logout Successfully...')
+              localStorage.removeItem('token')
+              dispatch(isLogin(false))
+              dispatch(account('false'))
+            }
+            logout()
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+
+
   }
 
-
   return (
-    <div className='header_container' style={{ backgroundColor: (account == 'employer') ? 'rgb(25, 30, 32)' : 'rgb(15, 15, 104)' }} >
+    <div className='header_container' style={{ backgroundColor: (accountType == 'employer') ? 'rgb(25, 30, 32)' : 'rgb(15, 15, 104)' }} >
 
 
       <Link to='/' className="header_logo">
@@ -35,7 +67,7 @@ const Header = () => {
       </Link>
 
       <section className="header__menu">
-
+        <ToastContainer />
         <Link className="link_row">
           <b><AiFillHome /></b> <Link className='linkheader'>Home</Link>
         </Link>
@@ -53,9 +85,9 @@ const Header = () => {
         </Link>
 
       </section>
-      <section className="header_operator" style={{backgroundColor: (account == 'employer') ?"grey" : 'rgb(73, 103, 191)'}}>
+      <section className="header_operator" style={{ backgroundColor: (accountType == 'employer') ? "grey" : 'rgb(73, 103, 191)' }}>
         {
-          (!isLogin) ?
+          (!isUserLogin) ?
             <>
 
               <Link className="first" to='/login'>
@@ -78,24 +110,25 @@ const Header = () => {
                   ?
                   <Link to='/post' className="first">
                     <span className='right_logo'><MdOutlineWork /></span>
-                    <span className='right_topic'>Post Job...</span>
+                    <span className='right_topic'><b>Post Job...</b></span>
                   </Link>
                   :
 
                   null
               }
 
-              <Link to='/' className="first" onClick={
-                logout
+              <b style={{ backgroundColor: 'none', cursor: 'pointer' }}
+                className="first" onClick={
+                  logout
 
-              }>
+                }>
                 <span className='right_logo'><RiLogoutCircleRLine /></span>
                 <span className='right_topic'>Logout</span>
 
-              </Link>
+              </b>
               <Link className="first">
                 <span className='right_logo'><BsFillPersonFill /></span>
-                <span className='right_topic'>Profile</span>
+                <span className='right_topic'><b>Profile</b></span>
 
               </Link>
             </>

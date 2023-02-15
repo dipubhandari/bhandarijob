@@ -30,6 +30,8 @@ const ApplyJob = () => {
         } else if (resume.type != ('application/pdf')) {
             toast.warn('Please upload file in pdf format')
         } else {
+            const resumePdf = JSON.parse(JSON.stringify(resume))
+
             const formData = new FormData()
             formData.append('resume', resume)
             formData.append('jobseeker', jobapplier)
@@ -37,6 +39,7 @@ const ApplyJob = () => {
             await axios.post(`${server}/apply`, formData).then((response) => {
                 if (response.data.error_msg) {
                     toast.error(response.data.error_msg)
+                    setResume({})
                 }
                 if (response.data.success) {
                     toast.success(response.data.success)
@@ -82,7 +85,11 @@ const ApplyJob = () => {
                                 />
                             </span>
                             <input
+
+
                                 type='submit'
+
+                                disabled={false}
                                 value='Apply' className='applybtn'
                                 onClick={Apply}
                             />

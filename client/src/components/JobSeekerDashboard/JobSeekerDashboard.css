@@ -1,0 +1,68 @@
+.jobseeker_dashboard_container {
+    display: grid;
+    grid-template-columns: 299px 299px 299px;
+    grid-template-rows: 299px 299px 299px;
+    grid-gap: 10px;
+    margin: 30px auto;
+    width: 70%;
+    align-content: center;
+}
+
+.first__icon {
+    background-color: rgb(224, 218, 209);
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    color: orange;
+    font-size: xx-large;
+}
+
+.dash_title {
+    color: rgb(75, 74, 72);
+    opacity: 90%;
+}
+
+.second__icon {
+    background-color: rgb(224, 218, 209);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.third__icon {
+    background-color: rgb(224, 218, 209);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forth__icon {
+    background-color: rgb(224, 218, 209);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fifth__icon {
+    background-color: rgb(224, 218, 209);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sixth__icon {
+    background-color: rgb(224, 218, 209);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

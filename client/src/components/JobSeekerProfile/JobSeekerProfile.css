@@ -1,0 +1,72 @@
+.companyprofile_container {
+  width: 100%;
+  color: white;
+  height: 90vh;
+  background-color: rgba(100, 100, 100, 0.6);
+}
+
+.form_companyprofile {
+  background-color: rgb(66, 66, 66);
+  width: 90%;
+  height: 100vh;
+  flex-direction: column;
+  display: flex;
+  margin: 10px 40px;
+
+}
+
+.image_company {
+  width: 100px;
+  height: 60px;
+  border-radius: 9px;
+}
+
+.companyProfileformheader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  gap: 9px;
+}
+
+.chageicon {
+  margin-left: 10px;
+  font-size: 20px;
+  color: gray;
+}
+
+.form_fullname input {
+  color: white;
+}
+
+.first_form_inputs {
+  color: white;
+  display: flex;
+  gap: 50px;
+  width: 100%;
+  padding: 10px 0px;
+}
+
+.first_form_inputs span {
+  width: 100%;
+}
+
+.companylogox {
+  display: none;
+}
+
+.update {
+  width: 100px;
+  background-color: gainsboro;
+  border-radius: 10px;
+  /* heigheith: 50px; */
+  padding: 0px 10px;
+  height: 50px;
+  border: none;
+
+  color: rgb(97, 95, 95);
+}
+
+.update:hover {
+  background-color: aliceblue;
+}

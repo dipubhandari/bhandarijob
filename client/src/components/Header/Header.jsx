@@ -105,7 +105,7 @@ const Header = () => {
             <>
 
               {
-                (account == 'employer')
+                (accountType == 'employer')
 
                   ?
                   <Link to='/post' className="first">
@@ -126,11 +126,18 @@ const Header = () => {
                 <span className='right_topic'>Logout</span>
 
               </b>
-              <Link className="first">
-                <span className='right_logo'><BsFillPersonFill /></span>
-                <span className='right_topic'><b>Profile</b></span>
-
-              </Link>
+              {
+                (accountType == 'employer') ?
+                  <Link className="first">
+                    <span className='right_logo'><BsFillPersonFill /></span>
+                    <span className='right_topic'><b>ProfileImage</b></span>
+                  </Link>
+                  :
+                  <Link to='/jobseeker-profile' className="first">
+                    <span className='right_logo'><BsFillPersonFill /></span>
+                    <span className='right_topic'><b>Profile</b></span>
+                  </Link>
+              }
             </>
         }
 

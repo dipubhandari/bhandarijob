@@ -17,6 +17,7 @@ import Postajob from './pages/Post/Postajob';
 import JobPostDetail from './pages/JobPostDetail/JobPostDetail'
 import EmployerHome from './pages/EmployerHome/EmployerHome'
 import ApplyJob from './pages/ApplyJob/ApplyJob';
+import JobSeekerProfile from './pages/JobSeekerProfile/JobSeekerProfile'
 
 function App() {
   // getting the user info from store
@@ -62,11 +63,11 @@ function App() {
 
         <Routes>
           {/* homepage */}
-          <Route path='/:resume'/>
+          <Route path='/:resume' />
           <Route path='/' element={
-          (Account == 'employer') ?  <EmployerHome/> : <Home isLogin={isAuth} /> 
+            (Account == 'employer') ? <EmployerHome /> : <Home isLogin={isAuth} />
           } />
-          <Route path='/homepage' element={(Account == 'employer') ?  <EmployerHome/> : <Home isLogin={isAuth} /> } />
+          <Route path='/homepage' element={(Account == 'employer') ? <EmployerHome /> : <Home isLogin={isAuth} />} />
           {/* homepage here */}
 
           {/* accoutn selection when signup */}
@@ -105,12 +106,14 @@ function App() {
           <Route path='/job-post-detail/:id' element={<JobPostDetail />} />
           <Route path='/apply/:id' element={(isAuth == true) ? <ApplyJob /> : <Login />} />
 
-          {/* post a job */}
-          {/* seasrch route */}
-          {/* <Route path='/search' element={< />} /> */}
-          {/* seasrch route */}
 
+          {/* routes for jobseeker profile */}
+          <Route path='/jobseeker-profile' element={<JobSeekerProfile />} />
         </Routes>
+
+
+
+
       </section>
     </>
   );

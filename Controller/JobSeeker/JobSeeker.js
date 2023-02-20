@@ -2,6 +2,8 @@ import bcrypt from 'bcryptjs';
 import JobSeeker_Model from "../../model/JobSeeker.js"
 import Employer_Model from "../../model/employer.js"
 import jwt from 'jsonwebtoken';
+import userValidator from 'email-validator';
+import Apply_Model from '../../model/Apply_Model.js'
 
 class JobSeekerController {
 
@@ -54,8 +56,8 @@ class JobSeekerController {
 
 
         if (!(user2 || user1)) {
-      
-            
+
+
             res.send({ error_msg: 'Enter correct details...' })
         }
         else {
@@ -67,7 +69,7 @@ class JobSeekerController {
     static Check__Login = async (req, res) => {
 
         const token = req.body.token
-       
+
         const user1 = await JobSeeker_Model.findOne({ _id: token })
         const user2 = await Employer_Model.findOne({ _id: token })
         if (user1 || user2) {
@@ -83,6 +85,45 @@ class JobSeekerController {
     static AllJobSekeer = async (req, res) => {
         const user = await JobSeeker_Model.find()
         res.send(user)
+    }
+    static JobSeekerDetails = async (req, res) => {
+        try {
+            const user = await JobSeeker_Model.findOne({ _id: req.params.id })
+            console.log(user)
+            user.password = null
+            user.account = null
+            user.jobapplied = null
+
+            res.send(user)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static UpdateJobSeekerDetail = async (req, res) => {
+        try {
+            const { _id, name, email } = req.body;
+            console.log(_id)
+            // validating 
+            const validateEmail = userValidator.validate(email)
+
+            if (!(name && email)) {
+                res.send({ error_msg: "Enter all fields." })
+            }
+            else if (!(validateEmail)) {
+                res.send({ error_msg: "Email is not valid" })
+            }
+            else {
+                const update = await JobSeeker_Model.updateOne({ _id }, { $set: { name, email } },)
+                const user = await JobSeeker_Model.findOne({ _id });
+                // update the email in appplication also
+                const updateEmailApplied = await Apply_Model.updateMany({ email: user.email }, { email })
+                if (update && updateEmailApplied) { res.send({ success_msg: "updated" }) } else { res.send({ error_msg: "Sorry Try Again" }) }
+
+            }
+        }
+        catch (err) {
+            res.send({ error_msg: "Something went Wrong" })
+        }
     }
 }
 

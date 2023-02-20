@@ -8,6 +8,9 @@ import { ImCross } from 'react-icons/im'
 import { MdOutlineWork } from 'react-icons/md'
 import { AiFillProfile } from 'react-icons/ai';
 const JobSeekerDashboard = () => {
+
+    
+
     return (
         <div className='jobseeker_dashboard_container'>
             <section className="first__icon">

@@ -1,0 +1,4 @@
+// All the error and learning during this app
+
+1. difference between findByIdAndUpdate updateOne
+2. bodyParse depreciated error

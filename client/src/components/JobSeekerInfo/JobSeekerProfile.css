@@ -5,8 +5,8 @@
   background-color: rgba(100, 100, 100, 0.6);
 }
 
-.form_companyprofile {
-  background-color: rgb(66, 66, 66);
+.form_seekerprofile {
+  background-color: rgb(219, 223, 210);
   width: 90%;
   height: 100vh;
   flex-direction: column;
@@ -36,11 +36,11 @@
 }
 
 .form_fullname input {
-  color: white;
+  color: rgb(107, 107, 107);
 }
 
 .first_form_inputs {
-  color: white;
+  color: rgb(15, 15, 15);
   display: flex;
   gap: 50px;
   width: 100%;
@@ -55,18 +55,18 @@
   display: none;
 }
 
-.update {
+.update_seeker {
   width: 100px;
-  background-color: gainsboro;
+  background-color: rgb(27, 104, 181);
   border-radius: 10px;
   /* heigheith: 50px; */
   padding: 0px 10px;
   height: 50px;
   border: none;
 
-  color: rgb(97, 95, 95);
+  color: #fff;
 }
 
 .update:hover {
-  background-color: aliceblue;
+  background-color: rgb(32, 62, 89);
 }

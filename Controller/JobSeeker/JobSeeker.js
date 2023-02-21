@@ -113,11 +113,22 @@ class JobSeekerController {
                 res.send({ error_msg: "Email is not valid" })
             }
             else {
-                const update = await JobSeeker_Model.updateOne({ _id }, { $set: { name, email } },)
-                const user = await JobSeeker_Model.findOne({ _id });
-                // update the email in appplication also
-                const updateEmailApplied = await Apply_Model.updateMany({ email: user.email }, { email })
-                if (update && updateEmailApplied) { res.send({ success_msg: "updated" }) } else { res.send({ error_msg: "Sorry Try Again" }) }
+                // checking if the user change anyting or not if not change 
+                const findUser = await JobSeeker_Model.findOne({ email })
+
+                if (findUser.name == name && findUser.email == email) {
+                    res.send({ error_msg: "Your Updated Data is same..." })
+                }
+                else {
+                    const update = await JobSeeker_Model.updateOne({ _id }, { $set: { name, email } },)
+                    const user = await JobSeeker_Model.findOne({ _id });
+
+                    const oldEmail = user.email
+                    console.log(oldEmail)
+                    // update the email in appplication also
+                    const updateEmailApplied = await Apply_Model.updateMany({ email: oldEmail }, { email })
+                    if (update && updateEmailApplied) { res.send({ success_msg: "updated" }) } else { res.send({ error_msg: "Sorry Try Again" }) }
+                }
 
             }
         }

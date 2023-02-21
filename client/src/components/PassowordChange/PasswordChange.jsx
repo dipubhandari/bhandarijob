@@ -5,11 +5,13 @@ import axios from 'axios'
 import { server } from '../../config'
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-
+import { Account } from '../../redux/accountSlice'
+import { useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const PasswordChange = () => {
+    const account = useSelector(state => state.Account)
     const [inputs, setInputs] = useState({ newpassword: '', oldpassword: '', againpassword: '' })
     const token = localStorage.getItem('token')
     // onChange the input of the field
@@ -25,6 +27,8 @@ const PasswordChange = () => {
     function passwordChange(e) {
         e.preventDefault()
         inputs.token = token
+        inputs.account = account
+        console.log(inputs)
         if (inputs.newpassword != inputs.againpassword) {
             toast.warn('Password donot match')
         }
@@ -41,17 +45,12 @@ const PasswordChange = () => {
                         onClick: async () => {
                             //    when user clieck yes button
                             await axios.post(`${server}/change-password`, inputs).then((response) => {
-
                                 {
                                     (response.data.success_msg) && toast.success(response.data.success_msg);
-
                                 }
                                 {
                                     (response.data.error_msg) && toast.warning(response.data.error_msg)
                                 }
-
-
-
                                 if (response.data.success_msg) {
                                     setInputs({ oldpassword: '', newpassword: '', againpassword: '' })
                                 }

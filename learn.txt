@@ -2,3 +2,5 @@
 
 1. difference between findByIdAndUpdate updateOne
 2. bodyParse depreciated error
+note:
+1. Debug update user email not update in apply model

@@ -70,17 +70,16 @@ const JobDetails = (props) => {
         }
         else {
 
-            console.log(searchInputTrack)
-
             async function search() {
                 const posts = await axios.post(`${server}/api/jobpost`, searchInput).then((response) => {
 
                     setJobPost(response.data)
                 })
             }
+            // props.isSearchClicked,
             search()
         }
-    }, [props.isSearchClicked, searchInputTrack])
+    }, [searchInputTrack,searchInput])
     // getting location of all the user so that to display in search
     const [location, setLocation] = useState([])
     const [skills, Setskills] = useState({})

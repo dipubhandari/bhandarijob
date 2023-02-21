@@ -4,6 +4,7 @@ import Jobseeker_Model from '../../model/JobSeeker.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Job_Model from '../../model/PostJob.js'
+import JobSeeker_Model from '../../model/JobSeeker.js';
 
 class EmployerController {
 
@@ -136,26 +137,57 @@ class EmployerController {
         const user = await Employer_Model.find()
         res.send(user)
     }
-    static ChangePassword = async (req, res) => {
-        // console.log(req.bod)
-        const { oldpassword, newpassword } = req.body
-        // checking the password in the database
-        const password = await Employer_Model.findOne({ _id: req.body.token })
 
-        if (password.password == newpassword) {
-            res.send({ error_msg: "New Password is same as old password." })
-        }
-        else if (password.password != oldpassword) {
-            res.send({ error_msg: "Old Password is wrong." })
-        }
-        else {
-            const update = await Employer_Model.updateOne({ _id: req.body.token }, { password: newpassword })
-            if (update) {
-                res.send({ success_msg: "Password is changed" })
+
+    // password change for employer and jobseeker also
+    static ChangePassword = async (req, res) => {
+
+        try {
+
+            const { oldpassword, newpassword, account } = req.body
+            // change password for employer
+            if (account == 'employer') {
+                console.log('this works')
+                // checking the password in the database
+                const password = await Employer_Model.findOne({ _id: req.body.token })
+
+                if (password.password == newpassword) {
+                    res.send({ error_msg: "New Password is same as old password." })
+                }
+                else if (password.password != oldpassword) {
+                    res.send({ error_msg: "Old Password is wrong." })
+                }
+                else {
+                    const update = await Employer_Model.updateOne({ _id: req.body.token }, { password: newpassword })
+                    if (update) {
+                        res.send({ success_msg: "Password is changed" })
+                    }
+                }
             }
+            // password change for jobseeker
+            else {
+                // checking the password in the database
+                const password = await JobSeeker_Model.findOne({ _id: req.body.token })
+
+                if (password.password == newpassword) {
+                    res.send({ error_msg: "New Password is same as old password." })
+                }
+                else if (password.password != oldpassword) {
+                    res.send({ error_msg: "Old Password is wrong." })
+                }
+                else {
+                    const update = await JobSeeker_Model.updateOne({ _id: req.body.token }, { password: newpassword })
+                    if (update) {
+                        res.send({ success_msg: "Password is changed" })
+                    }
+                }
+            }
+
+        }
+        catch (error) {
+            res.send({ error_msg: "Something Went Wrong" })
         }
     }
-
 }
 
 export default EmployerController

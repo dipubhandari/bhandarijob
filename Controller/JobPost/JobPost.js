@@ -39,7 +39,6 @@ class JobPostController {
             }
         }
         catch (error) {
-            console.log(error)
         }
     }
     // delete job
@@ -60,7 +59,6 @@ class JobPostController {
         const id = req.params.id
 
 
-        console.log(req.params.id)
         // find the resume
         const resume = await Apply_Model.findOne({ _id: id })
 
@@ -191,37 +189,40 @@ class JobPostController {
     // search
 
     static Search = async (req, res) => {
-
+        // console.log('this works')
         const skills = req.body.skills || []
         const keyword = req.body.keyword || ''
         const location = req.body.location || ''
         const category = req.body.category || ''
-
-        if (!(keyword == '' && category == '' && location == '')) {
-            console.log('this ')
+        // three situation for search this when hero search has data nad skills has no data
+        if ((keyword != '' || category != '' || location != '') && skills.length == 0) {
+            console.log('first')
             const jobs = await JobPost.find({
-
-                "$and": [
+                "$or": [
                     { "position": { $regex: keyword, $options: "i" } },
-                    { "category": { $regex: category } },
-                    { "address": { $regex: location } },
+                    { "companyname": { $regex: keyword, $options: "i" } },
+                    // { "category": { $regex: category } }
                 ]
                 // this will return search in skills
 
             }).sort({ createdAt: 'desc' })
             res.send(jobs)
         }
-        else if (skills.length > 0) {
+
+        // when skills only have data
+        else if (skills.length > 0 && (keyword == '' || category == '' || location == '')) {
+            console.log('second condition runs')
             const jobs = await JobPost.find({
-
                 skills: { $in: skills }
-
             }).sort({ createdAt: 'desc' })
             res.send(jobs)
-        }
-        else if ((keyword == '' && category == '' && location == '' && skills.length == 0)) {
-            const jobs = await JobPost.find().sort({ createdAt: 'desc' })
-            res.send(jobs)
+        } //when both have data
+        else if ((keyword !== '' || category !== '' || location == '') && (skills.length > 0)) {
+            console.log('third')
+
+        }//when user comes first time this page and no data
+        else {
+            const jobs = await JobPost.find().sort({ createdAt: 'desc' }); res.send(jobs)
         }
     }
 
@@ -272,7 +273,6 @@ class JobPostController {
     static GetNaukariDetails = async (req, res) => {
 
         const url = req.params.token
-        console.log(url)
         const jobdetail = await Job_Model.findOne({ _id: url })
 
         if (!jobdetail) {
@@ -289,8 +289,6 @@ class JobPostController {
 
             const newdate = year + "/" + month + "/" + day;
             jobdetail.applydate = newdate
-            console.log(newdate)
-            console.log(jobdetail)
             if (owner) {
 
                 res.send({ companydetail: owner, jobdetail })

@@ -48,7 +48,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(process.cwd(), "./build/index.html"))
 })
 
-
 app.get('*', (req, res) => {
     res.sendFile(path.join(process.cwd(), "./build/index.html"))
 })

@@ -2,5 +2,7 @@
 
 1. difference between findByIdAndUpdate updateOne
 2. bodyParse depreciated error
+3.how to make file downloadable
+4.how to send file to server 'blob'
 note:
 1. Debug update user email not update in apply model

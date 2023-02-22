@@ -9,36 +9,44 @@ class JobSeekerController {
 
     static UserAccountCreation = async (req, res) => {
 
-        // get data from user
 
-        const { name, email, phone, password } = req.body
-
-        // (if)
-        // check data in the db if exitst or not
-        const user = await (JobSeeker_Model.findOne({ email, password }) && Employer_Model.findOne({ email }))
-        if (user) {
-            res.send({ error_msg: 'Email used. Try New Email.' })
-        }
-        else {
-            // const pasword = req.body.password
-
-            const user_detail = await JobSeeker_Model.create({
-                name,
-                email,
-                password
-            })
-            // await bcrypt.hash(req.body.password, 10)
-            // generating the token
-            // let token = jwt.sign({
-            //     id: user_detail._id,
-            //     email: email,
-            // }, 'shhh', { expiresIn: '2h' })
-            // user_detail.token = token,
-            //     user_detail.password = null
-            // if user not exist and token generated then 
-            if (user_detail) {
-                res.send({ user: user_detail, success: 'Account created Successfully' })
+        try {
+            // get data from user
+            const { name, email, phone, password } = req.body
+            const validateEmail = userValidator.validate(email)
+            // valida email caine vane
+            if (!validateEmail) {
+                res.send({ error_msg: "Email is not vaild" })
             }
+            // valid email xa vane
+            else {
+                // check data in the db if exitst or not
+                const checkInJobFinder = await (JobSeeker_Model.findOne({ email }))
+                const checkInEmployer = await (Employer_Model.findOne({ email }))
+                if (checkInJobFinder || checkInEmployer) {
+                    res.send({ error_msg: 'Email used. Try New Email.' })
+                }
+                else {
+                    const enc_code = await bcrypt.hash(req.body.password, 10)
+                    const user_detail = await JobSeeker_Model.create({
+                        name,
+                        email,
+                        password: enc_code,
+                        phone
+                    })
+                    const token = jwt.sign({ userId: user_detail._id }, process.env.secrete_key, { expiresIn: '17d' })
+                    user_detail.token = token
+                    user_detail.password = null
+                    user_detail.jobapplied = null
+                    // if user not exist and token generated then
+                    if (user_detail) {
+                        res.send({ token, user: user_detail, success: 'Account created Successfully' })
+                    }
+
+                }
+            }
+        }
+        catch (error) {
 
         }
 

@@ -242,8 +242,9 @@ class JobPostController {
         }
         else {
             // getting the user who posted the postbased on token id
-
+            console.log(token)
             const owner = await Employer_Model.findOne({ _id: token })
+            console.log(owner)
             const post = await JobPost.create({
                 owneremail: owner.email,
                 companyname: owner.companyname,

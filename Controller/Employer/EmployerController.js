@@ -1,5 +1,4 @@
 import Employer_Model from '../../model/employer.js';
-
 import Jobseeker_Model from '../../model/JobSeeker.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -26,11 +25,12 @@ class EmployerController {
                 res.send({ error_msg: 'Email already exist' })
             }
             else {
+                const enc_code = await bcrypt.hash(req.body.password, 10)
                 const user = await Employer_Model.create({
                     companyname,
                     email,
                     phone,
-                    password,
+                    password: enc_code,
                     address,
                     description,
                     logo: req.file.filename
@@ -145,38 +145,42 @@ class EmployerController {
         try {
 
             const { oldpassword, newpassword, account } = req.body
+            console.log(req.body)
             // change password for employer
             if (account == 'employer') {
-                console.log('this works')
+                // console.log('this works')
                 // checking the password in the database
-                const password = await Employer_Model.findOne({ _id: req.body.token })
-
-                if (password.password == newpassword) {
+                const user = await Employer_Model.findOne({ _id: req.body.token })
+                const oldpasswordhash = await bcrypt.compare(oldpassword, user.password)
+                const newpasswordhash = await bcrypt.compare(newpassword, user.password)
+                if (newpasswordhash) {
                     res.send({ error_msg: "New Password is same as old password." })
                 }
-                else if (password.password != oldpassword) {
+                else if (!oldpasswordhash) {
                     res.send({ error_msg: "Old Password is wrong." })
                 }
                 else {
-                    const update = await Employer_Model.updateOne({ _id: req.body.token }, { password: newpassword })
+                    const enc_code = await bcrypt.hash(newpassword, 10)
+                    const update = await Employer_Model.updateOne({ _id: req.body.token }, { password: enc_code })
                     if (update) {
                         res.send({ success_msg: "Password is changed" })
                     }
                 }
-            }
-            // password change for jobseeker
+            }  // password change for jobseeker
             else {
                 // checking the password in the database
-                const password = await JobSeeker_Model.findOne({ _id: req.body.token })
-
-                if (password.password == newpassword) {
+                const jobseeker_user = await JobSeeker_Model.findOne({ _id: req.body.token })
+                const oldpasswordhash = await bcrypt.compare(oldpassword, jobseeker_user.password)
+                const newpasswordhash = await bcrypt.compare(newpassword, jobseeker_user.password)
+                if (newpasswordhash) {
                     res.send({ error_msg: "New Password is same as old password." })
                 }
-                else if (password.password != oldpassword) {
+                else if (!oldpasswordhash) {
                     res.send({ error_msg: "Old Password is wrong." })
                 }
                 else {
-                    const update = await JobSeeker_Model.updateOne({ _id: req.body.token }, { password: newpassword })
+                    const enc_code = await bcrypt.hash(newpassword, 10)
+                    const update = await JobSeeker_Model.updateOne({ _id: req.body.token }, { password: enc_code })
                     if (update) {
                         res.send({ success_msg: "Password is changed" })
                     }
@@ -185,6 +189,7 @@ class EmployerController {
 
         }
         catch (error) {
+            console.log(error)
             res.send({ error_msg: "Something Went Wrong" })
         }
     }

@@ -53,24 +53,36 @@ class JobSeekerController {
     }
 
     static User__Login = async (req, res) => {
-
-        // get data from user
-
-        const { email, password } = req.body
-        // check data in the db if exitst or notawait
-        // const employer = await (Employer_Model.findOne({ email, password }))
-        const user2 = await JobSeeker_Model.findOne({ email, password })
-        const user1 = await Employer_Model.findOne({ email, password })
-
-
-        if (!(user2 || user1)) {
-
-
-            res.send({ error_msg: 'Enter correct details...' })
+        try {
+            // get data from user
+            const { email, password } = req.body
+            // check data in the db if exitst or not
+            const user = await JobSeeker_Model.findOne({ email }) || await Employer_Model.findOne({ email })
+            //   user exist gardaina vane
+            if (!user) {
+                res.send({ error_msg: 'Enter correct details...' })
+            }
+            // user exist garxa vane compare 
+            else {
+                const hash = await bcrypt.compare(password, user.password)
+                if (!(user && hash)) {
+                    res.send({ error_msg: 'Enter correct details...' })
+                }
+                else {
+                    const token = jwt.sign({ userId: user._id }, process.env.secrete_key, { expiresIn: '25d' })
+                    console.log(token)
+                    user.token = token
+                    user.password = '****'
+                    user.jobapplied = null
+                    res.send({ user: user, success: 'Login Successful', token })
+                }
+            }
         }
-        else {
-            res.send({ user: user1 || user2, success: 'Login Successful' })
+        catch (error) {
+            console.log(error)
+            res.send({ error_msg: "Something went wrong" })
         }
+
     }
 
 

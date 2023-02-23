@@ -46,11 +46,24 @@ class JobPostController {
 
     // delete application
     static DeleteApplication = async (req, res) => {
-        const id = req.body.applicationid
-        const remove = await Apply_Model.findByIdAndDelete(id)
-        if (remove) {
-            res.send({ success_msg: 'Remove Sucessfully....' })
+        try {
+            const id = req.body.applicationid
+            console.log(req.body)
+            if (req.body.action == 'Delete') {
+                const operation = await Apply_Model.findByIdAndDelete(id)
+            }
+            else if (req.body.action == 'Sortlist') {
+                const operation = await Apply_Model.findByIdAndUpdate(id, { status: 'Sortlist' })
+            }
+            else {
+                const operation = await Apply_Model.findByIdAndUpdate(id, { status: 'Rejected' })
+            }
+            res.send({ success_msg: `${req.body.action} Successfully...` })
+
+        } catch (error) {
+            res.send({ error_msg: "Something Went Wrong!" })
         }
+
     }
 
     // download

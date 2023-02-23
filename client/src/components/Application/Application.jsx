@@ -8,6 +8,7 @@ import { AiOutlineMail, AiFillPhone } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import { HiDownload } from 'react-icons/hi'
 import { RxResume } from 'react-icons/rx'
+import { RxCross1 } from 'react-icons/rx'
 import { useEffect } from 'react'
 import axios, { Axios } from 'axios'
 import { server } from '../../config'
@@ -18,6 +19,7 @@ import { saveAs } from 'file-saver'
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
+import { BiSelectMultiple } from 'react-icons/bi'
 const Application = () => {
 
 
@@ -56,16 +58,16 @@ const Application = () => {
   // getting the appication based on id of post and tokenin gh elocalstorage
 
   // alert confrim
-  function Delete(id) {
+  function Decision(id, action) {
     confirmAlert({
-      title: 'Update Profile',
-      message: 'Are you sure to Update this details',
+      title: `${action} Application`,
+      message: `Are you sure to ${action} this application?`,
       buttons: [
         {
           label: 'Yes',
           onClick: () => {
             async function de() {
-              const del = await axios.post(`${server}/removeapplication`, { applicationid: id }).then((response) => {
+              const del = await axios.post(`${server}/removeapplication`, { applicationid: id, action }).then((response) => {
                 toast.success(response.data.success_msg)
                 setRender(Math.random())
               })
@@ -114,7 +116,7 @@ const Application = () => {
                 <th><BsFillPersonCheckFill className='dashboard-icon' />Name</th>
                 <th><AiOutlineMail className='dashboard-icon' />Email</th>
                 <th><AiFillPhone className='dashboard-icon' />Phone</th>
-                <th>Resume.</th>  <th>Action</th></tr>
+                <th>Resume.</th>  <th>Action</th><th>Status</th></tr>
             </thead>
             <tbody className='table_content'>
               {
@@ -125,7 +127,10 @@ const Application = () => {
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td className='download'><span>Download<HiDownload className='dashboard-icon' onClick={() => download(item._id)} /></span>
-                    </td> <td onClick={() => Delete(item._id)}><AiFillDelete className='dashboard-icon' /></td>
+                    </td> <td ><AiFillDelete onClick={() => Decision(item._id, 'Delete')} className='dashboard-icon' /><BiSelectMultiple onClick={() => Decision(item._id, 'Sortlist')} />
+
+                      <RxCross1 onClick={() => Decision(item._id, 'Reject')} /></td>
+                    <td>{item.status}</td>
                   </tr>
                 })
               }

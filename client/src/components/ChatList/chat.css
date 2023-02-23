@@ -1,0 +1,29 @@
+.chatperson {
+    display: flex;
+    color: #fff;
+    margin: 060px;
+    padding: 10px;
+    border: 1px solid rgb(111, 111, 111);
+}
+
+.chatperson img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.message_section_chat {
+    display: grid;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 70px;
+}
+
+.chatsection_company {
+    margin: 10px;
+}
+
+.chatperson:hover {
+    background-color: #cdc7c7;
+    color: black;
+}

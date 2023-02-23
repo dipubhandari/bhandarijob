@@ -8,6 +8,7 @@ import { RxDashboard } from 'react-icons/rx'
 import { MdOutlineWork } from 'react-icons/md'
 import CompanyProfile from '../../components/CompanyProfile/CompanyProfile'
 import PasswordChange from '../../components/PassowordChange/PasswordChange'
+import ChatList from '../../components/ChatList/ChatList'
 
 const EmployerHome = (props) => {
 
@@ -29,6 +30,7 @@ const EmployerHome = (props) => {
                 <section className="left_dashboard">
                     <button><RxDashboard />Dashboard</button>
                     <input onClick={() => setComponent('job')} type="button" value='Your Job Posts' />
+                    <input onClick={() => setComponent('chatlist')} type="button" value='Chats' />
                     <input onClick={() => setComponent('aboutuser')} type="button" value='Your Information' />
                     <input onClick={() => setComponent('changepassword')} type="button" value='Change Password' />
 
@@ -38,6 +40,7 @@ const EmployerHome = (props) => {
 
                         (component == 'job') && <JobApplication handleJobComponent={handleJobComponent} />}
 
+                    {(component == 'chatlist') && <ChatList />}
 
                     {(component == 'aboutuser') && <CompanyProfile />}
 

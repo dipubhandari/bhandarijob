@@ -4,9 +4,9 @@
 2. bodyParse depreciated error
 3.how to make file downloadable
 4.how to send file to server 'blob'
+4.loop in mongodb query (find)
 note: 
 1. Debug update user email not update in apply model
-
 
 how to integrate chat system
 

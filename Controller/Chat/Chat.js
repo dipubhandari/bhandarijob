@@ -16,7 +16,13 @@ class ChatController {
     // get all friends list
     static AllFriend = async (req, res) => {
         try {
-            
+            const friends = await Friend_Model.findOne({ user: req.params.token })
+
+            const friendDetail = await Employer_Model.find({
+                email: { $in: friends.friend }
+            })
+            res.send(friendDetail)
+
         } catch (error) {
             res.send({ error_msg: "Something went Wrong" })
         }

@@ -1,6 +1,7 @@
 .chatperson {
     display: flex;
     color: #fff;
+    background-color: #c7c7c7;
     margin: 060px;
     padding: 10px;
     border: 1px solid rgb(111, 111, 111);

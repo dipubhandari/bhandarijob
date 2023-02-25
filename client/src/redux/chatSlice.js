@@ -3,15 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {}
 
 const chatSlice = createSlice({
-    name: "currentchat",
+    name: "chatWith",
     initialState,
     reducers: {
-        currentchat: (state, action) => {
-           
+        chatWith: (state, action) => {
+            state = action.payload
+            return state
         }
     },
 });
 
-export const { currentchat } = chatSlice.actions;
+export const { chatWith } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header'
 import './JobSeekerProfile.css'
 import { RxDashboard } from 'react-icons/rx'
 import { MdOutlineWork } from 'react-icons/md'
+import Chat from '../../components/Chat/Chat'
 import JobSeekerDashboard from '../../components/JobSeekerDashboard/JobSeekerDashboard'
 import ChatList from '../../components/ChatList/ChatList'
 import JobSeekerInfo from '../../components/JobSeekerInfo/JobSeekerInfo'
@@ -38,7 +39,8 @@ const JobSeekerProfile = () => {
 
                     {(component == 'dashboard') && <JobSeekerDashboard />}
 
-                    {(component == 'chatlist') && <ChatList />}
+                    {(component == 'chatlist') && <ChatList setComponent={handleJobComponent} />}
+                    {(component == 'chat') && <Chat />}
                     {(component == 'profile') && <JobSeekerInfo />}
                     {(component == 'changepassword') && <PasswordChange />}
 

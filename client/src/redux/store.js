@@ -4,10 +4,14 @@ import accountSlice from './accountSlice'
 import searchKeysSlice from './searchKeysSlice'
 import applySlice from './applySlice'
 import jobIdSclice from './jobIdSlice'
+import chatSlice from './chatSlice'
 
 const store = configureStore({
-    reducer: {
 
+
+
+    reducer: {
+        chat: chatSlice,
         isLogin: authSlice,
         Account: accountSlice,
         search: searchKeysSlice,

@@ -15,10 +15,24 @@ import Footer from '../../components/Footer/Footer'
 import { apply } from '../../redux/applySlice'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const JobPostDetail = () => {
 
     // 
     const dispatch = useDispatch()
+
+    // add the company to user chatlist 
+    async function addToChat(email) {
+        const user = {
+            token: localStorage.getItem('token'),
+            chatWith: email
+        }
+        await axios.post(`${server}/api/chat/add-to-chat`, user).then(response => {
+            toast.success(response.data.message)
+        })
+    }
     // post detail state
     const [jobDetail, setDetail] = useState({})
 
@@ -47,7 +61,7 @@ const JobPostDetail = () => {
 
     return (
         <div>
-            <Header />
+            <Header /><ToastContainer />
 
             <div className="apply_page_container">
 
@@ -60,7 +74,7 @@ const JobPostDetail = () => {
                         <p>{jobDetail.description}</p>
                     </section>
                     <section className="view_company_profile">
-                        <Link className='view_company_profileLink'>View Company Profile</Link>
+                        <Link className='view_company_profileLink' onClick={() => addToChat(jobDetail.email)}>Add to Chat</Link>
                     </section>
                 </section>
 

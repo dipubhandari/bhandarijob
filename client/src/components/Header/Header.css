@@ -36,7 +36,6 @@
     align-items: center;
     height: 50px;
     padding: 0px 10px;
-    visibility: hidden;
 }
 
 .link_row:hover {

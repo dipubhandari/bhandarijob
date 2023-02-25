@@ -68,21 +68,19 @@ const Header = () => {
 
       <section className="header__menu">
         <ToastContainer />
-        <Link className="link_row">
+        <Link to='/' className="link_row">
           <b><AiFillHome /></b> <Link className='linkheader'>Home</Link>
         </Link>
 
-        <Link className="link_row">
-          <b><FaHandshake /></b> <Link className='linkheader'>Services</Link>
+        <Link to='/chat' className="link_row">
+          <b><FaHandshake /></b> <Link className='linkheader'>Chat</Link>
         </Link>
 
         <Link className="link_row">
           <b><MdPermContactCalendar /></b> <Link className='linkheader'>Contact</Link>
         </Link>
 
-        <Link className="link_row">
-          <b><FaBloggerB /></b> <Link className='linkheader'>Blog</Link>
-        </Link>
+     
 
       </section>
       <section className="header_operator" style={{ backgroundColor: (accountType == 'employer') ? "grey" : 'rgb(73, 103, 191)' }}>
@@ -130,7 +128,7 @@ const Header = () => {
                 (accountType == 'employer') ?
                   <Link className="first">
                     <span className='right_logo'><BsFillPersonFill /></span>
-                    <span className='right_topic'><b>ProfileImage</b></span>
+                    <span className='right_topic'><b>Chat</b></span>
                   </Link>
                   :
                   <Link to='/jobseeker-profile' className="first">

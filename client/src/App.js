@@ -18,6 +18,7 @@ import JobPostDetail from './pages/JobPostDetail/JobPostDetail'
 import EmployerHome from './pages/EmployerHome/EmployerHome'
 import ApplyJob from './pages/ApplyJob/ApplyJob';
 import JobSeekerProfile from './pages/JobSeekerProfile/JobSeekerProfile'
+import ChatList from './components/ChatList/ChatList';
 
 function App() {
   // getting the user info from store
@@ -87,21 +88,10 @@ function App() {
           {/* signup for jobseeker here */}
 
           {/* signup for new employer */}
-          <Route path='/newemploye' element={<SignupCompany />} />
+          <Route path='/newemployer' element={<SignupCompany />} />
           {/* signup for new employer  herer*/}
 
-
-
-          {/* post a job */}
-
-
           <Route path='/post' element={(isAuth) ? <Postajob /> : <Login />} />
-
-          {/* post a job */}
-
-
-          {/* post a job */}
-
 
           <Route path='/job-post-detail/:id' element={<JobPostDetail />} />
           <Route path='/apply/:id' element={(isAuth == true) ? <ApplyJob /> : <Login />} />
@@ -109,6 +99,7 @@ function App() {
 
           {/* routes for jobseeker profile */}
           <Route path='/jobseeker-profile' element={<JobSeekerProfile />} />
+          <Route path='/chat' element={<ChatList />} />
         </Routes>
 
 

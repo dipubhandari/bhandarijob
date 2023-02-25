@@ -4,5 +4,15 @@
 2. bodyParse depreciated error
 3.how to make file downloadable
 4.how to send file to server 'blob'
-note:
+note: 
 1. Debug update user email not update in apply model
+
+
+how to integrate chat system
+
+1. Model Conersation and chat
+->model includes array of sender and reiver
+
+2. Chat Model
+-> includes conversaion id from above model and sender id with text
+

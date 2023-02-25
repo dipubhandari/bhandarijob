@@ -5,7 +5,7 @@ import './JobSeekerProfile.css'
 import { RxDashboard } from 'react-icons/rx'
 import { MdOutlineWork } from 'react-icons/md'
 import JobSeekerDashboard from '../../components/JobSeekerDashboard/JobSeekerDashboard'
-
+import ChatList from '../../components/ChatList/ChatList'
 import JobSeekerInfo from '../../components/JobSeekerInfo/JobSeekerInfo'
 import PasswordChange from '../../components/PassowordChange/PasswordChange'
 
@@ -28,6 +28,7 @@ const JobSeekerProfile = () => {
 
                 <section className="left_dashboard_jobseeker">
                     <button onClick={() => setComponent('dashboard')}><RxDashboard />Your Dashboard</button>
+                    <input onClick={() => setComponent('chatlist')} type="button" value='Chats' />
                     <input onClick={() => setComponent('profile')} type="button" value='Your Profile' />
                     <input onClick={() => setComponent('aboutuser')} type="button" value='Resume' />
                     <input onClick={() => setComponent('changepassword')} type="button" value='Change Password' />
@@ -36,8 +37,10 @@ const JobSeekerProfile = () => {
                 <section className="right_dashboard_jobseeker">
 
                     {(component == 'dashboard') && <JobSeekerDashboard />}
+
+                    {(component == 'chatlist') && <ChatList />}
                     {(component == 'profile') && <JobSeekerInfo />}
-                    {(component == 'changepassword') && <PasswordChange/>}
+                    {(component == 'changepassword') && <PasswordChange />}
 
                 </section>
 

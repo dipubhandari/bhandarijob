@@ -9,12 +9,16 @@ import { MdOutlineWork } from 'react-icons/md'
 import CompanyProfile from '../../components/CompanyProfile/CompanyProfile'
 import PasswordChange from '../../components/PassowordChange/PasswordChange'
 import ChatList from '../../components/ChatList/ChatList'
+import Chat from '../../components/Chat/Chat'
 
 const EmployerHome = (props) => {
+
+
 
     const [component, setComponent] = useState('job')
 
     const handleJobComponent = (e) => {
+        console.log(e)
         setComponent(e)
     }
 
@@ -37,10 +41,10 @@ const EmployerHome = (props) => {
                 </section>
                 <section className="right_dashboard">
                     {
-
                         (component == 'job') && <JobApplication handleJobComponent={handleJobComponent} />}
+                    {(component == 'chat') && <Chat/>}
 
-                    {(component == 'chatlist') && <ChatList />}
+                    {(component == 'chatlist') && <ChatList setComponent={handleJobComponent}/>}
 
                     {(component == 'aboutuser') && <CompanyProfile />}
 

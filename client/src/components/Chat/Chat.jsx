@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,useRef, useState } from 'react';
 import { server } from '../../config';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { account } from '../../redux/accountSlice'
 import ReactTimeAgo from 'react-time-ago'
 
 function Chat(props) {
+    const scrollRef = useRef()
     // account type of the user
     const account = useSelector(state => state.Account)
     // fetch current user to chat 
@@ -46,6 +47,12 @@ function Chat(props) {
         getmessages()
     }, [])
 
+
+// adding scrool effect when message are more then screen
+    useEffect(()=>{
+   scrollRef.current?.scrollIntoView({behaviour:"smooth"})
+    },[messages])
+
     return (
         <div className="main">
 
@@ -55,10 +62,10 @@ function Chat(props) {
                     <div className="messages">
                         {
                             messages.map((item, id) => {
-                                return <div className={`${(item.sender == sender.email) ? 'sender' : 'receiver'}`}>
+                                return <div ref={scrollRef} className={`${(item.sender == sender.email) ? 'sender' : 'receiver'}`}>
                                     <span className="msgtahu">  <span>{item.message}<span className="messageTime"> <ReactTimeAgo date={item.createdAt} locale="en-US" /></span></span>
                                         <span>{(item.sender == sender.email) ? 'You' : receiver.name || receiver.companyname}</span></span>
-                                    <img src={`${server}/uploads/logo/${receiver.logo}`} alt="" />
+                                    <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80" alt="" />
                                 </div>
                             })
                         }

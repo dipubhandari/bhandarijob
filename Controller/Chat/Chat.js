@@ -47,14 +47,41 @@ class ChatController {
     // get all friends list
     static AllFriend = async (req, res) => {
         try {
-            const friends = await Friend_Model.findOne({ user: req.params.token })
 
-            const friendDetail = await Employer_Model.find({
-                email: { $in: friends.friend }
-            })
-            res.send(friendDetail)
+            // find the user is employer or job seeker
+            const userDetail = await JobSeeker_Model.findOne({ _id: req.params.token }) || await Employer_Model.findOne({ _id: req.params.token })
+            // if account is jobseeker
+            if (userDetail.account == 'jobseeker') {
+                // find user from friend model to fetch friends from employer
+                const friends = await Friend_Model.findOne({ user: req.params.token })
+                // find friend from employer model from array in friend
+                const friendDetail = await Employer_Model.find({
+                    email: { $in: friends.friend }
+                })
+                // send friend details as reponse
+                res.send(friendDetail)
+            }
+
+            // if account is employer find
+            else {
+                // get friend of user to from friend model that has this employer friend
+                const whoaddedme = await Friend_Model.find({
+                    friend: { $in: userDetail.email }
+                })
+                // convert id of the all added friends in array
+                const allfriends = whoaddedme.map((item, id) => {
+                    return item.user
+                })
+                //    find all the user from jobseeker model
+                const friendDetail = await JobSeeker_Model.find({ _id: { $in: allfriends } })
+
+                res.send(friendDetail)
+
+            }
+
 
         } catch (error) {
+            console.log(error)
             res.send({ error_msg: "Something went Wrong" })
         }
     }

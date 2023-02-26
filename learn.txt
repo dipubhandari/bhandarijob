@@ -5,6 +5,8 @@
 3.how to make file downloadable
 4.how to send file to server 'blob'
 4.loop in mongodb query (find)
+5.how to make scrool at the bottom using ref
+6.How to use time ago npmpackage
 note: 
 1. Debug update user email not update in apply model
 

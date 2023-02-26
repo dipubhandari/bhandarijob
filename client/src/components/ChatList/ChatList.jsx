@@ -21,7 +21,6 @@ function ChatList(props) {
                 console.log(error)
             })
         }
-
         getFriend()
 
     }, [])
@@ -44,9 +43,9 @@ function ChatList(props) {
                 {
                     friend.map((item, id) => {
                         return <div className="chatperson" key={id} onClick={() => setChatWith(item.email)}>
-                            <img src={`${server}/uploads/logo/${item.logo}`} alt="" />
+                            <img src={`${server}/uploads/logo/${item.logo}` || 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png'} alt="" />
                             <section className="message_section_chat">
-                                <span> {item.companyname}</span>
+                                <span> {item.companyname || item.name}</span>
                                 <span>click to chat...</span>
                             </section>
                         </div>

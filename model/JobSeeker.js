@@ -1,10 +1,10 @@
 import mongoose from "mongoose"
 
 const User_Schema = new mongoose.Schema({
-    name: { type: String, require: true },
-    email: { type: String, require: true },
-    password: { type: String, require: true },
-    phone: { type: String, require: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    phone: { type: String, required: true },
     account: { type: String, default: 'jobseeker' },
     jobapplied: { type: Array },
     createdAt: { type: Date, default: Date.now() }

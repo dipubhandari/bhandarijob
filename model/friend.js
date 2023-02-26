@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
 
 const Friend_Schema = new mongoose.Schema({
-    user: { type: String, require: true, unique: true },
-    friend: { type: Array, require: true }
+    user: { type: String, required: true, unique: true },
+    friend: { type: Array, required: true }
 },
     { timestamps: true })
 

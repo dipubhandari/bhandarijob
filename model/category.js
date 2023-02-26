@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 const Category_Schema = new mongoose.Schema({
-    name: { type: String, require: true },
+    name: { type: String, required: true },
     createdAt: { type: Date, default: Date.now() }
 })
 

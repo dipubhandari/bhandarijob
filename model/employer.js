@@ -1,13 +1,13 @@
 import mongoose from "mongoose"
 
 const Employer_Schema = new mongoose.Schema({
-    companyname: { type: String, require: true },
-    email: { type: String, require: true },
-    description: { type: String, require: true },
+    companyname: { type: String, required: true },
+    email: { type: String, required: true },
+    description: { type: String, required: true },
     logo: { type: String },
-    password: { type: String, require: true },
-    address: { type: String, require: true },
-    phone: { type: String, require: true },
+    password: { type: String, required: true },
+    address: { type: String, required: true },
+    phone: { type: String, required: true },
     account: { type: String, default: 'employer' },
     createdAt: { type: Date, default: Date.now() }
 })

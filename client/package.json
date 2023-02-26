@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.3",
     "file-saver": "^2.0.5",
+    "javascript-time-ago": "^2.5.9",
     "js-file-download": "^0.4.12",
     "react": "^18.2.0",
     "react-confirm-alert": "^3.0.6",
@@ -21,6 +22,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
+    "react-time-ago": "^7.2.1",
     "react-toastify": "^9.1.1",
     "web-vitals": "^2.1.4"
   },

@@ -1,16 +1,47 @@
 import Chat_Model from '../../model/chats.js'
 import Friend_Model from '../../model/friend.js'
 import Employer_Model from '../../model/employer.js';
-
+import JobSeeker_Model from '../../model/JobSeeker.js';
+import { findUser } from '../../utils/findUser.js';
 
 class ChatController {
 
-    static NewMessage = async (req, res) => {
+    // fetch the message of the user in chat section
+    static Messages = async (req, res) => {
         try {
-            // const newMessage = await Chat_Model.create(req.body)
-            // res.send(newMessage)
+            let { sender, receiver, account } = req.params
+            // find sender email 
+            const user = await ((account == 'employer') ? Employer_Model : JobSeeker_Model).findOne({ _id: sender })
+            sender = user.email
+            const messages = await Chat_Model.find({
+                "$or": [
+                    { "sender": sender, "receiver": receiver },
+                    { "receiver": sender, "sender": receiver },
+                ]
+            })
+            const receiverInfo = await ((account == 'employer') ? JobSeeker_Model : Employer_Model).findOne({ email: receiver })
+            console.log(receiverInfo)
+            receiverInfo.password = null
+            user.password = null
+            res.send({ messages, sender: user, receiver: receiverInfo })
         } catch (error) {
+            console.log(error)
+        }
+    }
 
+    // send message to particular user and saved to model db
+    static SendMessage = async (req, res) => {
+        try {
+            let { receiver, message, account } = req.body
+            console.log(req.body.sender)
+            let sender = await Employer_Model.findOne({ _id: req.body.sender }) || await JobSeeker_Model.findOne({ _id: req.body.sender })
+            const senderEmail = sender.email
+            // console.logsenderEmail
+            // saving the message to chat model
+            const sendMessage = await Chat_Model.create({ sender: senderEmail, receiver, message })
+            res.send(sendMessage)
+        } catch (error) {
+            console.log(error)
         }
     }
     // get all friends list

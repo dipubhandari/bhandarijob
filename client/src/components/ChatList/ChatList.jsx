@@ -39,7 +39,7 @@ function ChatList(props) {
         <div className="main">
 
             <div className="chatsection_company">
-                <h2 style={{ color: "#fff" }}>YOU CAN CHAT With </h2>
+                <h2 style={{ color: "orangered", margin: 'auto', width: '500px' }}>YOUR FRIENDS.... </h2>
                 {
                     friend.map((item, id) => {
                         return <div className="chatperson" key={id} onClick={() => setChatWith(item.email)}>
@@ -52,13 +52,7 @@ function ChatList(props) {
                     })
                 }
 
-                {/* <div className="chatperson">
-                    <img src="https://images-platform.99static.com//syUUBXWPuntRp-CG7bhwjByZIMg=/0x0:1080x1080/fit-in/500x500/99designs-contests-attachments/127/127807/attachment_127807231" alt="" />
-                    <section className="message_section_chat">
-                        <span> Swostika Shrestha</span>
-                        <span>Hy I am a mern developer</span>
-                    </section>
-                </div> */}
+
 
             </div>
         </div>

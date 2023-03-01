@@ -1,15 +1,19 @@
 .chatperson {
+    cursor: pointer;
     display: flex;
-    color: #fff;
-    background-color: #c7c7c7;
-    margin: 060px;
+    margin: 25px;
+    font-size: large;
     padding: 10px;
+    background-color: #c7c7c7;
     border: 1px solid rgb(111, 111, 111);
+    border-radius: 20px;
+    height: 80px;
+    color: rgb(84, 84, 84, 0.6);
 }
 
 .chatperson img {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
 }
 
@@ -17,14 +21,15 @@
     display: grid;
     align-items: center;
     justify-content: space-around;
-    margin-left: 70px;
+    margin-left: 10px;
 }
 
 .chatsection_company {
     margin: 10px;
 }
 
+
 .chatperson:hover {
-    background-color: #cdc7c7;
+    background-color: rgb(212, 212, 212);
     color: black;
 }

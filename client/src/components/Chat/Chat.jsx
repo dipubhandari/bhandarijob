@@ -54,11 +54,10 @@ function Chat(props) {
 
     useEffect(() => {
         socket.current.on('getMessage', (payload) => {
-            alert('new message is sent')
             setMessages([...messages, { createdAt: Date.now(), sender: receiver.email, receiver: sender.email, message: payload.message }])
         })
 
-    })
+    }, [])
     // fetching the messages of particular users
     useEffect(() => {
         const getmessages = async () => {
@@ -66,6 +65,7 @@ function Chat(props) {
                 // adding user to socket when joined chat
                 setMessages(response.data.messages)
                 setSender(response.data.sender)
+                console.log(response.data.receiver)
                 setReceiver(response.data.receiver)
 
             })
@@ -81,16 +81,16 @@ function Chat(props) {
     }, [messages])
 
     return (
-        <div className="main">
+        <div className="chatContainer">
 
             <div className="chatsection">
                 <div className="title">
-                    <h2>YOU CAN CHAT NOW </h2>
+                    <h2>CHATTING NOW WITH {receiver.name || receiver.companyname} </h2>
                     <div className="messages">
                         {
                             messages.map((item, id) => {
                                 return <div ref={scrollRef} className={`${(item.sender == sender.email) ? 'sender' : 'receiver'}`}>
-                                    <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png" alt="" />
+                                    <img src={(account == 'employer') ? (item.sender == sender.email) ? `${server}/uploads/logo/${sender.logo}` : "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png" : (item.sender == sender.email) ? "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png" : `${server}/uploads/logo/${receiver.logo}`} alt="" />
                                     <span className="msgtahu">  <span>{item.message}<span className="messageTime"> <ReactTimeAgo date={item.createdAt} locale="en-US" /></span></span>
                                         <span className='sendername'>{(item.sender == sender.email) ? 'You' : receiver.name || receiver.companyname}</span></span>
 

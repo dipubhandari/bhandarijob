@@ -6,4 +6,4 @@ const socket = () => {
 
 
 export { socket }
-export const server = ''
+export const server = 'http://localhost:5000'

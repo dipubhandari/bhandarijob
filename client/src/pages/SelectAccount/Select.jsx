@@ -18,7 +18,7 @@ const Select = () => {
                     <Link to='/new' className='new_link'><MdOutlineWork /> Job Finder</Link>
                 </section>
                 <section className="employer">
-                    <Link to='/newemploye' className='new_link'><FaHandshake /> Company</Link>
+                    <Link to='/newemployer' className='new_link'><FaHandshake /> Company</Link>
                 </section>
 
             </div>

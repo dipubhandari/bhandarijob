@@ -98,8 +98,8 @@ function App() {
 
 
           {/* routes for jobseeker profile */}
-          <Route path='/jobseeker-profile' element={<JobSeekerProfile />} />
-          <Route path='/chat' element={<ChatList />} />
+          <Route path='/jobseeker-profile' element={<JobSeekerProfile />} />      
+          <Route path='*' element="PAGE NOT FOUND" />
         </Routes>
 
 

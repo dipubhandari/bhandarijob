@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Header from '../Header/Header'
+import { useNavigate, useLocation } from 'react-router-dom';
 import './chat.css';
 import { server } from '../../config'
 import axios from 'axios'
@@ -12,6 +13,7 @@ function ChatList(props) {
 
     const [friend, setFriend] = useState([])
     const dispatch = useDispatch()
+    const location = useLocation()
     useEffect(() => {
         const getFriend = async () => {
             await axios.get(`${server}/api/chat/friendlist/${localStorage.getItem('token')}`).then((response) => {
@@ -33,11 +35,20 @@ function ChatList(props) {
         props.setComponent('chat')
     }
 
+    // find the last chat paramerer so that to render header when needed
+    function getPath() {
 
+        return (location.pathname)
+    }
+    getPath()
 
     return (
         <div className="main">
+            {
+                (location.pathname == '/chat') ?
+                    <Header /> : null
 
+            }
             <div className="chatsection_company">
                 <h2 style={{ color: "orangered", margin: 'auto', width: '500px' }}>YOUR FRIENDS.... </h2>
 

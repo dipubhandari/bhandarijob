@@ -72,15 +72,11 @@ const Header = () => {
           <b><AiFillHome /></b> <Link className='linkheader'>Home</Link>
         </Link>
 
-        <Link to='/chat' className="link_row">
-          <b><FaHandshake /></b> <Link className='linkheader'>Chat</Link>
-        </Link>
-
         <Link className="link_row">
           <b><MdPermContactCalendar /></b> <Link className='linkheader'>Contact</Link>
         </Link>
 
-     
+
 
       </section>
       <section className="header_operator" style={{ backgroundColor: (accountType == 'employer') ? "grey" : 'rgb(73, 103, 191)' }}>
@@ -126,14 +122,11 @@ const Header = () => {
               </b>
               {
                 (accountType == 'employer') ?
-                  <Link className="first">
-                    <span className='right_logo'><BsFillPersonFill /></span>
-                    <span className='right_topic'><b>Chat</b></span>
-                  </Link>
+                  null
                   :
                   <Link to='/jobseeker-profile' className="first">
                     <span className='right_logo'><BsFillPersonFill /></span>
-                    <span className='right_topic'><b>Profile</b></span>
+                    <span className='right_topic'><b>Menu</b></span>
                   </Link>
               }
             </>

@@ -54,7 +54,7 @@ function Chat(props) {
 
     useEffect(() => {
         socket.current.on('getMessage', (payload) => {
-            setMessages([...messages, { createdAt: Date.now(), sender: receiver.email, receiver: sender.email, message: payload.message }])
+            setMessages((prev) => [...prev, { createdAt: Date.now(), sender: receiver.email, receiver: sender.email, message: payload.message }])
         })
 
     }, [])

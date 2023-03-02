@@ -40,7 +40,9 @@ function ChatList(props) {
 
             <div className="chatsection_company">
                 <h2 style={{ color: "orangered", margin: 'auto', width: '500px' }}>YOUR FRIENDS.... </h2>
-                {
+
+                {(friend.length > 0) ?
+
                     friend.map((item, id) => {
                         return <div className="chatperson" key={id} onClick={() => setChatWith(item.email)}>
                             <img src={'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png'} alt="" />
@@ -50,9 +52,11 @@ function ChatList(props) {
                             </section>
                         </div>
                     })
+
+
+                    :
+                    <h1>You Have No Friends to Chat</h1>
                 }
-
-
 
             </div>
         </div>

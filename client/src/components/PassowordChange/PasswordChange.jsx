@@ -82,6 +82,7 @@ const PasswordChange = () => {
                             <span htmlFor="">Enter Old Password * </span>
                             <input value={inputs.oldpassword}
                                 type="text"
+                                className='pcInput'
                                 name='oldpassword' onChange={handleChange}
                                 placeholder='Enter Old Password'
                             />
@@ -91,6 +92,7 @@ const PasswordChange = () => {
                         <span className='form_fullname'>
                             <span>Enter New Password*</span>
                             <input
+                                className='pcInput'
                                 type="text"
                                 value={inputs.newpassword}
                                 name='newpassword' onChange={handleChange}
@@ -100,6 +102,7 @@ const PasswordChange = () => {
                         <span className='form_fullname'>
                             <span>Re-Type Password*</span>
                             <input
+                                className='pcInput'
                                 type="text"
                                 value={inputs.againpassword}
                                 name='againpassword' onChange={handleChange}

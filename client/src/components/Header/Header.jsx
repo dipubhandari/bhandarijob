@@ -32,8 +32,8 @@ const Header = () => {
   // alert confrim
   function logout(id) {
     confirmAlert({
-      title: 'Update Profile',
-      message: 'Are you sure to Update this details',
+      title: 'Log out',
+      message: 'Are you sure to logout this account',
       buttons: [
         {
           label: 'Yes',

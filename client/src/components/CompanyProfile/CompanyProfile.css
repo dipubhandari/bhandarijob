@@ -8,7 +8,7 @@
 .form_companyprofile {
   background-color: rgb(66, 66, 66);
   width: 90%;
-  height: 100vh;
+  height: auto;
   flex-direction: column;
   display: flex;
   margin: 10px 40px;
@@ -32,15 +32,15 @@
 .chageicon {
   margin-left: 10px;
   font-size: 20px;
-  color: gray;
+  /* color: gray; */
 }
 
 .form_fullname input {
-  color: white;
+  /* color: white; */
 }
 
 .first_form_inputs {
-  color: white;
+  /* color: white; */
   display: flex;
   gap: 50px;
   width: 100%;

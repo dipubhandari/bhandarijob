@@ -144,7 +144,7 @@ const CompanyProfile = () => {
                         <span className='form_fullname'>
                             <span>Password*</span>
                             <input
-                                value={companyDetails.password}
+                                value='****'
                                 type="text" onChange={passwordwarning}
                                 name='password'
                                 placeholder='Choose Passowrd'

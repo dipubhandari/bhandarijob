@@ -1,12 +1,17 @@
+.home_container {
+    height: 100vh;
+    overflow: hidden;
+}
+
 .dashboard_jobseeker {
     display: flex;
     background-color: rgb(247, 247, 247);
-    min-height: 98vh;
+    /* height: 90vh; */
     width: 100%;
 }
 
 .left_dashboard_jobseeker {
-    background-color: rgb(224, 218, 209);
+    background-color: rgb(27, 104, 181);
     display: flex;
     flex-direction: column;
     width: 20%;
@@ -21,13 +26,13 @@
     display: flex;
     padding: 0px 20px;
     height: 50px;
-    background-color: rgb(98, 98, 227);
+    background-color: rgb(27, 104, 181);
     border: 1px solid rgb(255, 255, 255);
     color: aliceblue;
 }
 
 .left_dashboard_jobseeker input:hover {
-    background-color: rgb(203, 218, 218);
+    background-color: rgb(255, 136, 0);
 }
 
 .left_dashboard_jobseeker button {

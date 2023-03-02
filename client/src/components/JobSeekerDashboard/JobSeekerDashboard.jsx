@@ -9,7 +9,7 @@ import { MdOutlineWork } from 'react-icons/md'
 import { AiFillProfile } from 'react-icons/ai';
 const JobSeekerDashboard = () => {
 
-    
+
 
     return (
         <div className='jobseeker_dashboard_container'>
@@ -20,9 +20,8 @@ const JobSeekerDashboard = () => {
             </section>
 
             <section className="second__icon">
-                <section className='icon'></section>
-                <section className='dash_title'>0 listed</section>
-                <section className='dash_title'>Short listed </section>
+                <section className='icon'><MdOutlineWork /></section>
+                <section className='dash_title'>0 Short listed </section>
             </section>
 
 

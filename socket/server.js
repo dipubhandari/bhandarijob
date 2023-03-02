@@ -20,8 +20,8 @@ const getUser = (receiver) => {
     let socketid
     users.filter((item, id) => {
         if (item.userId === receiver) {
-        
-           socketid = item.socketId
+
+            socketid = item.socketId
         }
     })
 
@@ -29,35 +29,37 @@ const getUser = (receiver) => {
 };
 
 
-  const removeUser = (socketId) => {
-    users = users.filter((user) => user.socketId !== socketId);
-  };
-  
+const removeUser = (socketId) => {
+    const newUsers = users.filter((user) => user.socketId !== socketId);
+    users = newUsers
+    console.log(users)
+};
+
 // connection event emitter
 io.on("connection", (socket) => {
     // when user connected to chat
-    socket.on("addUser", ({senderId}) => {
+    socket.on("addUser", ({ senderId }) => {
         addUser(senderId, socket.id);
     });
 
     // when user sends message
     socket.on("message", ({ sender, receiver, message }) => {
-    
-      const socketId =  getUser(receiver)
-      console.log(socketId)
-        
+
+        const socketId = getUser(receiver)
+        console.log(socketId)
+        console.log(users)
         if (socketId) {
             io.to(socketId).emit("getMessage", {
                 sender,
                 message,
-            }); 
-      }
-      
-    });
+            });
+        }
 
+    });
 
     // when disconnect
     socket.on("disconnect", () => {
+        console.log(users)
         console.log("a user disconnected!");
         removeUser(socket.id);
         // io.emit("getUsers", users);
@@ -69,4 +71,4 @@ httpServer.listen(5001, () => {
     console.log('Socket is here')
 });
 
-  
+

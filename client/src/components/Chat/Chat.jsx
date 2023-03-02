@@ -8,7 +8,7 @@ import { chatWith } from '../../redux/chatSlice'
 import { account } from '../../redux/accountSlice'
 import ReactTimeAgo from 'react-time-ago'
 import { io } from 'socket.io-client'
-
+import { socket } from '../../config';
 function Chat(props) {
 
     const socket = useRef()

@@ -23,7 +23,7 @@ const EmployerHome = (props) => {
     }
 
     return (
-        <div className='home_container'>
+        <div className='employercontainer'>
             {/* header */}
             <section className="header">
                 <Header isLogin={props.isLogin} />

@@ -31,14 +31,12 @@ const JobSeekerProfile = () => {
                     <button onClick={() => setComponent('dashboard')}><RxDashboard />Your Dashboard</button>
                     <input onClick={() => setComponent('chatlist')} type="button" value='Chats' />
                     <input onClick={() => setComponent('profile')} type="button" value='Your Profile' />
-                    <input onClick={() => setComponent('aboutuser')} type="button" value='Resume' />
                     <input onClick={() => setComponent('changepassword')} type="button" value='Change Password' />
 
                 </section>
                 <section className="right_dashboard_jobseeker">
 
                     {(component == 'dashboard') && <JobSeekerDashboard />}
-
                     {(component == 'chatlist') && <ChatList setComponent={handleJobComponent} />}
                     {(component == 'chat') && <Chat />}
                     {(component == 'profile') && <JobSeekerInfo />}
